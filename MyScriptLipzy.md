@@ -1,70 +1,1082 @@
---[[
-Encrypted by Hackers House
-Tool : https://hackershouse.tech/online-lua-obfuscator-free-unlimited
-Version: 1.1.0
-]]
-_G["PUQrXZfqpFWOH"]=function(src)
-  local box={__src=src}
-  return setmetatable({}, {
-    __index=function(_,k) return box.__src[k] end,
-    __newindex=function(_,k,v) box.__src[k]=v end
-  })
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local RunService = game:GetService("RunService")
+local Stats = game:GetService("Stats")
+
+local LocalPlayer = Players.LocalPlayer
+
+local AdminList = {
+    ["LifzxAfter2"] = "ADMIN",
+    ["Yanzzz_1023"] = "OWNER"
+}
+
+local userRole = AdminList[LocalPlayer.Name]
+local isAdmin = userRole ~= nil
+
+if game.CoreGui:FindFirstChild("StealAnEggGUI") then
+    game.CoreGui.StealAnEggGUI:Destroy()
 end
-_G["SnkvXv7HzxCiZ"]=function(a,b)
-  if type(a)~="table" then return nil end
-  local mt=getmetatable(a)
-  if mt and mt.__index then return a[b] end
-  local p=_G["PUQrXZfqpFWOH"](a)
-  return p[b]
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "StealAnEggGUI"
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ResetOnSpawn = false
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 500, 0, 400)
+MainFrame.Position = UDim2.new(0.5, -250, 0.5, -200)
+MainFrame.BackgroundColor3 = Color3.fromRGB(18, 12, 28)
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 10)
+MainCorner.Parent = MainFrame
+
+local MainStroke = Instance.new("UIStroke")
+MainStroke.Color = Color3.fromRGB(140, 45, 220)
+MainStroke.Thickness = 2
+MainStroke.Parent = MainFrame
+
+local OpenBanner = Instance.new("ImageButton")
+OpenBanner.Name = "OpenBanner"
+OpenBanner.Size = UDim2.new(0, 70, 0, 70)
+OpenBanner.Position = UDim2.new(0, 20, 0.5, -35)
+OpenBanner.BackgroundTransparency = 1
+OpenBanner.Image = "rbxassetid://131766089166568"
+OpenBanner.ScaleType = Enum.ScaleType.Fit
+OpenBanner.Active = true
+OpenBanner.Draggable = true
+OpenBanner.Visible = false
+OpenBanner.Parent = ScreenGui
+
+local OpenBannerCorner = Instance.new("UICorner")
+OpenBannerCorner.CornerRadius = UDim.new(0, 10)
+OpenBannerCorner.Parent = OpenBanner
+
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1, 0, 0, 40)
+Header.BackgroundColor3 = Color3.fromRGB(30, 18, 48)
+Header.BorderSizePixel = 0
+Header.Parent = MainFrame
+
+local HeaderCorner = Instance.new("UICorner")
+HeaderCorner.CornerRadius = UDim.new(0, 10)
+HeaderCorner.Parent = Header
+
+local TitleText = Instance.new("TextLabel")
+TitleText.Size = UDim2.new(1, -50, 1, 0)
+TitleText.Position = UDim2.new(0, 15, 0, 0)
+TitleText.BackgroundTransparency = 1
+TitleText.Text = "LIPZY HUB V5.2"
+TitleText.TextColor3 = Color3.fromRGB(200, 120, 255)
+TitleText.TextSize = 18
+TitleText.Font = Enum.Font.GothamBold
+TitleText.TextXAlignment = Enum.TextXAlignment.Left
+TitleText.Parent = Header
+
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+CloseBtn.Position = UDim2.new(1, -35, 0, 5)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(180, 40, 60)
+CloseBtn.Text = "X"
+CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextSize = 14
+CloseBtn.Parent = Header
+
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 6)
+CloseCorner.Parent = CloseBtn
+
+CloseBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    OpenBanner.Visible = true
+end)
+
+OpenBanner.MouseButton1Click:Connect(function()
+    MainFrame.Visible = true
+    OpenBanner.Visible = false
+end)
+
+local Sidebar = Instance.new("Frame")
+Sidebar.Size = UDim2.new(0, 130, 1, -50)
+Sidebar.Position = UDim2.new(0, 10, 0, 45)
+Sidebar.BackgroundColor3 = Color3.fromRGB(25, 15, 38)
+Sidebar.BorderSizePixel = 0
+Sidebar.Parent = MainFrame
+
+local SidebarCorner = Instance.new("UICorner")
+SidebarCorner.CornerRadius = UDim.new(0, 8)
+SidebarCorner.Parent = Sidebar
+
+local SidebarLayout = Instance.new("UIListLayout")
+SidebarLayout.SortOrder = Enum.SortOrder.LayoutOrder
+SidebarLayout.Padding = UDim.new(0, 6)
+SidebarLayout.Parent = Sidebar
+
+local SidebarPadding = Instance.new("UIPadding")
+SidebarPadding.PaddingTop = UDim.new(0, 10)
+SidebarPadding.PaddingLeft = UDim.new(0, 8)
+SidebarPadding.PaddingRight = UDim.new(0, 8)
+SidebarPadding.Parent = Sidebar
+
+local ContentContainer = Instance.new("Frame")
+ContentContainer.Size = UDim2.new(1, -160, 1, -55)
+ContentContainer.Position = UDim2.new(0, 150, 0, 45)
+ContentContainer.BackgroundTransparency = 1
+ContentContainer.Parent = MainFrame
+
+local Pages = {}
+
+local function CreateTab(name, layoutOrder)
+    local TabBtn = Instance.new("TextButton")
+    TabBtn.Size = UDim2.new(1, 0, 0, 30)
+    TabBtn.BackgroundColor3 = (layoutOrder == 1) and Color3.fromRGB(120, 40, 190) or Color3.fromRGB(40, 25, 60)
+    TabBtn.Text = name
+    TabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TabBtn.Font = Enum.Font.GothamBold
+    TabBtn.TextSize = 11
+    TabBtn.LayoutOrder = layoutOrder
+    TabBtn.Parent = Sidebar
+
+    local BtnCorner = Instance.new("UICorner")
+    BtnCorner.CornerRadius = UDim.new(0, 6)
+    BtnCorner.Parent = TabBtn
+
+    local Page = Instance.new("Frame")
+    Page.Size = UDim2.new(1, 0, 1, 0)
+    Page.BackgroundTransparency = 1
+    Page.Visible = (layoutOrder == 1)
+    Page.Parent = ContentContainer
+
+    Pages[name] = {Button = TabBtn, Page = Page}
+
+    TabBtn.MouseButton1Click:Connect(function()
+        for _, tabData in pairs(Pages) do
+            tabData.Page.Visible = false
+            tabData.Button.BackgroundColor3 = Color3.fromRGB(40, 25, 60)
+        end
+        Page.Visible = true
+        TabBtn.BackgroundColor3 = Color3.fromRGB(120, 40, 190)
+    end)
+
+    return Page
 end
-_G["lW3yLIISf1"]={{k=120,b={201,192,233,224,188,234,177,231,201,230,198,229}},{k=10,b={82,95,112,80,110,93,127,60,62,59,59,60}},{k=72,b={188,169,170,180,173}},{k=74,b={193,152,160,189,154,186,129,161,180,147,174,125,187,184}},{k=22,b={126,110,93,71,134,129,138,76}},{k=176,b={39,254,6,35,0,32,231,7,26,249,20,227,33,30}},{k=114,b={186,199,216,184,214,197,231,164,166,163,163,164}},{k=138,b={240,255,248,237,254,243,249,248}},{k=70,b={2,3,71,14,198,1,39,91,234,201,231,231,195,234,78,52,195,231,22,234,130,234,178,252,69,69,61,195,226,96,209,196,201,231,231,195,234,78,52,195,231,182,130,196,65,2,3,115,4,172,1,51,93,201,120,171,171,108,42,6,15,145,211,211,174,165,211,235,235,235,84,192,168,192,120,78,213,213,93,183,72,241,180,168,6,153,93,201,120,171,171,108,238,250,235,84,192,168,192,120,78,213,2,1,227,1,1,1,84,89,49,79,42,13,78,74,20,69,49,85,58,75,75,54,12,12,32,32,19,12,3,68,81,71,3,11,11,11,11,46,82,74,82,58,44,89,89,49,79,42,14,78,74,20,69,49,85,58,75,75,54,12,13,25,12,16,11,11,46,82,74,82,58,44,89,89,49,79,42,13,25,12,14,11,78,74,20,69,49,85,58,75,2,1,115,1,1,1,41,219,198,157,169,156,156,156,176,176,163,156,147,231,219,216,225,125,223,226,214,212,223,147,196,197,188,181,203,221,188,226,230,194,166,176,164,166,164,125,223,2,1,161,1,1,1,85,16,4,2,13,193,248,246,249,251,235,14,15,18,241,222,209,171,24,9,10,13,6,193,21,19,22,6,193,5,16,171,193,193,10,7,193,242,243,234,227,249,11,234,16,20,240,212,222,222,210,212,210,193,21,9,6,15,171,193,193,193,193,248,246,249,251,235,14,15,18,241,222,248,246,249,251,235,14,15,18,241,204,210,171,2,1,142,1,1,1,77,174,174,174,174,247,244,174,182,229,227,230,232,216,251,252,255,222,184,197,183,187,182,229,227,230,232,216,251,252,255,222,184,197,183,203,203,190,174,2,246,243,252,174,223,224,215,208,230,248,215,253,1,221,193,203,195,193,199,174,243,250,1,243,174,223,224,215,208,230,248,215,253,1,221,193,203,2,3,103,14,198,1,76,76,63,76,7,136,253,123,233,7,7,136,227,62,136,188,149,7,132,145,28,193,223,201,28,10,62,106,254,128,128,24,254,76,7,75,175,136,253,233,7,233,7,233,15,184,149,245,123,158,88,241,11,228,228,241,111,58,2,163,111,149,88,253,110,75,188,10,253,111,124,227,10,110,84,227,2,3,197,6,206,1,52,101,220,246,186,221,186,236,225,240,180,170,225,101,175,246,44,141,141,141,196,216,156,191,146,166,191,146,156,141,216,166,216,146,146,161,141,141,141,196,226,156,186,221,146,166,186,221,146,156,141,186,2,1,53,1,1,1,61,103,98,102,103,94,94,97,104,101,97,93,93,93,104,106,96,102,104,94,98,102,104,94,96,93,103,103,98,103,103,94,94,97,93,93,105,102,96,106,94,98,106,94,178,112,155,164,167,85,158,114,93,93,93,102,96,110,94,98,110,2,3,184,20,28,1,60,195,233,176,91,186,15,91,186,195,195,252,81,254,24,36,245,24,188,245,17,235,188,24,122,63,254,121,131,159,15,169,25,24,131,74,24,122,44,176,176,72,214,91,195,233,176,110,129,15,110,129,195,195,24,84,112,55,226,24,2,3,55,14,198,1,59,53,80,53,102,63,63,63,193,232,245,102,180,245,76,128,180,245,76,102,63,180,193,128,180,193,76,76,215,88,205,75,54,215,49,214,140,240,80,14,27,1,140,205,114,141,62,127,36,1,63,53,76,215,88,205,75,54,215,2,1,226,1,1,1,81,84,71,86,87,84,80,2,86,67,68,78,71,16,69,81,80,69,67,86,10,68,11,2,71,80,70,11,10,11,11,10,74,58,41,19,82,77,86,24,10,10,19,13,24,18,15,24,18,11,11,11,236,42,55,72,40,70,53,87,20,22,19,19,20,10,65,41,61,10,72,87,80,69,86,75,81,80,10,11,78,2,1,49,1,1,1,55,160,148,146,157,81,156,110,89,89,102,106,92,98,99,90,94,98,99,90,108,157,160,148,146,157,81,147,110,172,89,89,98,103,99,91,98,90,92,89,98,100,94,98,100,90,90,93,89,89,89,98,103,99,92,2,1,70,1,1,1,80,126,111,115,126,111,113,110,120,119,115,120,119,111,111,195,129,172,181,184,102,175,131,110,110,119,113,125,111,115,125,111,114,105,168,102,170,181,102,178,181,169,167,178,102,188,131,168,161,175,163,115,177,129,102,175,172,102,188,130,110,110,118,113,124,111,115,124,111,102,186,174,171,180,102,188,131,188,113,110,2,2,72,1,1,1,61,112,118,115,114,109,119,120,111,107,119,120,111,104,35,42,36,125,104,38,29,47,27,123,53,52,54,47,42,33,106,37,48,39,54,112,50,111,104,35,42,36,125,104,54,35,52,51,54,42,104,52,39,38,44,35,106,37,41,42,37,2,1,89,1,1,1,84,186,205,129,187,130,121,190,199,189,130,129,130,182,133,123,181,146,144,123,135,135,123,181,138,137,145,123,135,135,123,181,138,137,138,123,135,135,123,181,138,138,141,123,135,135,123,181,138,138,143,123,130,129,193,177,160,138,201,196,205,143,129,129,139,132,143,140,134,143,140,130,130,130,99,121,121,121,121,170,171,162,155,177,2,3,82,8,184,1,72,56,81,91,119,123,183,253,225,218,225,152,50,50,21,70,119,21,152,50,50,50,50,0,112,21,249,63,152,50,50,21,84,14,152,50,50,49,28,50,179,165,186,200,88,77,84,105,130,4,176,50,249,84,14,50,137,144,81,32,186,56,81,91,119,123,183,253,253,197,183,225,2,1,59,1,1,1,66,91,175,163,160,169,91,140,141,132,125,147,165,132,170,174,138,110,120,116,115,116,91,160,169,159,69,160,169,159,69,91,91,160,167,174,160,164,161,91,99,99,99,134,170,162,170,146,132,177,177,137,167,130,104,134,170,162,170,146,132,177,177,137,167,130,2,2,16,1,1,1,78,39,37,63,39,51,51,62,39,48,124,104,107,98,6,48,48,48,48,100,97,109,111,100,48,75,123,75,95,87,110,56,110,118,100,58,64,51,64,6,48,48,48,48,121,104,103,100,107,48,75,123,75,95,87,110,56,110,118,100,58,64,52,63,48,108,97,48,75,123,75,95,87,110,56,110,118,100,2,3,81,24,168,1,82,43,161,204,132,212,132,152,80,31,89,31,71,5,43,161,46,184,49,100,51,77,55,49,49,100,5,166,100,55,49,49,49,49,5,74,54,8,5,49,132,212,132,152,80,31,89,31,71,5,43,161,204,233,207,184,46,184,253,0,92,233,207,184,46,184,253,0,55,49,49,49,49,192,123,49,132,212,132,152,80,31,2,2,116,1,1,1,57,76,18,10,32,70,68,14,79,68,84,8,28,23,30,84,55,7,55,35,43,18,76,18,10,32,70,68,79,55,7,55,35,43,18,76,18,10,32,70,68,89,67,84,23,30,24,122,84,84,23,30,24,122,23,30,24,3}},{k=59,b={175}},{k=135,b={223,245,241,224,244,248,230,206,216,192,254,243,242,211,205}}}
-_G["hTYiGtkkN3Zzh"]=function(i)
-  local e=_G["lW3yLIISf1"][i]
-  local s=""
-  local j=1
-  while j<=#e.b do
-    local v=e.b[j]-e.k
-    if v<0 then v=v+256 end
-    s=s..string.char(v)
-    j=j+1
-  end
-  local nk=((e.k*33)+17)%251+1
-  local nb={string.byte(s,1,#s)}
-  for j=1,#nb do nb[j]=(nb[j]+nk)%256 end
-  e.k=nk; e.b=nb
-  return s
+
+local PlayerPage = CreateTab("PLAYER", 1)
+local MainPage = CreateTab("MAIN", 2)
+local TampilanPage = CreateTab("TAMPILAN", 3)
+local SettingPage = CreateTab("SETTING", 4)
+local OverlayPage = CreateTab("OVERLAY", 5)
+
+local AdminPage = nil
+if isAdmin then
+    AdminPage = CreateTab("ADMIN", 6)
 end
-local function aLegaPqHl1TS6()
-  if type(_G["SnkvXv7HzxCiZ"])~="function" then return false end
-  if type(_G["lW3yLIISf1"])~="table" then return false end
-  return true
+
+local function AddInfoLabel(container, title, value, order)
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, 0, 0, 25)
+    Label.BackgroundTransparency = 1
+    Label.Text = title .. ": " .. value
+    Label.TextColor3 = Color3.fromRGB(200, 200, 220)
+    Label.Font = Enum.Font.Gotham
+    Label.TextSize = 11
+    Label.TextXAlignment = Enum.TextXAlignment.Left
+    Label.LayoutOrder = order
+    Label.Parent = container
+    return Label
 end
-do
-  if not aLegaPqHl1TS6() then
-    local __t=nil
-    __t()
-  end
-end
-local function kUf7jJju0wJl(x)
-  local vHkdD9e3Krp=(x*9)-(x*9)
-  local pxOuFZTGa=(vHkdD9e3Krp+50)-50
-  if pxOuFZTGa~=0 then return x end
-  return x
-end
-kUf7jJju0wJl(1)
-do local vHkdD9e3Krp=1; local pxOuFZTGa=1; if (vHkdD9e3Krp+pxOuFZTGa)==3 then vHkdD9e3Krp=vHkdD9e3Krp+1 end end
-do local ZsSiHdO6h37=0; while ZsSiHdO6h37<1 do ZsSiHdO6h37=ZsSiHdO6h37+1 end end
-do local AwOL6NnKdt_=1; local SrNSPADSN=0
-  while true do
-    if AwOL6NnKdt_==1 then
-      SrNSPADSN=SrNSPADSN+1
-      if ((SrNSPADSN*13)-(SrNSPADSN*13))==0 then AwOL6NnKdt_=2 else AwOL6NnKdt_=3 end
-    elseif AwOL6NnKdt_==2 then
-      if (62-62)~=0 then SrNSPADSN=SrNSPADSN+9 end
-      break
-    else
-      break
+
+local ProfileImage = Instance.new("ImageLabel")
+ProfileImage.Size = UDim2.new(0, 70, 0, 70)
+ProfileImage.Position = UDim2.new(0.5, -35, 0, 0)
+ProfileImage.BackgroundColor3 = Color3.fromRGB(45, 25, 70)
+ProfileImage.Image = Players:GetUserThumbnailAsync(
+    LocalPlayer.UserId,
+    Enum.ThumbnailType.HeadShot,
+    Enum.ThumbnailSize.Size150x150
+)
+ProfileImage.Parent = PlayerPage
+
+local ProfileCorner = Instance.new("UICorner")
+ProfileCorner.CornerRadius = UDim.new(1, 0)
+ProfileCorner.Parent = ProfileImage
+
+local ProfileStroke = Instance.new("UIStroke")
+ProfileStroke.Color = Color3.fromRGB(160, 60, 255)
+ProfileStroke.Thickness = 2
+ProfileStroke.Parent = ProfileImage
+
+local UserBox = Instance.new("Frame")
+UserBox.Size = UDim2.new(1, -20, 0, 28)
+UserBox.Position = UDim2.new(0, 10, 0, 78)
+UserBox.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+UserBox.BorderSizePixel = 0
+UserBox.Parent = PlayerPage
+
+local UserBoxCorner = Instance.new("UICorner")
+UserBoxCorner.CornerRadius = UDim.new(0, 6)
+UserBoxCorner.Parent = UserBox
+
+local UserBoxStroke = Instance.new("UIStroke")
+UserBoxStroke.Color = Color3.fromRGB(100, 40, 160)
+UserBoxStroke.Thickness = 1
+UserBoxStroke.Parent = UserBox
+
+local UserLabel = Instance.new("TextLabel")
+UserLabel.Size = UDim2.new(1, 0, 1, 0)
+UserLabel.BackgroundTransparency = 1
+UserLabel.Text = "@" .. LocalPlayer.Name .. " (" .. LocalPlayer.DisplayName .. ")"
+UserLabel.TextColor3 = Color3.fromRGB(220, 180, 255)
+UserLabel.Font = Enum.Font.GothamBold
+UserLabel.TextSize = 11
+UserLabel.Parent = UserBox
+
+local PlayerInfoContainer = Instance.new("Frame")
+PlayerInfoContainer.Size = UDim2.new(1, -20, 0, 120)
+PlayerInfoContainer.Position = UDim2.new(0, 10, 0, 112)
+PlayerInfoContainer.BackgroundColor3 = Color3.fromRGB(28, 16, 42)
+PlayerInfoContainer.BorderSizePixel = 0
+PlayerInfoContainer.Parent = PlayerPage
+
+local PlayerInfoCorner = Instance.new("UICorner")
+PlayerInfoCorner.CornerRadius = UDim.new(0, 8)
+PlayerInfoCorner.Parent = PlayerInfoContainer
+
+local PlayerInfoLayout = Instance.new("UIListLayout")
+PlayerInfoLayout.SortOrder = Enum.SortOrder.LayoutOrder
+PlayerInfoLayout.Padding = UDim.new(0, 2)
+PlayerInfoLayout.Parent = PlayerInfoContainer
+
+local PlayerInfoPadding = Instance.new("UIPadding")
+PlayerInfoPadding.PaddingTop = UDim.new(0, 6)
+PlayerInfoPadding.PaddingLeft = UDim.new(0, 10)
+PlayerInfoPadding.PaddingRight = UDim.new(0, 10)
+PlayerInfoPadding.Parent = PlayerInfoContainer
+
+AddInfoLabel(PlayerInfoContainer, "Umur Akun", LocalPlayer.AccountAge .. " Hari", 1)
+
+local AccountCreatedDate = os.date("%d %B %Y", os.time() - (LocalPlayer.AccountAge * 86400))
+AddInfoLabel(PlayerInfoContainer, "Akun Dibuat", AccountCreatedDate, 2)
+
+local TimeLabel = AddInfoLabel(PlayerInfoContainer, "Jam", os.date("%H:%M:%S WIB"), 3)
+task.spawn(function()
+    while task.wait(1) do
+        if TimeLabel and TimeLabel.Parent then
+            TimeLabel.Text = "Jam: " .. os.date("%H:%M:%S WIB")
+        end
     end
-  end
+end)
+
+local GameName = "Steal an Egg"
+pcall(function()
+    local placeInfo = MarketplaceService:GetProductInfo(game.PlaceId)
+    if placeInfo and placeInfo.Name then
+        GameName = placeInfo.Name
+    end
+end)
+AddInfoLabel(PlayerInfoContainer, "Nama Game", GameName, 4)
+
+local StatsContainer = Instance.new("Frame")
+StatsContainer.Size = UDim2.new(1, -20, 0, 105)
+StatsContainer.Position = UDim2.new(0, 10, 0, 238)
+StatsContainer.BackgroundTransparency = 1
+StatsContainer.Parent = PlayerPage
+
+local StatsLayout = Instance.new("UIListLayout")
+StatsLayout.SortOrder = Enum.SortOrder.LayoutOrder
+StatsLayout.Padding = UDim.new(0, 5)
+StatsLayout.Parent = StatsContainer
+
+local function CreateStatBox(order, hasIcon)
+    local Box = Instance.new("Frame")
+    Box.Size = UDim2.new(1, 0, 0, 30)
+    Box.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+    Box.BorderSizePixel = 0
+    Box.LayoutOrder = order
+    Box.Parent = StatsContainer
+
+    local BoxCorner = Instance.new("UICorner")
+    BoxCorner.CornerRadius = UDim.new(0, 6)
+    BoxCorner.Parent = Box
+
+    local BoxStroke = Instance.new("UIStroke")
+    BoxStroke.Color = Color3.fromRGB(100, 40, 160)
+    BoxStroke.Thickness = 1
+    BoxStroke.Parent = Box
+
+    local Icon = nil
+    if hasIcon then
+        Icon = Instance.new("ImageLabel")
+        Icon.Size = UDim2.new(0, 18, 0, 18)
+        Icon.Position = UDim2.new(0, 8, 0.5, -9)
+        Icon.BackgroundTransparency = 1
+        Icon.ScaleType = Enum.ScaleType.Fit
+        Icon.Parent = Box
+    end
+
+    local Label = Instance.new("TextLabel")
+    Label.Size = hasIcon and UDim2.new(1, -38, 1, 0) or UDim2.new(1, -20, 1, 0)
+    Label.Position = hasIcon and UDim2.new(0, 32, 0, 0) or UDim2.new(0, 10, 0, 0)
+    Label.BackgroundTransparency = 1
+    Label.TextColor3 = Color3.fromRGB(220, 200, 255)
+    Label.Font = Enum.Font.GothamBold
+    Label.TextSize = 11
+    Label.TextXAlignment = Enum.TextXAlignment.Left
+    Label.Parent = Box
+
+    return Label, Icon
 end
-local YQyFsCc4som6Uav="\30\31\192\34\234\29\103\180\235\242\96\96\220\235\175\165\220\96\210\196\110\5\155\155\20\245\15\241\181\206\242\96\96\220\235\175\165\220\96\195\24\250\105\95\100\130\30\80\235\4\241\196\191\242\96\96\205\190\96\136\136\136\210\196\110\5\155\155\20\245\15\146\195\24\250\105\95\100\130\30\80\30\31\206\46\14\29\77\45\130\135\203\118\216\66\132\31\29\29\82\79\65\152\165\198\96\115\81\98\200\116\30\45\130\135\135\219\219\254\135\238\63\28\114\238\118\118\118\118\216\66\132\31\29\29\82\30\29\192\29\29\29\80\49\3\235\39\56\50\21\19\20\26\6\16\47\52\233\234\248\233\237\232\232\42\244\22\1\31\31\4\49\3\234\248\233\235\232\39\56\50\21\19\20\26\6\16\47\52\234\248\233\233\233\30\31\155\40\192\29\78\58\58\171\94\251\151\19\242\85\9\63\96\220\198\63\251\176\88\190\129\215\14\217\231\52\58\204\248\171\9\63\96\220\198\63\251\52\121\63\88\190\179\179\8\66\171\195\146\184\30\29\178\29\29\29\79\251\239\226\188\41\26\27\30\23\210\38\36\39\23\210\22\33\188\210\210\27\24\210\17\9\251\36\230\235\44\22\29\239\239\229\233\226\210\38\26\23\32\188\210\210\210\210\29\12\30\30\31\60\32\200\29\88\65\23\20\20\113\59\204\164\11\161\23\243\125\74\128\65\23\20\20\113\59\204\164\11\161\23\189\207\90\156\156\156\156\119\110\156\180\125\74\128\65\23\20\20\113\59\204\164\11\161\23\186\225\183\195\180\125\74\128\30\29\185\29\29\29\68\16\2\1\1\32\14\233\49\254\48\2\227\240\226\246\246\233\217\45\33\30\39\217\24\16\2\43\237\242\51\29\36\246\240\242\235\217\30\37\30\30\122\29\29\29\98\75\85\154\31\39\49\76\134\129\68\86\83\125\129\133\129\154\85\80\86\116\154\154\85\78\75\85\81\88\154\31\39\49\76\134\129\68\86\83\125\125\135\129\140\154\70\82\85\80\116\116\116\116\116\116\31\55\35\82\38\33\81\55\70\83\83\48\139\36\30\30\83\29\29\29\105\105\123\59\59\36\58\30\32\56\30\32\60\60\136\40\109\96\117\114\95\124\118\117\59\111\139\111\111\100\30\150\122\119\153\152\156\120\60\89\51\51\119\118\114\116\119\51\129\119\30\123\144\105\93\140\33\36\154\137\111\129\152\139\40\106\134\134\98\97\114\40\111\139\111\111\100\30\31\177\40\192\29\73\14\22\74\85\223\0\212\96\16\31\17\17\151\8\173\184\151\107\17\198\190\154\105\19\184\107\242\173\52\118\107\105\116\85\118\242\220\85\17\74\80\105\105\204\30\29\176\29\29\29\118\230\229\218\225\217\219\216\226\227\221\226\227\217\217\235\28\31\19\17\28\208\18\237\43\216\216\226\228\218\225\217\219\216\225\224\221\225\224\217\217\220\216\216\225\224\219\229\217\221\229\217\220\226\229\220\216\216\225\232\219\225\224\217\221\225\224\217\220\216\216\216\225\224\219\225\230\217\221\225\230\217\219\216\225\224\221\225\224\217\30\31\205\42\226\29\113\226\9\213\213\213\87\126\252\74\152\226\22\74\152\226\252\213\74\139\22\74\139\226\226\9\213\213\213\139\252\74\152\226\22\74\152\226\252\213\74\139\22\74\139\226\226\9\213\213\87\126\239\74\226\252\213\87\87\22\87\87\226\226\9\213\213\139\239\74\226\252\213\87\61\22\87\61\226\226\9\152\9\213\213\30\30\109\29\29\29\74\149\126\132\152\126\125\150\154\126\125\150\152\149\126\126\154\126\126\150\150\153\149\149\126\125\152\126\129\150\154\126\129\150\74\136\83\92\63\141\86\138\149\149\126\151\30\30\101\29\29\29\86\150\126\128\125\141\130\141\126\126\129\136\71\133\73\68\133\65\68\72\70\65\133\91\146\71\48\62\50\130\64\144\133\62\75\133\91\145\125\125\149\128\150\156\126\130\150\156\126\133\89\61\74\67\133\91\146\91\30\30\0\29\29\29\99\229\232\232\238\243\242\229\239\240\231\235\239\240\231\224\163\170\164\245\224\158\213\167\219\251\173\180\174\167\170\161\234\157\168\159\174\232\178\231\224\163\170\164\245\224\174\163\180\179\174\170\224\180\159\158\172\163\234\157\169\170\157\159\180\232\158\231\224\163\170\30\30\74\29\29\29\118\102\33\34\33\141\34\115\109\30\42\115\68\42\42\42\42\143\143\97\96\102\101\114\45\104\117\96\107\118\97\95\96\34\104\122\145\128\49\155\56\103\117\60\30\105\128\145\148\50\118\130\153\97\132\113\33\42\124\101\118\117\124\96\42\156\94\55\98\133\116\120\145\60\57\131\148\102\156\125\146\32\143\143\123\124\107\147\105\128\30\29\62\29\29\29\71\151\152\118\178\134\143\167\136\183\155\94\163\172\162\106\72\94\94\94\94\157\157\172\163\181\167\172\162\163\182\123\164\179\172\161\178\167\173\172\102\152\118\30\31\133\40\192\29\74\77\44\190\41\253\248\223\77\33\201\105\242\96\245\63\154\140\151\193\107\41\198\234\105\253\245\66\187\168\19\33\0\215\52\91\72\229\11\41\226\253\124\195\151\88\30\30\92\29\29\29\93\42\43\145\130\120\138\143\132\46\125\125\105\106\121\129\117\107\140\110\125\103\102\40\106\112\121\141\127\31\116\140\133\122\147\114\136\139\38\111\154\60\119\110\120\82\60\60\95\51\82\119\110\120\82\125\149\129\116\136\131\115\149\104\113\30\29\184\29\29\29\83\35\6\235\18\50\32\224\224\234\227\234\239\229\234\239\225\225\21\245\30\45\38\27\44\33\39\38\224\47\18\233\48\26\236\15\254\4\249\41\237\228\35\50\31\44\33\38\7\255\36\8\15\0\48\30\30\231\29\29\29\86\193\184\219\0\221\7\7\192\201\7\182\193\190\217\175\217\26\159\205\207\166\192\173\255\178\170\3\255\201\220\193\198\219\192\194\193\255\0\195\194\198\200\195\7\190\20\255\255\24\21\28\253\24\0\254\255\24\30\31\105\52\196\29\89\208\116\208\208\24\24\182\29\98\78\32\29\73\55\228\118\1\1\1\231\21\208\70\208\136\24\116\208\136\24\70\1\21\116\21\24\24\93\231\21\67\93\1\1\231\254\90\70\208\44\24\116\208\44\24\93\1\1\1\231\30\30\81\29\29\29\99\35\31\60\42\58\54\42\58\60\57\32\54\32\58\58\102\44\111\120\99\49\122\38\57\57\34\60\34\32\58\54\34\32\58\53\52\115\49\109\120\49\117\120\116\114\117\49\95\38\115\140\122\134\54\124\44\49\122\111\49\95\37\33\49\93\121\110\119\49\95\30\31\216\48\56\29\113\95\154\9\208\208\142\199\218\9\142\227\47\142\227\56\87\2\68\57\56\30\153\163\191\95\97\116\78\163\2\125\66\49\144\11\78\208\154\227\56\87\2\68\57\56\78\87\116\135\78\2\56\116\11\30\220\87\66\49\21\2\49\11\116\208\30\227\56\87\2\68\227\208\227\227\208\173\134\123\192\30\180\77\10\30\30\227\29\29\29\66\167\164\212\16\12\213\24\203\175\188\204\158\207\202\202\165\18\185\217\203\11\11\18\10\15\18\8\15\18\12\12\3\207\203\192\197\3\30\29\207\29\29\29\112\65\52\67\68\65\61\239\61\56\59\239\52\61\51\217\239\239\59\62\50\48\59\239\54\54\29\62\37\23\18\40\52\22\36\18\61\19\12\46\22\42\247\53\68\61\50\67\56\62\61\247\248\59\62\50\48\59\239\58\12\247\247\247\6\8\250\0\7\248\252\0\7\248\250\247\8\252\8\248\248\10\59\62\30\31\124\40\192\29\90\189\167\32\220\178\27\197\52\52\52\151\228\162\85\151\162\63\107\151\162\63\85\52\151\151\107\151\151\63\63\96\52\52\151\228\140\74\151\63\85\52\151\184\107\151\184\63\63\96\52\52\151\239\195\74\151\63\85\52\151\151\30\29\75\29\29\29\95\120\124\124\116\116\119\115\115\124\131\131\118\124\130\116\120\124\130\116\119\115\115\124\131\123\117\124\116\118\115\124\126\120\124\126\116\116\119\115\115\124\132\128\118\125\116\120\125\116\119\115\115\124\130\129\118\131\116\120\131\116\119\115\115\115\124\30\30\104\29\29\29\115\143\155\125\154\127\131\154\127\125\128\156\131\156\127\127\132\128\128\151\153\154\125\151\144\127\131\151\144\127\132\128\128\151\153\153\125\151\143\127\131\151\143\127\132\128\128\151\144\153\125\150\127\131\150\127\132\128\128\151\144\152\125\151\151\127\131\151\151\127\83\141\74\65\86\136\63\147\151\132\133\70\136\76\65\136\68\30\30\194\29\29\29\87\231\227\225\230\162\240\181\228\27\233\21\165\235\187\162\233\224\162\240\182\170\170\170\178\171\177\180\169\165\177\180\169\171\170\174\165\174\169\169\162\238\234\221\232\162\240\181\240\171\170\170\180\173\176\171\177\175\169\30\30\44\29\29\29\78\63\91\85\67\76\135\126\136\81\76\138\113\131\111\79\153\152\154\131\126\133\62\137\132\139\154\68\150\67\76\135\126\136\81\76\154\135\152\151\154\126\76\152\139\138\128\135\62\137\30\31\254\32\200\29\85\75\72\39\33\90\118\36\121\94\45\72\42\121\118\121\21\118\99\12\145\102\36\154\3\208\226\193\81\157\121\28\94\94\57\48\94\51\51\232\75\0\214\199\9\45\211\253\199\72\202\94\33\72\42\94\51\30\30\58\29\29\29\120\151\112\143\104\114\123\97\149\119\101\123\144\118\80\95\95\145\144\150\149\130\90\134\146\149\144\90\140\149\134\133\140\144\90\135\100\73\130\156\70\103\120\110\121\137\69\99\147\132\151\134\145\144\111\119\142\106\103\114\130\144\105\134\93\90\149\144\150\52\90\90\142\143\155\153\142\90\107\135\95\148\71\145\102\113\141\130\72\108\61\95\30\30\236\29\29\29\68\165\177\196\184\179\195\165\216\193\193\158\25\178\210\196\4\4\27\1\26\20\255\26\20\3\3\175\4\213\178\27\212\202\24\181\166\160\171\219\30\29\62\29\29\29\67\115\103\72\94\94\176\163\178\179\176\172\94\145\181\157\168\117\167\146\135\171\182\116\144\153\169\184\165\178\167\172\141\133\170\142\149\134\182\30\31\207\36\212\29\75\209\6\251\90\21\146\209\139\21\104\192\76\167\27\62\174\192\251\188\188\241\52\69\37\167\231\231\59\252\87\94\10\87\94\238\238\90\122\44\44\188\122\231\231\87\245\30\31\220\36\212\29\78\51\251\9\244\51\93\23\51\93\251\251\16\138\135\57\244\244\244\107\51\9\51\100\251\23\51\100\251\9\244\51\58\23\51\58\251\251\16\244\244\51\58\72\9\65\251\23\65\251\30\31\219\42\226\29\121\23\227\227\88\75\140\253\88\240\10\227\192\36\192\240\240\23\88\101\101\23\227\227\227\88\101\127\10\192\240\36\192\240\10\227\101\114\36\101\114\240\240\23\227\227\227\88\88\114\10\88\127\240\36\88\127\240\10\227\101\101\36\101\101\240\240\23\227\227\227\88\88\179\10\101\240\36\101\240\10\227\88\179\36\88\179\240\240\23\227\227\227\30\29\2\29\29\29\75\51\51\51\45\51\59\43\47\51\59\43\45\42\51\55\47\51\55\43\43\46\54\50\46\42\42\51\52\54\44\51\43\45\42\51\59\47\51\59\43\43\46\42\42\51\51\30\29\94\29\29\29\118\144\137\149\135\139\149\135\138\134\134\143\142\151\137\147\135\139\147\135\138\134\134\146\142\136\143\135\137\134\143\145\139\143\145\135\135\138\134\134\143\144\145\137\146\135\139\146\135\138\134\134\143\142\149\136\143\135\137\134\151\139\151\135\135\138\134\134\143\144\144\137\143\144\135\139\143\144\135\138\143\143\145\138\134\134\134\143\144\142\30\31\168\52\196\29\117\133\15\84\87\179\15\84\87\133\64\107\179\107\87\87\156\15\38\84\156\64\64\64\107\84\133\15\199\87\179\15\199\87\133\64\199\179\199\87\87\156\107\84\156\107\84\227\227\156\181\69\35\64\64\84\107\133\15\153\87\179\15\153\87\156\118\35\181\64\64\64\15\61\38\133\38\87\179\38\87\133\64\15\248\179\15\248\87\30\30\106\29\29\29\76\129\126\130\130\153\150\152\132\153\129\131\130\153\153\125\153\153\129\129\126\130\130\153\149\155\132\153\129\131\130\153\149\125\153\149\129\129\126\130\130\153\150\150\131\153\155\129\30\30\136\29\29\29\65\99\119\117\95\100\119\123\122\100\96\96\96\119\123\124\93\124\95\99\124\95\93\96\118\120\99\118\120\95\95\100\96\96\119\124\122\30\31\203\46\14\29\72\149\12\132\166\115\131\200\131\132\132\183\115\115\114\114\149\12\132\166\115\46\200\46\132\132\183\12\97\12\183\115\115\12\80\97\149\12\132\166\115\114\200\114\30\30\99\29\29\29\77\140\140\135\139\139\142\142\137\148\140\138\139\145\148\136\145\148\140\140\135\148\144\143\135\139\139\148\141\141\137\148\140\138\139\145\148\136\145\148\140\140\135\139\139\139\142\142\138\30\31\193\48\56\29\87\214\204\24\214\204\242\185\100\138\24\100\138\204\204\5\185\185\100\195\81\223\100\204\242\185\100\195\24\100\195\204\204\5\185\185\185\100\157\157\242\100\100\204\24\100\100\204\242\185\119\81\24\119\81\204\204\5\185\30\29\204\29\29\29\74\244\244\253\1\5\247\253\254\245\249\253\254\245\247\244\3\249\3\245\245\248\244\244\253\1\252\246\253\245\247\244\4\249\4\245\245\248\244\244\253\1\3\246\253\245\30\29\135\29\29\29\74\178\175\185\186\180\185\186\176\176\179\175\175\184\189\184\177\184\176\178\175\184\185\180\184\185\176\176\4\4\4\145\230\206\226\239\219\224\240\206\251\242\242\213\186\225\30\30\182\29\29\29\113\0\14\206\206\201\207\200\190\209\200\190\205\205\225\193\28\9\20\23\10\13\19\20\206\238\238\202\12\236\13\244\24\26\224\250\19\205\176\214\214\18\19\23\21\18\214\15\250\242\239\6\5\18\189\190\254\193\227\251\223\14\234\221\13\251\10\15\15\244\199\224\0\14\206\206\204\207\197\198\197\209\197\198\197\30\31\221\52\196\29\118\140\140\56\10\85\85\137\119\151\76\223\171\217\243\249\214\56\195\189\189\145\214\194\148\145\189\122\7\73\108\36\240\217\171\142\174\177\217\229\217\88\234\24\195\189\189\7\214\27\189\50\183\197\102\73\252\188\82\223\88\117\117\68\163\68\140\186\117\252\232\252\140\140\209\2\122\249\177\154\237\4\145\252\229\165\255\171\189\217\30\30\210\29\29\29\76\247\220\178\178\178\178\251\240\222\25\1\237\238\244\223\255\22\238\170\238\11\227\160\10\7\222\169\233\3\24\5\165\251\14\22\27\226\225\246\169\170\234\184\244\11\227\160\30\29\203\29\29\29\98\35\42\63\4\68\30\25\40\248\54\15\23\22\59\60\55\4\3\67\249\54\213\235\235\235\235\52\49\235\54\49\63\20\28\48\47\45\66\
+
+local StatusLabel, StatusIcon = CreateStatBox(1, true)
+StatusIcon.Image = "rbxassetid://95842412229310"
+
+if isAdmin then
+    StatusLabel.Text = "PREMIUM"
+    StatusLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+else
+    StatusLabel.Text = "FREE"
+    StatusLabel.TextColor3 = Color3.fromRGB(150, 255, 150)
+end
+
+local FPSLabel, FPSIcon = CreateStatBox(2, true)
+FPSIcon.Image = "rbxassetid://137800308683217"
+
+local PingLabel, PingIcon = CreateStatBox(3, true)
+PingIcon.Image = "rbxassetid://78681903515425"
+
+local frameCount = 0
+local lastTime = tick()
+local currentFPS = 0
+
+RunService.RenderStepped:Connect(function()
+    frameCount = frameCount + 1
+    local currentTime = tick()
+    if currentTime - lastTime >= 1 then
+        currentFPS = frameCount
+        frameCount = 0
+        lastTime = currentTime
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.2) do
+        if FPSLabel and FPSLabel.Parent then
+            FPSLabel.Text = "FPS: " .. currentFPS
+        end
+        if PingLabel and PingLabel.Parent then
+            local rawPing = Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
+            local pingVal = math.floor(rawPing)
+            
+            PingLabel.Text = pingVal .. " ms"
+        end
+    end
+end)
+
+local ScriptList = {
+    {Name = "CHILI HUB V2", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/spicy/main/Chilli.lua"))()]]},
+    {Name = "THANHDUY HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/ThanhDuyHub/Game/refs/heads/main/Steal-An-Egg.lua"))()]]},
+    {Name = "PULSE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PulseZax/Loader/refs/heads/main/.lua"))()]]},
+    {Name = "SENA BETA", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://senahub.xyz/raw/loader"))()]]},
+    {Name = "LENON HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/lennonxscripts/lennonhubv4/refs/heads/main/stealanegg",true))()]]},
+    {Name = "DHII's HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
+    {Name = "BlyxoHUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://flowauth.net/v1/loaders/69d3463240384f3a73fbe32c178093a2.lua"))()]]},
+    {Name = "FINDER PRIVAT SERVER", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/GlazeScripts/Private-Server-Finder/refs/heads/main/Glazehub.lua"))()]]},
+    {Name = "MIRANDA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
+    {Name = "HOSHI HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://hoshihub.site/loader.lua"))()]]},
+    {Name = "OXIDE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/xulfo/Oxide-Loader/main/Main.lua"))()]]},
+    {Name = "NEVA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2"))()]]},
+    {Name = "BK's HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/9ee4edde227ac85f50872bf9e4226508.lua"))()]]},
+    {Name = "VINCITORE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/tutorkah104-rgb/Steal-an-Egg/refs/heads/main/Vincitore.luau"))()]]},
+    {Name = "LKZ HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/LucasggkX/LKZ-Hub/refs/heads/main/Loader.lua"))()]]},
+    {Name = "SKIBIDI HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/Fn-stealanegg.lua"))()]]},
+    {Name = "BP HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://rscripts.net/raw/open-src-premium-or-bphub_1790968708765_mTTlSoUSyY.txt"))()]]},
+    {Name = "FOXNAME", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/Fn-stealanegg.lua"))()]]},
+    {Name = "ZEROIN HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://zeroinhub.com/api/script"))()]]},
+    {Name = "FAKE ADMIN", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/Dayvinksthik/Script/main/Games/JoshBNS-Crack.lua"))()]]},
+    {Name = "POLLUTED HUN", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PollutedHub/Sae/refs/heads/main/SaePolluted"))()]]},
+    {Name = "SENA V6", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://senahub.xyz/senav6"))()]]},
+    {Name = "AJJANS HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/359e97f8618e9008afe5f496184ebb7c.lua"))()]]},
+    {Name = "FYY COMMUNITY", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://FyyCommunity.my.id"))()]]},
+    {Name = "LIMBO HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://limbohub.my.id/loader.lua"))()]]},
+    {Name = "UNKNOWN HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://unknownhub.win/api/projects/54474b4c5d5a4f459909c4cb70e7b4f3/loader"))()]]},
+    {Name = "CLOVER HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://cloverhub.app/clover.lua"))()]]},
+    {Name = "BIGFROOT", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/hanniii1/Loader/refs/heads/main/BFLoader.lua"))()]]},
+    {Name = "SYS HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://syshub.fun/free"))()]]}
+}
+
+local OpenScriptBtn = Instance.new("TextButton")
+OpenScriptBtn.Size = UDim2.new(1, -20, 0, 36)
+OpenScriptBtn.Position = UDim2.new(0, 10, 0, 5)
+OpenScriptBtn.BackgroundColor3 = Color3.fromRGB(140, 45, 220)
+OpenScriptBtn.Text = "OPEN SCRIPT"
+OpenScriptBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenScriptBtn.Font = Enum.Font.GothamBold
+OpenScriptBtn.TextSize = 14
+OpenScriptBtn.Parent = MainPage
+
+local OpenScriptCorner = Instance.new("UICorner")
+OpenScriptCorner.CornerRadius = UDim.new(0, 8)
+OpenScriptCorner.Parent = OpenScriptBtn
+
+local ScriptScroll = Instance.new("ScrollingFrame")
+ScriptScroll.Size = UDim2.new(1, -20, 1, -50)
+ScriptScroll.Position = UDim2.new(0, 10, 0, 46)
+ScriptScroll.BackgroundTransparency = 1
+ScriptScroll.BorderSizePixel = 0
+ScriptScroll.ScrollBarThickness = 4
+ScriptScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
+ScriptScroll.Parent = MainPage
+
+local ScriptListLayout = Instance.new("UIListLayout")
+ScriptListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ScriptListLayout.Padding = UDim.new(0, 6)
+ScriptListLayout.Parent = ScriptScroll
+
+local SelectedScript = nil
+local RegisteredItems = {}
+
+for index, data in ipairs(ScriptList) do
+    local ItemFrame = Instance.new("Frame")
+    ItemFrame.Size = UDim2.new(1, -10, 0, 40)
+    ItemFrame.BackgroundColor3 = Color3.fromRGB(32, 18, 50)
+    ItemFrame.BorderSizePixel = 0
+    ItemFrame.LayoutOrder = index
+    ItemFrame.Parent = ScriptScroll
+
+    local ItemCorner = Instance.new("UICorner")
+    ItemCorner.CornerRadius = UDim.new(0, 6)
+    ItemCorner.Parent = ItemFrame
+
+    local ItemStroke = Instance.new("UIStroke")
+    ItemStroke.Color = Color3.fromRGB(70, 40, 110)
+    ItemStroke.Thickness = 1
+    ItemStroke.Parent = ItemFrame
+
+    local NameLabel = Instance.new("TextLabel")
+    NameLabel.Size = UDim2.new(1, -80, 0, 20)
+    NameLabel.Position = UDim2.new(0, 10, 0, 4)
+    NameLabel.BackgroundTransparency = 1
+    NameLabel.Text = data.Name
+    NameLabel.TextColor3 = Color3.fromRGB(220, 200, 255)
+    NameLabel.Font = Enum.Font.GothamBold
+    NameLabel.TextSize = 12
+    NameLabel.TextXAlignment = Enum.TextXAlignment.Left
+    NameLabel.Parent = ItemFrame
+
+    local StatusLabel = Instance.new("TextLabel")
+    StatusLabel.Size = UDim2.new(1, -80, 0, 14)
+    StatusLabel.Position = UDim2.new(0, 10, 0, 22)
+    StatusLabel.BackgroundTransparency = 1
+    StatusLabel.Text = "[" .. data.KeyStatus .. "]"
+    StatusLabel.TextColor3 = (data.KeyStatus == "NO KEY") and Color3.fromRGB(100, 220, 120) or Color3.fromRGB(255, 180, 80)
+    StatusLabel.Font = Enum.Font.Gotham
+    StatusLabel.TextSize = 10
+    StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+    StatusLabel.Parent = ItemFrame
+
+    local CheckBox = Instance.new("Frame")
+    CheckBox.Size = UDim2.new(0, 22, 0, 22)
+    CheckBox.Position = UDim2.new(1, -30, 0.5, -11)
+    CheckBox.BackgroundColor3 = Color3.fromRGB(20, 12, 32)
+    CheckBox.Parent = ItemFrame
+
+    local CheckCorner = Instance.new("UICorner")
+    CheckCorner.CornerRadius = UDim.new(0, 4)
+    CheckCorner.Parent = CheckBox
+
+    local CheckStroke = Instance.new("UIStroke")
+    CheckStroke.Color = Color3.fromRGB(120, 60, 180)
+    CheckStroke.Thickness = 1
+    CheckStroke.Parent = CheckBox
+
+    local CheckMark = Instance.new("TextLabel")
+    CheckMark.Size = UDim2.new(1, 0, 1, 0)
+    CheckMark.BackgroundTransparency = 1
+    CheckMark.Text = ""
+    CheckMark.TextColor3 = Color3.fromRGB(0, 255, 120)
+    CheckMark.Font = Enum.Font.GothamBold
+    CheckMark.TextSize = 14
+    CheckMark.Parent = CheckBox
+
+    local ClickBtn = Instance.new("TextButton")
+    ClickBtn.Size = UDim2.new(1, 0, 1, 0)
+    ClickBtn.BackgroundTransparency = 1
+    ClickBtn.Text = ""
+    ClickBtn.Parent = ItemFrame
+
+    RegisteredItems[index] = {
+        Frame = ItemFrame,
+        NameLabel = NameLabel,
+        CheckMark = CheckMark,
+        Stroke = ItemStroke,
+        Data = data
+    }
+
+    ClickBtn.MouseButton1Click:Connect(function()
+        SelectedScript = data.Script
+        for _, item in pairs(RegisteredItems) do
+            item.CheckMark.Text = ""
+            item.Stroke.Color = Color3.fromRGB(70, 40, 110)
+        end
+        CheckMark.Text = "✓"
+        ItemStroke.Color = Color3.fromRGB(200, 100, 255)
+    end)
+end
+
+RunService.RenderStepped:Connect(function()
+    local hue = (tick() % 4) / 4
+    local rainbowColor = Color3.fromHSV(hue, 1, 1)
+    
+    for _, item in pairs(RegisteredItems) do
+        if item.CheckMark.Text == "✓" then
+            item.NameLabel.TextColor3 = rainbowColor
+        else
+            item.NameLabel.TextColor3 = Color3.fromRGB(220, 200, 255)
+        end
+    end
+end)
+
+ScriptListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    ScriptScroll.CanvasSize = UDim2.new(0, 0, 0, ScriptListLayout.AbsoluteContentSize.Y + 10)
+end)
+
+OpenScriptBtn.MouseButton1Click:Connect(function()
+    if SelectedScript then
+        local success, err = pcall(function()
+            loadstring(SelectedScript)()
+        end)
+        if not success then
+            warn("Gagal mengeksekusi script: " .. tostring(err))
+        end
+    end
+end)
+
+local TampilanScroll = Instance.new("ScrollingFrame")
+TampilanScroll.Size = UDim2.new(1, -10, 1, -10)
+TampilanScroll.Position = UDim2.new(0, 5, 0, 5)
+TampilanScroll.BackgroundTransparency = 1
+TampilanScroll.BorderSizePixel = 0
+TampilanScroll.ScrollBarThickness = 4
+TampilanScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
+TampilanScroll.Parent = TampilanPage
+
+local TampilanLayout = Instance.new("UIListLayout")
+TampilanLayout.SortOrder = Enum.SortOrder.LayoutOrder
+TampilanLayout.Padding = UDim.new(0, 8)
+TampilanLayout.Parent = TampilanScroll
+
+TampilanLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    TampilanScroll.CanvasSize = UDim2.new(0, 0, 0, TampilanLayout.AbsoluteContentSize.Y + 15)
+end)
+
+local function CreateToggle(name, order, onClick)
+    local Frame = Instance.new("Frame")
+    Frame.Size = UDim2.new(1, -10, 0, 40)
+    Frame.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+    Frame.BorderSizePixel = 0
+    Frame.LayoutOrder = order
+    Frame.Parent = TampilanScroll
+
+    local Corner = Instance.new("UICorner")
+    Corner.CornerRadius = UDim.new(0, 8)
+    Corner.Parent = Frame
+
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(0.6, 0, 1, 0)
+    Label.Position = UDim2.new(0, 12, 0, 0)
+    Label.BackgroundTransparency = 1
+    Label.Text = name
+    Label.TextColor3 = Color3.fromRGB(220, 200, 255)
+    Label.Font = Enum.Font.GothamBold
+    Label.TextSize = 12
+    Label.TextXAlignment = Enum.TextXAlignment.Left
+    Label.Parent = Frame
+
+    local ToggleBg = Instance.new("Frame")
+    ToggleBg.Size = UDim2.new(0, 46, 0, 24)
+    ToggleBg.Position = UDim2.new(1, -56, 0.5, -12)
+    ToggleBg.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    ToggleBg.Parent = Frame
+
+    local ToggleCorner = Instance.new("UICorner")
+    ToggleCorner.CornerRadius = UDim.new(1, 0)
+    ToggleCorner.Parent = ToggleBg
+
+    local ToggleCircle = Instance.new("Frame")
+    ToggleCircle.Size = UDim2.new(0, 18, 0, 18)
+    ToggleCircle.Position = UDim2.new(0, 3, 0.5, -9)
+    ToggleCircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ToggleCircle.Parent = ToggleBg
+
+    local CircleCorner = Instance.new("UICorner")
+    CircleCorner.CornerRadius = UDim.new(1, 0)
+    CircleCorner.Parent = ToggleCircle
+
+    local Button = Instance.new("TextButton")
+    Button.Size = UDim2.new(1, 0, 1, 0)
+    Button.BackgroundTransparency = 1
+    Button.Text = ""
+    Button.Parent = Frame
+
+    local state = false
+    Button.MouseButton1Click:Connect(function()
+        state = not state
+        if state then
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
+                Position = UDim2.new(1, -21, 0.5, -9),
+                BackgroundColor3 = Color3.fromRGB(0, 255, 120)
+            }):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(40, 120, 60)
+            }):Play()
+        else
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
+                Position = UDim2.new(0, 3, 0.5, -9),
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            }):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+            }):Play()
+        end
+        pcall(onClick, state)
+    end)
+end
+
+CreateToggle("120 FPS", 1, function(state)
+    if setfpscap then
+        setfpscap(state and 120 or 60)
+    end
+end)
+
+local defaultFOV = workspace.CurrentCamera.FieldOfView
+CreateToggle("PC DISPLAY", 2, function(state)
+    if state then
+        workspace.CurrentCamera.FieldOfView = 90
+    else
+        workspace.CurrentCamera.FieldOfView = defaultFOV
+    end
+end)
+
+local SliderFrame = Instance.new("Frame")
+SliderFrame.Size = UDim2.new(1, -10, 0, 50)
+SliderFrame.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+SliderFrame.BorderSizePixel = 0
+SliderFrame.LayoutOrder = 3
+SliderFrame.Parent = TampilanScroll
+
+local SliderCorner = Instance.new("UICorner")
+SliderCorner.CornerRadius = UDim.new(0, 8)
+SliderCorner.Parent = SliderFrame
+
+local SliderTitle = Instance.new("TextLabel")
+SliderTitle.Size = UDim2.new(1, -24, 0, 20)
+SliderTitle.Position = UDim2.new(0, 12, 0, 4)
+SliderTitle.BackgroundTransparency = 1
+SliderTitle.Text = "ZOOM PC DISTANCE: 0%"
+SliderTitle.TextColor3 = Color3.fromRGB(220, 200, 255)
+SliderTitle.Font = Enum.Font.GothamBold
+SliderTitle.TextSize = 11
+SliderTitle.TextXAlignment = Enum.TextXAlignment.Left
+SliderTitle.Parent = SliderFrame
+
+local SliderBar = Instance.new("Frame")
+SliderBar.Size = UDim2.new(1, -24, 0, 8)
+SliderBar.Position = UDim2.new(0, 12, 0, 30)
+SliderBar.BackgroundColor3 = Color3.fromRGB(20, 12, 32)
+SliderBar.BorderSizePixel = 0
+SliderBar.Parent = SliderFrame
+
+local SliderBarCorner = Instance.new("UICorner")
+SliderBarCorner.CornerRadius = UDim.new(1, 0)
+SliderBarCorner.Parent = SliderBar
+
+local SliderFill = Instance.new("Frame")
+SliderFill.Size = UDim2.new(0, 0, 1, 0)
+SliderFill.BackgroundColor3 = Color3.fromRGB(140, 45, 220)
+SliderFill.BorderSizePixel = 0
+SliderFill.Parent = SliderBar
+
+local SliderFillCorner = Instance.new("UICorner")
+SliderFillCorner.CornerRadius = UDim.new(1, 0)
+SliderFillCorner.Parent = SliderFill
+
+local SliderKnob = Instance.new("Frame")
+SliderKnob.Size = UDim2.new(0, 16, 0, 16)
+SliderKnob.Position = UDim2.new(0, -8, 0.5, -8)
+SliderKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SliderKnob.Parent = SliderFill
+
+local KnobCorner = Instance.new("UICorner")
+KnobCorner.CornerRadius = UDim.new(1, 0)
+KnobCorner.Parent = SliderKnob
+
+local isDraggingZoom = false
+local function UpdateZoom(input)
+    local barPos = SliderBar.AbsolutePosition.X
+    local barSize = SliderBar.AbsoluteSize.X
+    local mouseX = input.Position.X
+    local percentage = math.clamp((mouseX - barPos) / barSize, 0, 1)
+    
+    SliderFill.Size = UDim2.new(percentage, 0, 1, 0)
+    local zoomPercent = math.floor(percentage * 50)
+    SliderTitle.Text = "ZOOM PC DISTANCE: " .. zoomPercent .. "%"
+    
+    LocalPlayer.CameraMaxZoomDistance = 128 + (zoomPercent * 4)
+    LocalPlayer.CameraMinZoomDistance = 0.5
+end
+
+SliderBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        isDraggingZoom = true
+        UpdateZoom(input)
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if isDraggingZoom and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        UpdateZoom(input)
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        isDraggingZoom = false
+    end
+end)
+
+local SavedMaterials = {}
+CreateToggle("FPS BOOST", 4, function(state)
+    local Terrain = workspace:FindFirstChildOfClass("Terrain")
+    if state then
+        if Terrain then
+            Terrain.WaterWaveSize = 0
+            Terrain.WaterWaveSpeed = 0
+            Terrain.WaterReflectance = 0
+            Terrain.WaterTransparency = 0
+        end
+        for _, v in ipairs(game:GetDescendants()) do
+            if v:IsA("BasePart") then
+                SavedMaterials[v] = v.Material
+                v.Material = Enum.Material.SmoothPlastic
+            elseif v:IsA("PostEffect") or v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                v.Enabled = false
+            end
+        end
+    else
+        for part, mat in pairs(SavedMaterials) do
+            if part and part.Parent then
+                part.Material = mat
+            end
+        end
+        SavedMaterials = {}
+        for _, v in ipairs(game:GetDescendants()) do
+            if v:IsA("PostEffect") or v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                v.Enabled = true
+            end
+        end
+    end
+end)
+
+local Lighting = game:GetService("Lighting")
+local DayLoop = nil
+CreateToggle("ANTI NIGHT", 5, function(state)
+    if state then
+        DayLoop = RunService.RenderStepped:Connect(function()
+            Lighting.ClockTime = 12
+        end)
+    else
+        if DayLoop then
+            DayLoop:Disconnect()
+            DayLoop = nil
+        end
+    end
+end)
+
+local NightLoop = nil
+CreateToggle("ANTI-NOON", 6, function(state)
+    if state then
+        NightLoop = RunService.RenderStepped:Connect(function()
+            Lighting.ClockTime = 0
+        end)
+    else
+        if NightLoop then
+            NightLoop:Disconnect()
+            NightLoop = nil
+        end
+    end
+end)
+
+local origShadows = Lighting.GlobalShadows
+CreateToggle("GRAPHIC SHADOW", 7, function(state)
+    Lighting.GlobalShadows = state
+    if state then
+        Lighting.Technology = Enum.Technology.Future
+    end
+end)
+
+if isAdmin and AdminPage then
+    local MessageFrame = Instance.new("Frame")
+    MessageFrame.Size = UDim2.new(1, -20, 0, 100)
+    MessageFrame.Position = UDim2.new(0, 10, 0, 40)
+    MessageFrame.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+    MessageFrame.BorderSizePixel = 0
+    MessageFrame.Parent = AdminPage
+
+    local MessageCorner = Instance.new("UICorner")
+    MessageCorner.CornerRadius = UDim.new(0, 8)
+    MessageCorner.Parent = MessageFrame
+
+    local MessageBox = Instance.new("TextBox")
+    MessageBox.Size = UDim2.new(1, -20, 0, 40)
+    MessageBox.Position = UDim2.new(0, 10, 0, 10)
+    MessageBox.BackgroundColor3 = Color3.fromRGB(25, 15, 38)
+    MessageBox.Text = "PESAN.."
+    MessageBox.TextColor3 = Color3.fromRGB(200, 200, 220)
+    MessageBox.Font = Enum.Font.Gotham
+    MessageBox.TextSize = 14
+    MessageBox.ClearTextOnFocus = true
+    MessageBox.Parent = MessageFrame
+
+    local MessageCorner2 = Instance.new("UICorner")
+    MessageCorner2.CornerRadius = UDim.new(0, 6)
+    MessageCorner2.Parent = MessageBox
+
+    local SendBtn = Instance.new("TextButton")
+    SendBtn.Size = UDim2.new(1, -20, 0, 35)
+    SendBtn.Position = UDim2.new(0, 10, 1, -45)
+    SendBtn.BackgroundColor3 = Color3.fromRGB(120, 40, 190)
+    SendBtn.Text = "SEND"
+    SendBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    SendBtn.Font = Enum.Font.GothamBold
+    SendBtn.TextSize = 14
+    SendBtn.Parent = MessageFrame
+
+    local SendCorner = Instance.new("UICorner")
+    SendCorner.CornerRadius = UDim.new(0, 6)
+    SendCorner.Parent = SendBtn
+
+    SendBtn.MouseButton1Click:Connect(function()
+        local msg = MessageBox.Text
+        if msg == "" or msg == "PESAN.." then return end
+        
+        local NotifGui = Instance.new("ScreenGui")
+        NotifGui.Name = "LipzyNotification"
+        NotifGui.Parent = game.CoreGui
+        NotifGui.IgnoreGuiInset = true
+        
+        local NotifFrame = Instance.new("Frame")
+        NotifFrame.Size = UDim2.new(0, 500, 0, 100)
+        NotifFrame.Position = UDim2.new(0.5, -250, 0, -150)
+        NotifFrame.BackgroundColor3 = Color3.fromRGB(30, 18, 48)
+        NotifFrame.BorderSizePixel = 0
+        NotifFrame.Parent = NotifGui
+        
+        local NotifCorner = Instance.new("UICorner")
+        NotifCorner.CornerRadius = UDim.new(0, 10)
+        NotifCorner.Parent = NotifFrame
+        
+        local NotifStroke = Instance.new("UIStroke")
+        NotifStroke.Color = Color3.fromRGB(140, 45, 220)
+        NotifStroke.Thickness = 2
+        NotifStroke.Parent = NotifFrame
+        
+        local NotifProfile = Instance.new("ImageLabel")
+        NotifProfile.Size = UDim2.new(0, 60, 0, 60)
+        NotifProfile.Position = UDim2.new(0, 20, 0.5, -30)
+        NotifProfile.BackgroundColor3 = Color3.fromRGB(45, 25, 70)
+        NotifProfile.Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
+        NotifProfile.Parent = NotifFrame
+        
+        local NotifProfileCorner = Instance.new("UICorner")
+        NotifProfileCorner.CornerRadius = UDim.new(1, 0)
+        NotifProfileCorner.Parent = NotifProfile
+        
+        local NotifProfileStroke = Instance.new("UIStroke")
+        NotifProfileStroke.Color = Color3.fromRGB(255, 215, 0)
+        NotifProfileStroke.Thickness = 2
+        NotifProfileStroke.Parent = NotifProfile
+        
+        local CrownLabel = Instance.new("TextLabel")
+        CrownLabel.Size = UDim2.new(1, -100, 0, 20)
+        CrownLabel.Position = UDim2.new(0, 90, 0, 0)
+        CrownLabel.BackgroundTransparency = 1
+        CrownLabel.Text = "👑LIPZY HUB👑"
+        CrownLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+        CrownLabel.Font = Enum.Font.GothamBold
+        CrownLabel.TextSize = 14
+        CrownLabel.TextXAlignment = Enum.TextXAlignment.Left
+        CrownLabel.Parent = NotifFrame
+        
+        local NotifMsg = Instance.new("TextLabel")
+        NotifMsg.Size = UDim2.new(1, -100, 1, -25)
+        NotifMsg.Position = UDim2.new(0, 90, 0, 20)
+        NotifMsg.BackgroundTransparency = 1
+        NotifMsg.Text = msg
+        NotifMsg.TextColor3 = Color3.fromRGB(255, 255, 255)
+        NotifMsg.Font = Enum.Font.Gotham
+        NotifMsg.TextSize = 16
+        NotifMsg.TextXAlignment = Enum.TextXAlignment.Left
+        NotifMsg.TextYAlignment = Enum.TextYAlignment.Top
+        NotifMsg.Parent = NotifFrame
+        
+        TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+            Position = UDim2.new(0.5, -250, 0, 50)
+        }):Play()
+        
+        task.delay(3, function()
+            TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+                Position = UDim2.new(0.5, -250, 0, -150)
+            }):Play()
+            task.wait(0.5)
+            NotifGui:Destroy()
+        end)
+    end)
+
+    local OwnerScriptYPos = 150
+
+    local OwnerScriptFrame = Instance.new("Frame")
+    OwnerScriptFrame.Size = UDim2.new(1, -20, 0, 40)
+    OwnerScriptFrame.Position = UDim2.new(0, 10, 0, OwnerScriptYPos)
+    OwnerScriptFrame.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+    OwnerScriptFrame.BorderSizePixel = 0
+    OwnerScriptFrame.Parent = AdminPage
+
+    local OwnerScriptCorner = Instance.new("UICorner")
+    OwnerScriptCorner.CornerRadius = UDim.new(0, 8)
+    OwnerScriptCorner.Parent = OwnerScriptFrame
+
+    local OwnerTextLabel = Instance.new("TextLabel")
+    OwnerTextLabel.Size = UDim2.new(0, 150, 1, 0)
+    OwnerTextLabel.Position = UDim2.new(0, 10, 0, 0)
+    OwnerTextLabel.BackgroundTransparency = 1
+    OwnerTextLabel.Text = "OWNER SCRIPT"
+    OwnerTextLabel.TextColor3 = Color3.fromRGB(200, 200, 220)
+    OwnerTextLabel.Font = Enum.Font.GothamBold
+    OwnerTextLabel.TextSize = 14
+    OwnerTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+    OwnerTextLabel.Parent = OwnerScriptFrame
+
+    local ToggleBg = Instance.new("Frame")
+    ToggleBg.Size = UDim2.new(0, 50, 0, 26)
+    ToggleBg.Position = UDim2.new(1, -60, 0.5, -13)
+    ToggleBg.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    ToggleBg.Parent = OwnerScriptFrame
+
+    local ToggleCorner = Instance.new("UICorner")
+    ToggleCorner.CornerRadius = UDim.new(1, 0)
+    ToggleCorner.Parent = ToggleBg
+
+    local ToggleCircle = Instance.new("Frame")
+    ToggleCircle.Size = UDim2.new(0, 20, 0, 20)
+    ToggleCircle.Position = UDim2.new(0, 3, 0.5, -10)
+    ToggleCircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ToggleCircle.Parent = ToggleBg
+
+    local ToggleCircleCorner = Instance.new("UICorner")
+    ToggleCircleCorner.CornerRadius = UDim.new(1, 0)
+    ToggleCircleCorner.Parent = ToggleCircle
+
+    local isOwnerScriptEnabled = false
+    local headBillboard = nil
+    local rainbowConnection = nil
+
+    local function ApplyBillboard(character)
+        if headBillboard then headBillboard:Destroy() end
+        if rainbowConnection then rainbowConnection:Disconnect() end
+
+        if not character or not character:FindFirstChild("Head") then return end
+
+        headBillboard = Instance.new("BillboardGui")
+        headBillboard.Name = "OwnerScriptBillboard"
+        headBillboard.Adornee = character.Head
+        headBillboard.Size = UDim2.new(0, 220, 0, 50)
+        headBillboard.StudsOffset = Vector3.new(0, 2.5, 0)
+        headBillboard.AlwaysOnTop = true
+        headBillboard.Parent = character.Head
+        
+        local ownerText = Instance.new("TextLabel")
+        ownerText.Name = "OwnerText"
+        ownerText.Size = UDim2.new(1, 0, 1, 0)
+        ownerText.BackgroundTransparency = 1
+        ownerText.Font = Enum.Font.GothamBold
+        ownerText.TextSize = 24
+        ownerText.Parent = headBillboard
+        
+        local textStroke = Instance.new("UIStroke")
+        textStroke.Color = Color3.fromRGB(0, 0, 0)
+        textStroke.Thickness = 3
+        textStroke.Parent = ownerText
+
+        if LocalPlayer.Name == "Yanzzz_1023" then
+            ownerText.Text = "👑OWNER👑"
+            ownerText.TextColor3 = Color3.fromRGB(255, 220, 0)
+        elseif LocalPlayer.Name == "LifzxAfter2" then
+            ownerText.Text = "👑ADMIN👑"
+            rainbowConnection = RunService.RenderStepped:Connect(function()
+                local hue = (tick() % 5) / 5
+                ownerText.TextColor3 = Color3.fromHSV(hue, 1, 1)
+            end)
+        else
+            ownerText.Text = "👑VIP👑"
+            ownerText.TextColor3 = Color3.fromRGB(200, 100, 255)
+        end
+    end
+
+    local OwnerScriptBtn = Instance.new("TextButton")
+    OwnerScriptBtn.Size = UDim2.new(1, 0, 1, 0)
+    OwnerScriptBtn.BackgroundTransparency = 1
+    OwnerScriptBtn.Text = ""
+    OwnerScriptBtn.Parent = OwnerScriptFrame
+
+    OwnerScriptBtn.MouseButton1Click:Connect(function()
+        isOwnerScriptEnabled = not isOwnerScriptEnabled
+        
+        if isOwnerScriptEnabled then
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
+                Position = UDim2.new(1, -23, 0.5, -10),
+                BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+            }):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(40, 120, 40)
+            }):Play()
+            
+            if LocalPlayer.Character then
+                ApplyBillboard(LocalPlayer.Character)
+            end
+        else
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
+                Position = UDim2.new(0, 3, 0.5, -10),
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            }):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+            }):Play()
+            
+            if headBillboard then
+                headBillboard:Destroy()
+                headBillboard = nil
+            end
+            if rainbowConnection then
+                rainbowConnection:Disconnect()
+                rainbowConnection = nil
+            end
+        end
+    end)
+
+    LocalPlayer.CharacterAdded:Connect(function(char)
+        if isOwnerScriptEnabled then
+            char:WaitForChild("Head")
+            ApplyBillboard(char)
+        end
+    end)
+end
+
+print("Lipzy Hub V5.2 Loaded Successfully!")
