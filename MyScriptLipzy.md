@@ -6,7 +6,6 @@ local RunService = game:GetService("RunService")
 local Stats = game:GetService("Stats")
 
 local LocalPlayer = Players.LocalPlayer
-
 local AdminList = {
     ["LifzxAfter2"] = "ADMIN",
     ["Yanzzz_1023"] = "OWNER"
@@ -134,7 +133,7 @@ local function CreateTab(name, layoutOrder)
     Page.Parent = ContentContainer
 
     Pages[name] = {Button = TabBtn, Page = Page}
-    
+
     TabBtn.MouseButton1Click:Connect(function()
         for _, tabData in pairs(Pages) do
             tabData.Page.Visible = false
@@ -321,13 +320,13 @@ end
 
 local FPSLabel, FPSIcon = CreateStatBox(2, true)
 FPSIcon.Image = "rbxassetid://137800308683217"
-
 local PingLabel, PingIcon = CreateStatBox(3, true)
 PingIcon.Image = "rbxassetid://78681903515425"
 
 local frameCount = 0
 local lastTime = tick()
 local currentFPS = 0
+
 RunService.RenderStepped:Connect(function()
     frameCount = frameCount + 1
     local currentTime = tick()
@@ -673,7 +672,6 @@ KnobCorner.CornerRadius = UDim.new(1, 0)
 KnobCorner.Parent = SliderKnob
 
 local isDraggingZoom = false
-
 local function UpdateZoom(input)
     local barPos = SliderBar.AbsolutePosition.X
     local barSize = SliderBar.AbsoluteSize.X
@@ -840,7 +838,6 @@ local function CreateMainCountdownLabel(name, color, order)
     Stroke.Color = Color3.fromRGB(0, 0, 0)
     Stroke.Thickness = 1
     Stroke.Parent = Label
-
     return Label
 end
 
@@ -871,6 +868,7 @@ task.spawn(function()
         divineTime = math.max(0, divineTime - 1)
         eternalTime = math.max(0, eternalTime - 1)
         secretTime = math.max(0, secretTime - 1)
+
         if divineTime == 0 then divineTime = math.random(3600, 14400) end
         if eternalTime == 0 then eternalTime = math.random(1800, 7200) end
         if secretTime == 0 then secretTime = math.random(600, 3600) end
@@ -966,11 +964,13 @@ for _, egg in ipairs(divineEggs) do
     orderCounter = orderCounter + 1
     eggTimeData[egg] = {Label = timeLabel, Time = math.random(3600, 14400)}
 end
+
 for _, egg in ipairs(eternalEggs) do
     local timeLabel = CreateEggPredictionBox(egg, "ETERNAL", Color3.fromRGB(180, 100, 255), orderCounter)
     orderCounter = orderCounter + 1
     eggTimeData[egg] = {Label = timeLabel, Time = math.random(1800, 7200)}
 end
+
 for _, egg in ipairs(secretEggs) do
     local timeLabel = CreateEggPredictionBox(egg, "SECRET", Color3.fromRGB(255, 50, 50), orderCounter)
     orderCounter = orderCounter + 1
@@ -1042,12 +1042,10 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
-local TargetTimeStamp = 1791637200
-local TargetDateString = os.date("%d %B %Y - %H:%M WIB", TargetTimeStamp)
 local AADateLabel = Instance.new("TextLabel")
 AADateLabel.Size = UDim2.new(1, 0, 0, 25)
 AADateLabel.BackgroundTransparency = 1
-AADateLabel.Text = "DATE: " .. TargetDateString
+AADateLabel.Text = "SCHEDULE: Monday - Sunday (22:00 PM)"
 AADateLabel.TextColor3 = Color3.fromRGB(180, 180, 220)
 AADateLabel.Font = Enum.Font.Gotham
 AADateLabel.TextSize = 12
@@ -1077,7 +1075,7 @@ AAStatusText.BackgroundTransparency = 1
 AAStatusText.Text = "Calculating Time..."
 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
 AAStatusText.Font = Enum.Font.GothamBold
-AAStatusText.TextSize = 16
+AAStatusText.TextSize = 15
 AAStatusText.TextWrapped = true
 AAStatusText.Parent = AAStatusBox
 
@@ -1086,20 +1084,47 @@ AAStatusStroke.Color = Color3.fromRGB(0, 0, 0)
 AAStatusStroke.Thickness = 0
 AAStatusStroke.Parent = AAStatusText
 
+-- Logika Countdown Berulang (Senin s/d Minggu Jam 22:00 + Durasi 2 Jam)
 task.spawn(function()
     while task.wait(1) do
         if AAStatusText and AAStatusText.Parent then
-            local now = os.time()
-            local diff = TargetTimeStamp - now
-            if diff <= 0 then
-                AAStatusText.Text = "ADMIN ABUSE START GO GOO!"
+            local timeTable = os.date("*t")
+            local currentWday = timeTable.wday -- 1=Minggu, 2=Senin, ..., 7=Sabtu
+            -- Konversi wday lua ke Senin=1 ... Minggu=7
+            local dayIndex = (currentWday == 1) and 7 or (currentWday - 1)
+            
+            -- Hitung detik sekarang sejak awal hari (jam 00:00:00)
+            local currentSecondsToday = (timeTable.hour * 3600) + (timeTable.min * 60) + timeTable.sec
+            local targetSecondsToday = (22 * 3600) -- Jam 22:00
+            local eventDuration = 7200 -- 2 Jam durasi event
+            
+            local diff = targetSecondsToday - currentSecondsToday
+            
+            if diff > 0 and diff <= (24 * 3600) then
+                -- Belum jam 22:00 hari ini
+                local days = 0
+                local hours = math.floor(diff / 3600)
+                local minutes = math.floor((diff % 3600) / 60)
+                local seconds = diff % 60
+                
+                AAStatusText.Text = string.format("ADMIN ABUSE STARTS IN:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
+                AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
+                AAStatusStroke.Thickness = 0
+            elseif currentSecondsToday >= targetSecondsToday and currentSecondsToday < (targetSecondsToday + eventDuration) then
+                -- Sedang Berlangsung (Rentang 2 Jam)
+                AAStatusText.Text = "GOO BROOO ADMIN ABUSE 🌌"
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 0, 0)
                 AAStatusStroke.Thickness = 2
             else
-                local days = math.floor(diff / 86400)
-                local hours = math.floor((diff % 86400) / 3600)
-                local minutes = math.floor((diff % 3600) / 60)
-                local seconds = diff % 60
+                -- Lewat jam 22:00 + 2 jam, hitung mundur untuk hari berikutnya (reset loop Senin-Minggu)
+                local secondsLeftToday = (24 * 3600) - currentSecondsToday
+                local totalDiff = secondsLeftToday + targetSecondsToday
+                
+                local days = math.floor(totalDiff / 86400)
+                local hours = math.floor((totalDiff % 86400) / 3600)
+                local minutes = math.floor((totalDiff % 3600) / 60)
+                local seconds = totalDiff % 60
+                
                 AAStatusText.Text = string.format("ADMIN ABUSE STARTS IN:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
                 AAStatusStroke.Thickness = 0
@@ -1418,6 +1443,7 @@ if isAdmin and AdminPage then
         NotifMsg.Parent = NotifFrame
 
         TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -250, 0, 50)}):Play()
+
         task.delay(3, function()
             TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.5, -250, 0, -150)}):Play()
             task.wait(0.5)
