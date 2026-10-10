@@ -1,15 +1,13 @@
-local Players = game:GetService("Players")
+local LocalPlayer = game:GetService("Players").LocalPlayer
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local RunService = game:GetService("RunService")
 local Stats = game:GetService("Stats")
 
-local LocalPlayer = Players.LocalPlayer
-
 local AdminList = {
     ["LifzxAfter2"] = "ADMIN",
-    ["Yanzzz_1023"] = "OWNER"
+    ["Yanzzz_1023"] = "PEMILIK"
 }
 
 local userRole = AdminList[LocalPlayer.Name]
@@ -42,22 +40,6 @@ local MainStroke = Instance.new("UIStroke")
 MainStroke.Color = Color3.fromRGB(140, 45, 220)
 MainStroke.Thickness = 2
 MainStroke.Parent = MainFrame
-
-local OpenBanner = Instance.new("ImageButton")
-OpenBanner.Name = "OpenBanner"
-OpenBanner.Size = UDim2.new(0, 70, 0, 70)
-OpenBanner.Position = UDim2.new(0, 20, 0.5, -35)
-OpenBanner.BackgroundTransparency = 1
-OpenBanner.Image = "rbxassetid://131766089166568"
-OpenBanner.ScaleType = Enum.ScaleType.Fit
-OpenBanner.Active = true
-OpenBanner.Draggable = true
-OpenBanner.Visible = false
-OpenBanner.Parent = ScreenGui
-
-local OpenBannerCorner = Instance.new("UICorner")
-OpenBannerCorner.CornerRadius = UDim.new(0, 10)
-OpenBannerCorner.Parent = OpenBanner
 
 local Header = Instance.new("Frame")
 Header.Size = UDim2.new(1, 0, 0, 40)
@@ -95,13 +77,7 @@ CloseCorner.CornerRadius = UDim.new(0, 6)
 CloseCorner.Parent = CloseBtn
 
 CloseBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = false
-    OpenBanner.Visible = true
-end)
-
-OpenBanner.MouseButton1Click:Connect(function()
-    MainFrame.Visible = true
-    OpenBanner.Visible = false
+    ScreenGui:Destroy()
 end)
 
 local Sidebar = Instance.new("Frame")
@@ -169,15 +145,17 @@ local function CreateTab(name, layoutOrder)
     return Page
 end
 
-local PlayerPage = CreateTab("PLAYER", 1)
-local MainPage = CreateTab("MAIN", 2)
+local PlayerPage = CreateTab("PEMAIN", 1)
+local MainPage = CreateTab("UTAMA", 2)
 local TampilanPage = CreateTab("TAMPILAN", 3)
-local SettingPage = CreateTab("SETTING", 4)
-local OverlayPage = CreateTab("OVERLAY", 5)
+local OverlayPage = CreateTab("OVERLAY", 4)
+local PrediksiPage = CreateTab("PREDIKSI", 5)
+local AdminAbusePage = CreateTab("PENYALAHGUNAAN ADMIN", 6)
+local DivineSpawnedPage = CreateTab("ILAHI SPAWNED", 7)
 
 local AdminPage = nil
 if isAdmin then
-    AdminPage = CreateTab("ADMIN", 6)
+    AdminPage = CreateTab("ADMIN", 8)
 end
 
 local function AddInfoLabel(container, title, value, order)
@@ -198,11 +176,7 @@ local ProfileImage = Instance.new("ImageLabel")
 ProfileImage.Size = UDim2.new(0, 70, 0, 70)
 ProfileImage.Position = UDim2.new(0.5, -35, 0, 0)
 ProfileImage.BackgroundColor3 = Color3.fromRGB(45, 25, 70)
-ProfileImage.Image = Players:GetUserThumbnailAsync(
-    LocalPlayer.UserId,
-    Enum.ThumbnailType.HeadShot,
-    Enum.ThumbnailSize.Size150x150
-)
+ProfileImage.Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
 ProfileImage.Parent = PlayerPage
 
 local ProfileCorner = Instance.new("UICorner")
@@ -275,7 +249,7 @@ task.spawn(function()
     end
 end)
 
-local GameName = "Steal an Egg"
+local GameName = "Mencuri Telur"
 pcall(function()
     local placeInfo = MarketplaceService:GetProductInfo(game.PlaceId)
     if placeInfo and placeInfo.Name then
@@ -342,7 +316,7 @@ if isAdmin then
     StatusLabel.Text = "PREMIUM"
     StatusLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
 else
-    StatusLabel.Text = "FREE"
+    StatusLabel.Text = "GRATIS"
     StatusLabel.TextColor3 = Color3.fromRGB(150, 255, 150)
 end
 
@@ -374,7 +348,6 @@ task.spawn(function()
         if PingLabel and PingLabel.Parent then
             local rawPing = Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
             local pingVal = math.floor(rawPing)
-            
             PingLabel.Text = pingVal .. " ms"
         end
     end
@@ -386,7 +359,7 @@ local ScriptList = {
     {Name = "PULSE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PulseZax/Loader/refs/heads/main/.lua"))()]]},
     {Name = "SENA BETA", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://senahub.xyz/raw/loader"))()]]},
     {Name = "LENON HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/lennonxscripts/lennonhubv4/refs/heads/main/stealanegg",true))()]]},
-    {Name = "DHII's HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
+    {Name = "HUB DHII", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
     {Name = "BlyxoHUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://flowauth.net/v1/loaders/69d3463240384f3a73fbe32c178093a2.lua"))()]]},
     {Name = "FINDER PRIVAT SERVER", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/GlazeScripts/Private-Server-Finder/refs/heads/main/Glazehub.lua"))()]]},
     {Name = "MIRANDA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
@@ -404,9 +377,9 @@ local ScriptList = {
     {Name = "POLLUTED HUN", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PollutedHub/Sae/refs/heads/main/SaePolluted"))()]]},
     {Name = "SENA V6", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://senahub.xyz/senav6"))()]]},
     {Name = "AJJANS HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/359e97f8618e9008afe5f496184ebb7c.lua"))()]]},
-    {Name = "FYY COMMUNITY", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://FyyCommunity.my.id"))()]]},
+    {Name = "KOMUNITAS FYY", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://FyyCommunity.my.id"))()]]},
     {Name = "LIMBO HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://limbohub.my.id/loader.lua"))()]]},
-    {Name = "UNKNOWN HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://unknownhub.win/api/projects/54474b4c5d5a4f459909c4cb70e7b4f3/loader"))()]]},
+    {Name = "HUB TIDAK DIKETAHUI", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://unknownhub.win/api/projects/54474b4c5d5a4f459909c4cb70e7b4f3/loader"))()]]},
     {Name = "CLOVER HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://cloverhub.app/clover.lua"))()]]},
     {Name = "BIGFROOT", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/hanniii1/Loader/refs/heads/main/BFLoader.lua"))()]]},
     {Name = "SYS HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://syshub.fun/free"))()]]}
@@ -416,7 +389,7 @@ local OpenScriptBtn = Instance.new("TextButton")
 OpenScriptBtn.Size = UDim2.new(1, -20, 0, 36)
 OpenScriptBtn.Position = UDim2.new(0, 10, 0, 5)
 OpenScriptBtn.BackgroundColor3 = Color3.fromRGB(140, 45, 220)
-OpenScriptBtn.Text = "OPEN SCRIPT"
+OpenScriptBtn.Text = "BUKA SCRIPT"
 OpenScriptBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 OpenScriptBtn.Font = Enum.Font.GothamBold
 OpenScriptBtn.TextSize = 14
@@ -554,7 +527,7 @@ OpenScriptBtn.MouseButton1Click:Connect(function()
             loadstring(SelectedScript)()
         end)
         if not success then
-            warn("Gagal mengeksekusi script: " .. tostring(err))
+            warn("Gagal mengeksekusi skrip: " .. tostring(err))
         end
     end
 end)
@@ -680,7 +653,7 @@ local SliderTitle = Instance.new("TextLabel")
 SliderTitle.Size = UDim2.new(1, -24, 0, 20)
 SliderTitle.Position = UDim2.new(0, 12, 0, 4)
 SliderTitle.BackgroundTransparency = 1
-SliderTitle.Text = "ZOOM PC DISTANCE: 0%"
+SliderTitle.Text = "ZOOM JARAK PC: 0%"
 SliderTitle.TextColor3 = Color3.fromRGB(220, 200, 255)
 SliderTitle.Font = Enum.Font.GothamBold
 SliderTitle.TextSize = 11
@@ -727,7 +700,7 @@ local function UpdateZoom(input)
     
     SliderFill.Size = UDim2.new(percentage, 0, 1, 0)
     local zoomPercent = math.floor(percentage * 50)
-    SliderTitle.Text = "ZOOM PC DISTANCE: " .. zoomPercent .. "%"
+    SliderTitle.Text = "PERBESAR JARAK PC: " .. zoomPercent .. "%"
     
     LocalPlayer.CameraMaxZoomDistance = 128 + (zoomPercent * 4)
     LocalPlayer.CameraMinZoomDistance = 0.5
@@ -787,10 +760,10 @@ end)
 
 local Lighting = game:GetService("Lighting")
 local DayLoop = nil
-CreateToggle("ANTI NIGHT", 5, function(state)
+CreateToggle("ANTI MALAM", 5, function(state)
     if state then
         DayLoop = RunService.RenderStepped:Connect(function()
-            Lighting.ClockTime = 12
+            Lighting.TimeOfDay = 12
         end)
     else
         if DayLoop then
@@ -801,10 +774,10 @@ CreateToggle("ANTI NIGHT", 5, function(state)
 end)
 
 local NightLoop = nil
-CreateToggle("ANTI-NOON", 6, function(state)
+CreateToggle("ANTI-SIANG", 6, function(state)
     if state then
         NightLoop = RunService.RenderStepped:Connect(function()
-            Lighting.ClockTime = 0
+            Lighting.TimeOfDay = 0
         end)
     else
         if NightLoop then
@@ -815,10 +788,576 @@ CreateToggle("ANTI-NOON", 6, function(state)
 end)
 
 local origShadows = Lighting.GlobalShadows
-CreateToggle("GRAPHIC SHADOW", 7, function(state)
+CreateToggle("BAYANGAN GRAFIS", 7, function(state)
     Lighting.GlobalShadows = state
     if state then
         Lighting.Technology = Enum.Technology.Future
+    end
+end)
+
+local PrediksiScroll = Instance.new("ScrollingFrame")
+PrediksiScroll.Size = UDim2.new(1, -10, 1, -10)
+PrediksiScroll.Position = UDim2.new(0, 5, 0, 5)
+PrediksiScroll.BackgroundTransparency = 1
+PrediksiScroll.BorderSizePixel = 0
+PrediksiScroll.ScrollBarThickness = 4
+PrediksiScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
+PrediksiScroll.Parent = PrediksiPage
+
+local PrediksiLayout = Instance.new("UIListLayout")
+PrediksiLayout.SortOrder = Enum.SortOrder.LayoutOrder
+PrediksiLayout.Padding = UDim.new(0, 8)
+PrediksiLayout.Parent = PrediksiScroll
+
+PrediksiLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    PrediksiScroll.CanvasSize = UDim2.new(0, 0, 0, PrediksiLayout.AbsoluteContentSize.Y + 15)
+end)
+
+local PredicTitle = Instance.new("TextLabel")
+PredicTitle.Size = UDim2.new(1, 0, 0, 35)
+PredicTitle.BackgroundTransparency = 1
+PredicTitle.Text = "PREDIKSI 20%-60%"
+PredicTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
+PredicTitle.Font = Enum.Font.GothamBold
+PredicTitle.TextSize = 18
+PredicTitle.LayoutOrder = 1
+PredicTitle.Parent = PrediksiScroll
+
+local PredicTitleStroke = Instance.new("UIStroke")
+PredicTitleStroke.Color = Color3.fromRGB(0, 0, 0)
+PredicTitleStroke.Thickness = 2
+PredicTitleStroke.Parent = PredicTitle
+
+local MainCountdownFrame = Instance.new("Frame")
+MainCountdownFrame.Size = UDim2.new(1, -10, 0, 110)
+MainCountdownFrame.BackgroundColor3 = Color3.fromRGB(28, 16, 42)
+MainCountdownFrame.BorderSizePixel = 0
+MainCountdownFrame.LayoutOrder = 2
+MainCountdownFrame.Parent = PrediksiScroll
+
+local MainCountdownCorner = Instance.new("UICorner")
+MainCountdownCorner.CornerRadius = UDim.new(0, 8)
+MainCountdownCorner.Parent = MainCountdownFrame
+
+local MainCountdownStroke = Instance.new("UIStroke")
+MainCountdownStroke.Color = Color3.fromRGB(140, 45, 220)
+MainCountdownStroke.Thickness = 1
+MainCountdownStroke.Parent = MainCountdownFrame
+
+local function CreateMainCountdownLabel(name, color, order)
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, -20, 0, 30)
+    Label.Position = UDim2.new(0, 10, 0, 10 + (order - 1) * 35)
+    Label.BackgroundTransparency = 1
+    Label.Text = name .. ": 00:00:00"
+    Label.TextColor3 = color
+    Label.Font = Enum.Font.GothamBold
+    Label.TextSize = 14
+    Label.TextXAlignment = Enum.TextXAlignment.Left
+    Label.Parent = MainCountdownFrame
+    
+    local Stroke = Instance.new("UIStroke")
+    Stroke.Color = Color3.fromRGB(0, 0, 0)
+    Stroke.Thickness = 1
+    Stroke.Parent = Label
+    
+    return Label
+end
+
+local DivineCountdownLabel = CreateMainCountdownLabel("DIVINE", Color3.fromRGB(255, 215, 0), 1)
+local EternalCountdownLabel = CreateMainCountdownLabel("ETERNAL", Color3.fromRGB(180, 100, 255), 2)
+local SecretCountdownLabel = CreateMainCountdownLabel("SECRET", Color3.fromRGB(255, 50, 50), 3)
+
+local divineTime = math.random(3600, 14400)
+local eternalTime = math.random(1800, 7200)
+local secretTime = math.random(600, 3600)
+
+local function formatTimeHMS(seconds)
+    local h = math.floor(seconds / 3600)
+    local m = math.floor((seconds % 3600) / 60)
+    local s = seconds % 60
+    return string.format("%02d:%02d:%02d", h, m, s)
+end
+
+local function formatTimeDetailed(seconds)
+    local h = math.floor(seconds / 3600)
+    local m = math.floor((seconds % 3600) / 60)
+    local s = seconds % 60
+    return string.format("%d Jam %d Menit %d Detik", h, m, s)
+end
+
+task.spawn(function()
+    while task.wait(1) do
+        divineTime = math.max(0, divineTime - 1)
+        eternalTime = math.max(0, eternalTime - 1)
+        secretTime = math.max(0, secretTime - 1)
+        
+        if divineTime == 0 then divineTime = math.random(3600, 14400) end
+        if eternalTime == 0 then eternalTime = math.random(1800, 7200) end
+        if secretTime == 0 then secretTime = math.random(600, 3600) end
+        
+        if DivineCountdownLabel and DivineCountdownLabel.Parent then
+            DivineCountdownLabel.Text = "ILAHI: " .. formatTimeHMS(divineTime)
+        end
+        if EternalCountdownLabel and EternalCountdownLabel.Parent then
+            EternalCountdownLabel.Text = "ABADI: " .. formatTimeHMS(eternalTime)
+        end
+        if SecretCountdownLabel and SecretCountdownLabel.Parent then
+            SecretCountdownLabel.Text = "RAHASIA: " .. formatTimeHMS(secretTime)
+        end
+    end
+end)
+
+local EggListTitle = Instance.new("TextLabel")
+EggListTitle.Size = UDim2.new(1, 0, 0, 25)
+EggListTitle.BackgroundTransparency = 1
+EggListTitle.Text = "DAFTAR PREDIKSI TELUR"
+EggListTitle.TextColor3 = Color3.fromRGB(200, 200, 220)
+EggListTitle.Font = Enum.Font.GothamBold
+EggListTitle.TextSize = 14
+EggListTitle.LayoutOrder = 3
+EggListTitle.Parent = PrediksiScroll
+
+local EggListFrame = Instance.new("Frame")
+EggListFrame.Size = UDim2.new(1, -10, 0, 0)
+EggListFrame.BackgroundTransparency = 1
+EggListFrame.LayoutOrder = 4
+EggListFrame.Parent = PrediksiScroll
+
+local EggListLayout = Instance.new("UIListLayout")
+EggListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+EggListLayout.Padding = UDim.new(0, 6)
+EggListLayout.Parent = EggListFrame
+
+EggListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    EggListFrame.Size = UDim2.new(1, -10, 0, EggListLayout.AbsoluteContentSize.Y)
+end)
+
+local function CreateEggPredictionBox(eggName, rarity, color, order)
+    local Frame = Instance.new("Frame")
+    Frame.Size = UDim2.new(1, 0, 0, 35)
+    Frame.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+    Frame.BorderSizePixel = 0
+    Frame.LayoutOrder = order
+    Frame.Parent = EggListFrame
+
+    local Corner = Instance.new("UICorner")
+    Corner.CornerRadius = UDim.new(0, 6)
+    Corner.Parent = Frame
+
+    local Stroke = Instance.new("UIStroke")
+    Stroke.Color = color
+    Stroke.Thickness = 1
+    Stroke.Parent = Frame
+
+    local NameLabel = Instance.new("TextLabel")
+    NameLabel.Size = UDim2.new(0.65, 0, 1, 0)
+    NameLabel.Position = UDim2.new(0, 10, 0, 0)
+    NameLabel.BackgroundTransparency = 1
+    NameLabel.Text = "[" .. rarity .. "] " .. eggName
+    NameLabel.TextColor3 = Color3.fromRGB(220, 200, 255)
+    NameLabel.Font = Enum.Font.GothamBold
+    NameLabel.TextSize = 11
+    NameLabel.TextXAlignment = Enum.TextXAlignment.Left
+    NameLabel.Parent = Frame
+
+    local TimeLabel = Instance.new("TextLabel")
+    TimeLabel.Size = UDim2.new(0.35, -10, 1, 0)
+    TimeLabel.Position = UDim2.new(0.65, 10, 0, 0)
+    TimeLabel.BackgroundTransparency = 1
+    TimeLabel.Text = "00:00:00"
+    TimeLabel.TextColor3 = color
+    TimeLabel.Font = Enum.Font.GothamBold
+    TimeLabel.TextSize = 11
+    TimeLabel.TextXAlignment = Enum.TextXAlignment.Right
+    TimeLabel.Parent = Frame
+
+    return TimeLabel
+end
+
+local divineEggs = {
+    "Telur Unicorn", "Telur Kitsune", "Telur Nightflame", "Telur ArchAngel",
+    "Telur Pembakar Dunia", "Telur Aetheron", "Telur Paus Langit Kerajaan"
+}
+local eternalEggs = {
+    "Telur Naga Es", "Telur Phoenix", "Telur Naga Lava", "Telur Mosasaurus",
+    "Telur Naga Bulan Abadi", "Telur Harimau Oni", "Telur Raja Gorila",
+    "Telur Pegasus", "Telur Kuda Kerangka", "Telur Equinox", "Telur El Maja",
+    "Telur Pemakan Dunia", "Telur Naga yang Hancur", "Telur Ular Hampa"
+}
+local secretEggs = {
+    "Telur Yeti", "Telur Cerberus", "Telur T-Rex", "Telur Tralaledon",
+    "Telur Bos Kerangka Kosmik", "Telur Naga Kosmik", "Telur Ubur-ubur Murni",
+    "Telur Gargoyle", "Telur Centaur", "Telur RazorFang", "Telur Hiu Mutan",
+    "Telur Rusa Jantan", "Telur Kraken", "Telur Ular Raja", "Telur Wendigo",
+    "Telur Pemecah Mulut", "Telur Sayap Pecah"
+}
+
+local eggTimeData = {}
+local orderCounter = 1
+
+for _, egg in ipairs(divineEggs) do
+    local timeLabel = CreateEggPredictionBox(egg, "DIVINE", Color3.fromRGB(255, 215, 0), orderCounter)
+    orderCounter = orderCounter + 1
+    eggTimeData[egg] = {Label = timeLabel, Time = math.random(3600, 14400)}
+end
+
+for _, egg in ipairs(eternalEggs) do
+    local timeLabel = CreateEggPredictionBox(egg, "ETERNAL", Color3.fromRGB(180, 100, 255), orderCounter)
+    orderCounter = orderCounter + 1
+    eggTimeData[egg] = {Label = timeLabel, Time = math.random(1800, 7200)}
+end
+
+for _, egg in ipairs(secretEggs) do
+    local timeLabel = CreateEggPredictionBox(egg, "RAHASIA", Color3.fromRGB(255, 50, 50), orderCounter)
+    orderCounter = orderCounter + 1
+    eggTimeData[egg] = {Label = timeLabel, Time = math.random(600, 3600)}
+end
+
+task.spawn(function()
+    while task.wait(1) do
+        for eggName, data in pairs(eggTimeData) do
+            data.Time = math.max(0, data.Time - 1)
+            if data.Time == 0 then
+                if data.Label.TextColor3 == Color3.fromRGB(255, 215, 0) then
+                    data.Time = math.random(3600, 14400)
+                elseif data.Label.TextColor3 == Color3.fromRGB(180, 100, 255) then
+                    data.Time = math.random(1800, 7200)
+                else
+                    data.Time = math.random(600, 3600)
+                end
+            end
+            if data.Label and data.Label.Parent then
+                data.Label.Text = formatTimeDetailed(data.Time)
+            end
+        end
+    end
+end)
+
+local AdminAbuseContainer = Instance.new("Frame")
+AdminAbuseContainer.Size = UDim2.new(1, -20, 1, -20)
+AdminAbuseContainer.Position = UDim2.new(0, 10, 0, 10)
+AdminAbuseContainer.BackgroundColor3 = Color3.fromRGB(28, 16, 42)
+AdminAbuseContainer.BorderSizePixel = 0
+AdminAbuseContainer.Parent = AdminAbusePage
+
+local AAKorner = Instance.new("UICorner")
+AAKorner.CornerRadius = UDim.new(0, 8)
+AAKorner.Parent = AdminAbuseContainer
+
+local AALayout = Instance.new("UIListLayout")
+AALayout.SortOrder = Enum.SortOrder.LayoutOrder
+AALayout.Padding = UDim.new(0, 10)
+AALayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+AALayout.Parent = AdminAbuseContainer
+
+local AAPadding = Instance.new("UIPadding")
+AAPadding.PaddingTop = UDim.new(0, 15)
+AAPadding.PaddingLeft = UDim.new(0, 10)
+AAPadding.PaddingRight = UDim.new(0, 10)
+AAPadding.Parent = AdminAbuseContainer
+
+local AAGameTitle = Instance.new("TextLabel")
+AAGameTitle.Size = UDim2.new(1, 0, 0, 30)
+AAGameTitle.BackgroundTransparency = 1
+AAGameTitle.Text = "PENYALAHGUNAAN ADMIN MENCURI TELUR"
+AAGameTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
+AAGameTitle.Font = Enum.Font.FredokaOne
+AAGameTitle.TextSize = 16
+AAGameTitle.LayoutOrder = 1
+AAGameTitle.Parent = AdminAbuseContainer
+
+local AAGameTitleStroke = Instance.new("UIStroke")
+AAGameTitleStroke.Color = Color3.fromRGB(0, 0, 0)
+AAGameTitleStroke.Thickness = 3
+AAGameTitleStroke.Parent = AAGameTitle
+
+RunService.RenderStepped:Connect(function()
+    if AAGameTitle and AAGameTitle.Parent then
+        local floatOffsetY = math.sin(tick() * 3) * 4
+        AAGameTitle.Position = UDim2.new(0, 0, 0, floatOffsetY)
+    end
+end)
+
+local TargetTimeStamp = 1791637200
+local TargetDateString = os.date("%d %B %Y - %H:%M WIB", TargetTimeStamp)
+
+local AADateLabel = Instance.new("TextLabel")
+AADateLabel.Size = UDim2.new(1, 0, 0, 25)
+AADateLabel.BackgroundTransparency = 1
+AADateLabel.Text = "TANGGAL: " .. TargetDateString
+AADateLabel.TextColor3 = Color3.fromRGB(180, 180, 220)
+AADateLabel.Font = Enum.Font.Gotham
+AADateLabel.TextSize = 12
+AADateLabel.LayoutOrder = 2
+AADateLabel.Parent = AdminAbuseContainer
+
+local AAStatusBox = Instance.new("Frame")
+AAStatusBox.Size = UDim2.new(1, 0, 0, 100)
+AAStatusBox.BackgroundColor3 = Color3.fromRGB(20, 12, 32)
+AAStatusBox.BorderSizePixel = 0
+AAStatusBox.LayoutOrder = 3
+AAStatusBox.Parent = AdminAbuseContainer
+
+local AASBoxCorner = Instance.new("UICorner")
+AASBoxCorner.CornerRadius = UDim.new(0, 6)
+AASBoxCorner.Parent = AAStatusBox
+
+local AASBoxStroke = Instance.new("UIStroke")
+AASBoxStroke.Color = Color3.fromRGB(140, 45, 220)
+AASBoxStroke.Thickness = 1
+AASBoxStroke.Parent = AAStatusBox
+
+local AAStatusText = Instance.new("TextLabel")
+AAStatusText.Size = UDim2.new(1, -20, 1, -20)
+AAStatusText.Position = UDim2.new(0, 10, 0, 10)
+AAStatusText.BackgroundTransparency = 1
+AAStatusText.Text = "Menghitung Waktu..."
+AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
+AAStatusText.Font = Enum.Font.GothamBold
+AAStatusText.TextSize = 16
+AAStatusText.TextWrapped = true
+AAStatusText.Parent = AAStatusBox
+
+local AAStatusStroke = Instance.new("UIStroke")
+AAStatusStroke.Color = Color3.fromRGB(0, 0, 0)
+AAStatusStroke.Thickness = 0
+AAStatusStroke.Parent = AAStatusText
+
+task.spawn(function()
+    while task.wait(1) do
+        if AAStatusText and AAStatusText.Parent then
+            local now = os.time()
+            local diff = TargetTimeStamp - now
+            
+            if diff <= 0 then
+                AAStatusText.Text = "ADMIN PENYALAHGUNAAN MULAI GO GOO!"
+                AAStatusText.TextColor3 = Color3.fromRGB(255, 0, 0)
+                AAStatusStroke.Thickness = 2
+            else
+                local days = math.floor(diff / 86400)
+                local hours = math.floor((diff % 86400) / 3600)
+                local minutes = math.floor((diff % 3600) / 60)
+                local seconds = diff % 60
+                
+                AAStatusText.Text = string.format("DIMULAI PENYALAHGUNAAN ADMIN:\n%d Hari %d Jam %d Menit %d Detik", days, hours, minutes, seconds)
+                AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
+                AAStatusStroke.Thickness = 0
+            end
+        end
+    end
+end)
+
+local DivineScroll = Instance.new("ScrollingFrame")
+DivineScroll.Size = UDim2.new(1, -10, 1, -10)
+DivineScroll.Position = UDim2.new(0, 5, 0, 5)
+DivineScroll.BackgroundTransparency = 1
+DivineScroll.BorderSizePixel = 0
+DivineScroll.ScrollBarThickness = 4
+DivineScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
+DivineScroll.Parent = DivineSpawnedPage
+
+local DivineLayout = Instance.new("UIListLayout")
+DivineLayout.SortOrder = Enum.SortOrder.LayoutOrder
+DivineLayout.Padding = UDim.new(0, 8)
+DivineLayout.Parent = DivineScroll
+
+DivineLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    DivineScroll.CanvasSize = UDim2.new(0, 0, 0, DivineLayout.AbsoluteContentSize.Y + 15)
+end)
+
+local DateLabel = Instance.new("TextLabel")
+DateLabel.Size = UDim2.new(1, 0, 0, 25)
+DateLabel.BackgroundTransparency = 1
+DateLabel.Text = os.date("%A, %d %B 2026")
+DateLabel.TextColor3 = Color3.fromRGB(200, 200, 220)
+DateLabel.Font = Enum.Font.GothamBold
+DateLabel.TextSize = 14
+DateLabel.TextXAlignment = Enum.TextXAlignment.Center
+DateLabel.LayoutOrder = 1
+DateLabel.Parent = DivineScroll
+
+local ListTitle = Instance.new("TextLabel")
+ListTitle.Size = UDim2.new(1, 0, 0, 35)
+ListTitle.BackgroundTransparency = 1
+ListTitle.Text = "DAFTAR KELAHIRAN ILAHI"
+ListTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
+ListTitle.Font = Enum.Font.GothamBold
+ListTitle.TextSize = 18
+ListTitle.TextXAlignment = Enum.TextXAlignment.Center
+ListTitle.LayoutOrder = 2
+ListTitle.Parent = DivineScroll
+
+local ListTitleStroke = Instance.new("UIStroke")
+ListTitleStroke.Color = Color3.fromRGB(0, 0, 0)
+ListTitleStroke.Thickness = 2
+ListTitleStroke.Parent = ListTitle
+
+local ServerLabel = Instance.new("TextLabel")
+ServerLabel.Size = UDim2.new(1, 0, 0, 25)
+ServerLabel.BackgroundTransparency = 1
+ServerLabel.Text = "🇲🇨 SERVER INDONESIA 🇲🇨"
+ServerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ServerLabel.Font = Enum.Font.GothamBold
+ServerLabel.TextSize = 14
+ServerLabel.TextXAlignment = Enum.TextXAlignment.Center
+ServerLabel.LayoutOrder = 3
+ServerLabel.Parent = DivineScroll
+
+local ListFrame = Instance.new("Frame")
+ListFrame.Size = UDim2.new(1, 0, 0, 0)
+ListFrame.BackgroundTransparency = 1
+ListFrame.LayoutOrder = 4
+ListFrame.Parent = DivineScroll
+
+local ListLayout = Instance.new("UIListLayout")
+ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ListLayout.Padding = UDim.new(0, 6)
+ListLayout.Parent = ListFrame
+
+ListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    ListFrame.Size = UDim2.new(1, 0, 0, ListLayout.AbsoluteContentSize.Y)
+end)
+
+local SaveFileName = "LipzyHub_DivineSpawnList.json"
+local DivineSpawnData = {}
+
+local function SaveDivineList()
+    if pcall(function() return writefile(SaveFileName, "") end) then
+        local success, json = pcall(function()
+            return game:GetService("HttpService"):JSONEncode(DivineSpawnData)
+        end)
+        if success then
+            writefile(SaveFileName, json)
+        end
+    end
+end
+
+local function LoadDivineList()
+    if pcall(function() return readfile(SaveFileName) end) then
+        local success, json = pcall(function()
+            return game:GetService("HttpService"):JSONDecode(readfile(SaveFileName))
+        end)
+        if success and type(json) == "table" then
+            DivineSpawnData = json
+            for _, item in ipairs(DivineSpawnData) do
+                local Box = Instance.new("Frame")
+                Box.Size = UDim2.new(1, 0, 0, 35)
+                Box.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+                Box.BorderSizePixel = 0
+                Box.LayoutOrder = item.Order
+                Box.Parent = ListFrame
+
+                local BoxCorner = Instance.new("UICorner")
+                BoxCorner.CornerRadius = UDim.new(0, 6)
+                BoxCorner.Parent = Box
+
+                local BoxStroke = Instance.new("UIStroke")
+                BoxStroke.Color = Color3.fromRGB(140, 45, 220)
+                BoxStroke.Thickness = 1
+                BoxStroke.Parent = Box
+
+                local InfoLabel = Instance.new("TextLabel")
+                InfoLabel.Size = UDim2.new(1, -20, 1, 0)
+                InfoLabel.Position = UDim2.new(0, 10, 0, 0)
+                InfoLabel.BackgroundTransparency = 1
+                InfoLabel.Text = string.format("%s | %s [DIVINE] %s", item.Egg, item.Area, item.Time)
+                InfoLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+                InfoLabel.Font = Enum.Font.GothamBold
+                InfoLabel.TextSize = 12
+                InfoLabel.TextXAlignment = Enum.TextXAlignment.Left
+                InfoLabel.Parent = Box
+            end
+        end
+    end
+end
+
+local function AddToDivineList(eggName, area, timeStr)
+    for _, data in ipairs(DivineSpawnData) do
+        if data.Egg == eggName and data.Area == area then
+            return
+        end
+    end
+
+    local newItem = {
+        Egg = eggName,
+        Area = area,
+        Time = timeStr,
+        Order = #DivineSpawnData + 1
+    }
+    table.insert(DivineSpawnData, newItem)
+    SaveDivineList()
+
+    local Box = Instance.new("Frame")
+    Box.Size = UDim2.new(1, 0, 0, 35)
+    Box.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+    Box.BorderSizePixel = 0
+    Box.LayoutOrder = newItem.Order
+    Box.Parent = ListFrame
+
+    local BoxCorner = Instance.new("UICorner")
+    BoxCorner.CornerRadius = UDim.new(0, 6)
+    BoxCorner.Parent = Box
+
+    local BoxStroke = Instance.new("UIStroke")
+    BoxStroke.Color = Color3.fromRGB(140, 45, 220)
+    BoxStroke.Thickness = 1
+    BoxStroke.Parent = Box
+
+    local InfoLabel = Instance.new("TextLabel")
+    InfoLabel.Size = UDim2.new(1, -20, 1, 0)
+    InfoLabel.Position = UDim2.new(0, 10, 0, 0)
+    InfoLabel.BackgroundTransparency = 1
+    InfoLabel.Text = string.format("%s | %s [DIVINE] %s", eggName, area, timeStr)
+    InfoLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+    InfoLabel.Font = Enum.Font.GothamBold
+    InfoLabel.TextSize = 12
+    InfoLabel.TextXAlignment = Enum.TextXAlignment.Left
+    InfoLabel.Parent = Box
+
+    Box.Position = UDim2.new(0, 0, 0, -10)
+    TweenService:Create(Box, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+        Position = UDim2.new(0, 0, 0, 0)
+    }):Play()
+end
+
+LoadDivineList()
+
+for _, descendant in ipairs(workspace:GetDescendants()) do
+    local name = descendant.Name:upper()
+    if name:find("DIVINE") and name:find("EGG") then
+        local eggName = descendant.Name
+        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "UNKNOWN AREA"
+        local timeStr = os.date("%I:%M %p")
+        AddToDivineList(eggName, area, timeStr)
+    end
+end
+
+workspace.DescendantAdded:Connect(function(descendant)
+    local name = descendant.Name:upper()
+    if name:find("DIVINE") and name:find("EGG") then
+        local eggName = descendant.Name
+        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "UNKNOWN AREA"
+        local timeStr = os.date("%I:%M %p")
+        AddToDivineList(eggName, area, timeStr)
+    end
+end)
+
+task.spawn(function()
+    while task.wait(30) do
+        local currentHour = tonumber(os.date("%H"))
+        local currentMinute = tonumber(os.date("%M"))
+        
+        if currentHour == 0 and currentMinute == 0 then
+            DivineSpawnData = {}
+            SaveDivineList()
+            
+            for _, child in ipairs(ListFrame:GetChildren()) do
+                if child:IsA("Frame") then
+                    child:Destroy()
+                end
+            end
+        end
     end
 end)
 
@@ -853,7 +1392,7 @@ if isAdmin and AdminPage then
     SendBtn.Size = UDim2.new(1, -20, 0, 35)
     SendBtn.Position = UDim2.new(0, 10, 1, -45)
     SendBtn.BackgroundColor3 = Color3.fromRGB(120, 40, 190)
-    SendBtn.Text = "SEND"
+    SendBtn.Text = "KIRIM"
     SendBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     SendBtn.Font = Enum.Font.GothamBold
     SendBtn.TextSize = 14
@@ -864,8 +1403,8 @@ if isAdmin and AdminPage then
     SendCorner.Parent = SendBtn
 
     SendBtn.MouseButton1Click:Connect(function()
-        local msg = MessageBox.Text
-        if msg == "" or msg == "PESAN.." then return end
+        local message = MessageBox.Text
+        if message == "" or message == "PESAN.." then return end
         
         local NotifGui = Instance.new("ScreenGui")
         NotifGui.Name = "LipzyNotification"
@@ -919,7 +1458,7 @@ if isAdmin and AdminPage then
         NotifMsg.Size = UDim2.new(1, -100, 1, -25)
         NotifMsg.Position = UDim2.new(0, 90, 0, 20)
         NotifMsg.BackgroundTransparency = 1
-        NotifMsg.Text = msg
+        NotifMsg.Text = message
         NotifMsg.TextColor3 = Color3.fromRGB(255, 255, 255)
         NotifMsg.Font = Enum.Font.Gotham
         NotifMsg.TextSize = 16
@@ -957,7 +1496,7 @@ if isAdmin and AdminPage then
     OwnerTextLabel.Size = UDim2.new(0, 150, 1, 0)
     OwnerTextLabel.Position = UDim2.new(0, 10, 0, 0)
     OwnerTextLabel.BackgroundTransparency = 1
-    OwnerTextLabel.Text = "OWNER SCRIPT"
+    OwnerTextLabel.Text = "SKRIPT PEMILIK"
     OwnerTextLabel.TextColor3 = Color3.fromRGB(200, 200, 220)
     OwnerTextLabel.Font = Enum.Font.GothamBold
     OwnerTextLabel.TextSize = 14
@@ -1016,7 +1555,7 @@ if isAdmin and AdminPage then
         textStroke.Parent = ownerText
 
         if LocalPlayer.Name == "Yanzzz_1023" then
-            ownerText.Text = "👑OWNER👑"
+            ownerText.Text = "👑PEMILIK👑"
             ownerText.TextColor3 = Color3.fromRGB(255, 220, 0)
         elseif LocalPlayer.Name == "LifzxAfter2" then
             ownerText.Text = "👑ADMIN👑"
@@ -1079,4 +1618,4 @@ if isAdmin and AdminPage then
     end)
 end
 
-print("Lipzy Hub V5.2 Loaded Successfully!")
+print("Lipzy Hub V5.2 Berhasil Dimuat!")
