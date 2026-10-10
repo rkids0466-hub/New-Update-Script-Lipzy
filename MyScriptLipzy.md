@@ -9,7 +9,7 @@ local LocalPlayer = Players.LocalPlayer
 
 local AdminList = {
     ["LifzxAfter2"] = "ADMIN",
-    ["Yanzzz_1023"] = "PEMILIK"
+    ["Yanzzz_1023"] = "OWNER"
 }
 
 local userRole = AdminList[LocalPlayer.Name]
@@ -134,7 +134,7 @@ local function CreateTab(name, layoutOrder)
     Page.Parent = ContentContainer
 
     Pages[name] = {Button = TabBtn, Page = Page}
-
+    
     TabBtn.MouseButton1Click:Connect(function()
         for _, tabData in pairs(Pages) do
             tabData.Page.Visible = false
@@ -147,14 +147,13 @@ local function CreateTab(name, layoutOrder)
     return Page
 end
 
-local PlayerPage = CreateTab("PEMAIN", 1)
-local MainPage = CreateTab("UTAMA", 2)
-local TampilanPage = CreateTab("TAMPILAN", 3)
+local PlayerPage = CreateTab("PLAYER", 1)
+local MainPAge = CreateTab("MAIN", 2)
+local DisplayPage = CreateTab("DISPLAY", 3)
 local OverlayPage = CreateTab("OVERLAY", 4)
-local PrediksiPage = CreateTab("PREDIKSI", 5)
-local AdminAbusePage = CreateTab("PENYALAHGUNAAN ADMIN", 6)
-local DivineSpawnedPage = CreateTab("ILAHI SPAWNED", 7)
-
+local PredictionPage = CreateTab("PREDICTION", 5)
+local AdminAbusePage = CreateTab("ADMIN ABUSE", 6)
+local DivineSpawnedPage = CreateTab("DIVINE SPAWNED", 7)
 local AdminPage = nil
 if isAdmin then
     AdminPage = CreateTab("ADMIN", 8)
@@ -178,11 +177,7 @@ local ProfileImage = Instance.new("ImageLabel")
 ProfileImage.Size = UDim2.new(0, 70, 0, 70)
 ProfileImage.Position = UDim2.new(0.5, -35, 0, 0)
 ProfileImage.BackgroundColor3 = Color3.fromRGB(45, 25, 70)
-ProfileImage.Image = Players:GetUserThumbnailAsync(
-    LocalPlayer.UserId,
-    Enum.ThumbnailType.HeadShot,
-    Enum.ThumbnailSize.Size150x150
-)
+ProfileImage.Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
 ProfileImage.Parent = PlayerPage
 
 local ProfileCorner = Instance.new("UICorner")
@@ -241,28 +236,27 @@ PlayerInfoPadding.PaddingLeft = UDim.new(0, 10)
 PlayerInfoPadding.PaddingRight = UDim.new(0, 10)
 PlayerInfoPadding.Parent = PlayerInfoContainer
 
-AddInfoLabel(PlayerInfoContainer, "Umur Akun", LocalPlayer.AccountAge .. " Hari", 1)
-
+AddInfoLabel(PlayerInfoContainer, "Account Age", LocalPlayer.AccountAge .. " Days", 1)
 local AccountCreatedDate = os.date("%d %B %Y", os.time() - (LocalPlayer.AccountAge * 86400))
-AddInfoLabel(PlayerInfoContainer, "Akun Dibuat", AccountCreatedDate, 2)
+AddInfoLabel(PlayerInfoContainer, "Account Created", AccountCreatedDate, 2)
+local TimeLabel = AddInfoLabel(PlayerInfoContainer, "Time", os.date("%H:%M:%S WIB"), 3)
 
-local TimeLabel = AddInfoLabel(PlayerInfoContainer, "Jam", os.date("%H:%M:%S WIB"), 3)
 task.spawn(function()
     while task.wait(1) do
         if TimeLabel and TimeLabel.Parent then
-            TimeLabel.Text = "Jam: " .. os.date("%H:%M:%S WIB")
+            TimeLabel.Text = "Time: " .. os.date("%H:%M:%S WIB")
         end
     end
 end)
 
-local GameName = "Mencuri Telur"
+local GameName = "Steal an Egg"
 pcall(function()
     local placeInfo = MarketplaceService:GetProductInfo(game.PlaceId)
     if placeInfo and placeInfo.Name then
         GameName = placeInfo.Name
     end
 end)
-AddInfoLabel(PlayerInfoContainer, "Nama Game", GameName, 4)
+AddInfoLabel(PlayerInfoContainer, "Game Name", GameName, 4)
 
 local StatsContainer = Instance.new("Frame")
 StatsContainer.Size = UDim2.new(1, -20, 0, 105)
@@ -317,12 +311,11 @@ end
 
 local StatusLabel, StatusIcon = CreateStatBox(1, true)
 StatusIcon.Image = "rbxassetid://95842412229310"
-
 if isAdmin then
     StatusLabel.Text = "PREMIUM"
     StatusLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
 else
-    StatusLabel.Text = "GRATIS"
+    StatusLabel.Text = "FREE"
     StatusLabel.TextColor3 = Color3.fromRGB(150, 255, 150)
 end
 
@@ -335,7 +328,6 @@ PingIcon.Image = "rbxassetid://78681903515425"
 local frameCount = 0
 local lastTime = tick()
 local currentFPS = 0
-
 RunService.RenderStepped:Connect(function()
     frameCount = frameCount + 1
     local currentTime = tick()
@@ -363,20 +355,20 @@ local ScriptList = {
     {Name = "CHILI HUB V2", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/spicy/main/Chilli.lua"))()]]},
     {Name = "THANHDUY HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/ThanhDuyHub/Game/refs/heads/main/Steal-An-Egg.lua"))()]]},
     {Name = "PULSE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PulseZax/Loader/refs/heads/main/.lua"))()]]},
-    {Name = "SENA BETA", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://senahub.xyz/raw/loader"))()]]},
+    {Name = "SENA BETA", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://senahub.xyz/raw/loader"))()]]},
     {Name = "LENON HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/lennonxscripts/lennonhubv4/refs/heads/main/stealanegg",true))()]]},
-    {Name = "DHII HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
+    {Name = "DHII HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
     {Name = "BlyxoHUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://flowauth.net/v1/loaders/69d3463240384f3a73fbe32c178093a2.lua"))()]]},
     {Name = "FINDER PRIVATE SERVER", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/GlazeScripts/Private-Server-Finder/refs/heads/main/Glazehub.lua"))()]]},
-    {Name = "MIRANDA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
+    {Name = "MIRANDA HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
     {Name = "HOSHI HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://hoshihub.site/loader.lua"))()]]},
     {Name = "OXIDE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/xulfo/Oxide-Loader/main/Main.lua"))()]]},
-    {Name = "NEVA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2"))()]]},
+    {Name = "NEVA HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2"))()]]},
     {Name = "BK's HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/9ee4edde227ac85f50872bf9e4226508.lua"))()]]},
     {Name = "VINCITORE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/tutorkah104-rgb/Steal-an-Egg/refs/heads/main/Vincitore.luau"))()]]},
     {Name = "LKZ HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/LucasggkX/LKZ-Hub/refs/heads/main/Loader.lua"))()]]},
     {Name = "SKIBIDI HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/Fn-stealanegg.lua"))()]]},
-    {Name = "BP HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://rscripts.net/raw/open-src-premium-or-bphub_1790968708765_mTTlSoUSyY.txt"))()]]},
+    {Name = "BP HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://rscripts.net/raw/open-src-premium-or-bphub_1790968708765_mTTlSoUSyY.txt"))()]]},
     {Name = "FOXNAME", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/Fn-stealanegg.lua"))()]]},
     {Name = "ZEROIN HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://zeroinhub.com/api/script"))()]]},
     {Name = "FAKE ADMIN", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/Dayvinksthik/Script/main/Games/JoshBNS-Crack.lua"))()]]},
@@ -395,11 +387,11 @@ local OpenScriptBtn = Instance.new("TextButton")
 OpenScriptBtn.Size = UDim2.new(1, -20, 0, 36)
 OpenScriptBtn.Position = UDim2.new(0, 10, 0, 5)
 OpenScriptBtn.BackgroundColor3 = Color3.fromRGB(140, 45, 220)
-OpenScriptBtn.Text = "BUKA SCRIPT"
+OpenScriptBtn.Text = "OPEN SCRIPT"
 OpenScriptBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 OpenScriptBtn.Font = Enum.Font.GothamBold
 OpenScriptBtn.TextSize = 14
-OpenScriptBtn.Parent = MainPage
+OpenScriptBtn.Parent = MainPAge
 
 local OpenScriptCorner = Instance.new("UICorner")
 OpenScriptCorner.CornerRadius = UDim.new(0, 8)
@@ -412,7 +404,7 @@ ScriptScroll.BackgroundTransparency = 1
 ScriptScroll.BorderSizePixel = 0
 ScriptScroll.ScrollBarThickness = 4
 ScriptScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
-ScriptScroll.Parent = MainPage
+ScriptScroll.Parent = MainPAge
 
 local ScriptListLayout = Instance.new("UIListLayout")
 ScriptListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -491,13 +483,7 @@ for index, data in ipairs(ScriptList) do
     ClickBtn.Text = ""
     ClickBtn.Parent = ItemFrame
 
-    RegisteredItems[index] = {
-        Frame = ItemFrame,
-        NameLabel = NameLabel,
-        CheckMark = CheckMark,
-        Stroke = ItemStroke,
-        Data = data
-    }
+    RegisteredItems[index] = {ItemFrame = ItemFrame, NameLabel = NameLabel, CheckMark = CheckMark, Stroke = ItemStroke, Data = data}
 
     ClickBtn.MouseButton1Click:Connect(function()
         SelectedScript = data.Script
@@ -513,7 +499,6 @@ end
 RunService.RenderStepped:Connect(function()
     local hue = (tick() % 4) / 4
     local rainbowColor = Color3.fromHSV(hue, 1, 1)
-    
     for _, item in pairs(RegisteredItems) do
         if item.CheckMark.Text == "✓" then
             item.NameLabel.TextColor3 = rainbowColor
@@ -533,27 +518,27 @@ OpenScriptBtn.MouseButton1Click:Connect(function()
             loadstring(SelectedScript)()
         end)
         if not success then
-            warn("Gagal mengeksekusi skrip: " .. tostring(err))
+            warn("Failed to execute script: " .. tostring(err))
         end
     end
 end)
 
-local TampilanScroll = Instance.new("ScrollingFrame")
-TampilanScroll.Size = UDim2.new(1, -10, 1, -10)
-TampilanScroll.Position = UDim2.new(0, 5, 0, 5)
-TampilanScroll.BackgroundTransparency = 1
-TampilanScroll.BorderSizePixel = 0
-TampilanScroll.ScrollBarThickness = 4
-TampilanScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
-TampilanScroll.Parent = TampilanPage
+local DisplayScroll = Instance.new("ScrollingFrame")
+DisplayScroll.Size = UDim2.new(1, -10, 1, -10)
+DisplayScroll.Position = UDim2.new(0, 5, 0, 5)
+DisplayScroll.BackgroundTransparency = 1
+DisplayScroll.BorderSizePixel = 0
+DisplayScroll.ScrollBarThickness = 4
+DisplayScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
+DisplayScroll.Parent = DisplayPage
 
-local TampilanLayout = Instance.new("UIListLayout")
-TampilanLayout.SortOrder = Enum.SortOrder.LayoutOrder
-TampilanLayout.Padding = UDim.new(0, 8)
-TampilanLayout.Parent = TampilanScroll
+local DisplayLayout = Instance.new("UIListLayout")
+DisplayLayout.SortOrder = Enum.SortOrder.LayoutOrder
+DisplayLayout.Padding = UDim.new(0, 8)
+DisplayLayout.Parent = DisplayScroll
 
-TampilanLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-    TampilanScroll.CanvasSize = UDim2.new(0, 0, 0, TampilanLayout.AbsoluteContentSize.Y + 15)
+DisplayLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    DisplayScroll.CanvasSize = UDim2.new(0, 0, 0, DisplayLayout.AbsoluteContentSize.Y + 15)
 end)
 
 local function CreateToggle(name, order, onClick)
@@ -562,7 +547,7 @@ local function CreateToggle(name, order, onClick)
     Frame.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
     Frame.BorderSizePixel = 0
     Frame.LayoutOrder = order
-    Frame.Parent = TampilanScroll
+    Frame.Parent = DisplayScroll
 
     local Corner = Instance.new("UICorner")
     Corner.CornerRadius = UDim.new(0, 8)
@@ -609,21 +594,11 @@ local function CreateToggle(name, order, onClick)
     Btn.MouseButton1Click:Connect(function()
         state = not state
         if state then
-            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
-                Position = UDim2.new(1, -21, 0.5, -9),
-                BackgroundColor3 = Color3.fromRGB(0, 255, 120)
-            }):Play()
-            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
-                BackgroundColor3 = Color3.fromRGB(40, 120, 60)
-            }):Play()
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(1, -21, 0.5, -9), BackgroundColor3 = Color3.fromRGB(0, 255, 120)}):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(40, 120, 60)}):Play()
         else
-            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
-                Position = UDim2.new(0, 3, 0.5, -9),
-                BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            }):Play()
-            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
-                BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-            }):Play()
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(0, 3, 0.5, -9), BackgroundColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(60, 60, 60)}):Play()
         end
         pcall(onClick, state)
     end)
@@ -649,7 +624,7 @@ SliderFrame.Size = UDim2.new(1, -10, 0, 50)
 SliderFrame.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
 SliderFrame.BorderSizePixel = 0
 SliderFrame.LayoutOrder = 3
-SliderFrame.Parent = TampilanScroll
+SliderFrame.Parent = DisplayScroll
 
 local SliderCorner = Instance.new("UICorner")
 SliderCorner.CornerRadius = UDim.new(0, 8)
@@ -659,7 +634,7 @@ local SliderTitle = Instance.new("TextLabel")
 SliderTitle.Size = UDim2.new(1, -24, 0, 20)
 SliderTitle.Position = UDim2.new(0, 12, 0, 4)
 SliderTitle.BackgroundTransparency = 1
-SliderTitle.Text = "ZOOM JARAK PC: 0%"
+SliderTitle.Text = "PC ZOOM DISTANCE: 0%"
 SliderTitle.TextColor3 = Color3.fromRGB(220, 200, 255)
 SliderTitle.Font = Enum.Font.GothamBold
 SliderTitle.TextSize = 11
@@ -698,16 +673,15 @@ KnobCorner.CornerRadius = UDim.new(1, 0)
 KnobCorner.Parent = SliderKnob
 
 local isDraggingZoom = false
+
 local function UpdateZoom(input)
     local barPos = SliderBar.AbsolutePosition.X
     local barSize = SliderBar.AbsoluteSize.X
     local mouseX = input.Position.X
     local percentage = math.clamp((mouseX - barPos) / barSize, 0, 1)
-    
     SliderFill.Size = UDim2.new(percentage, 0, 1, 0)
     local zoomPercent = math.floor(percentage * 50)
-    SliderTitle.Text = "PERBESAR JARAK PC: " .. zoomPercent .. "%"
-    
+    SliderTitle.Text = "PC ZOOM DISTANCE: " .. zoomPercent .. "%"
     LocalPlayer.CameraMaxZoomDistance = 128 + (zoomPercent * 4)
     LocalPlayer.CameraMinZoomDistance = 0.5
 end
@@ -766,7 +740,7 @@ end)
 
 local Lighting = game:GetService("Lighting")
 local DayLoop = nil
-CreateToggle("ANTI MALAM", 5, function(state)
+CreateToggle("ANTI NIGHT", 5, function(state)
     if state then
         DayLoop = RunService.RenderStepped:Connect(function()
             Lighting.ClockTime = 12
@@ -780,7 +754,7 @@ CreateToggle("ANTI MALAM", 5, function(state)
 end)
 
 local NightLoop = nil
-CreateToggle("ANTI-SIANG", 6, function(state)
+CreateToggle("ANTI DAY", 6, function(state)
     if state then
         NightLoop = RunService.RenderStepped:Connect(function()
             Lighting.ClockTime = 0
@@ -794,52 +768,52 @@ CreateToggle("ANTI-SIANG", 6, function(state)
 end)
 
 local origShadows = Lighting.GlobalShadows
-CreateToggle("BAYANGAN GRAFIS", 7, function(state)
+CreateToggle("GRAPHICS SHADOWS", 7, function(state)
     Lighting.GlobalShadows = state
     if state then
         Lighting.Technology = Enum.Technology.Future
     end
 end)
 
-local PrediksiScroll = Instance.new("ScrollingFrame")
-PrediksiScroll.Size = UDim2.new(1, -10, 1, -10)
-PrediksiScroll.Position = UDim2.new(0, 5, 0, 5)
-PrediksiScroll.BackgroundTransparency = 1
-PrediksiScroll.BorderSizePixel = 0
-PrediksiScroll.ScrollBarThickness = 4
-PrediksiScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
-PrediksiScroll.Parent = PrediksiPage
+local PredictionScroll = Instance.new("ScrollingFrame")
+PredictionScroll.Size = UDim2.new(1, -10, 1, -10)
+PredictionScroll.Position = UDim2.new(0, 5, 0, 5)
+PredictionScroll.BackgroundTransparency = 1
+PredictionScroll.BorderSizePixel = 0
+PredictionScroll.ScrollBarThickness = 4
+PredictionScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
+PredictionScroll.Parent = PredictionPage
 
-local PrediksiLayout = Instance.new("UIListLayout")
-PrediksiLayout.SortOrder = Enum.SortOrder.LayoutOrder
-PrediksiLayout.Padding = UDim.new(0, 8)
-PrediksiLayout.Parent = PrediksiScroll
+local PredictionLayout = Instance.new("UIListLayout")
+PredictionLayout.SortOrder = Enum.SortOrder.LayoutOrder
+PredictionLayout.Padding = UDim.new(0, 8)
+PredictionLayout.Parent = PredictionScroll
 
-PrediksiLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-    PrediksiScroll.CanvasSize = UDim2.new(0, 0, 0, PrediksiLayout.AbsoluteContentSize.Y + 15)
+PredictionLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    PredictionScroll.CanvasSize = UDim2.new(0, 0, 0, PredictionLayout.AbsoluteContentSize.Y + 15)
 end)
 
-local PredicTitle = Instance.new("TextLabel")
-PredicTitle.Size = UDim2.new(1, 0, 0, 35)
-PredicTitle.BackgroundTransparency = 1
-PredicTitle.Text = "PREDIKSI 20%-60%"
-PredicTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
-PredicTitle.Font = Enum.Font.GothamBold
-PredicTitle.TextSize = 18
-PredicTitle.LayoutOrder = 1
-PredicTitle.Parent = PrediksiScroll
+local PredictTitle = Instance.new("TextLabel")
+PredictTitle.Size = UDim2.new(1, 0, 0, 35)
+PredictTitle.BackgroundTransparency = 1
+PredictTitle.Text = "PREDICTION 20%-60%"
+PredictTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
+PredictTitle.Font = Enum.Font.GothamBold
+PredictTitle.TextSize = 18
+PredictTitle.LayoutOrder = 1
+PredictTitle.Parent = PredictionScroll
 
-local PredicTitleStroke = Instance.new("UIStroke")
-PredicTitleStroke.Color = Color3.fromRGB(0, 0, 0)
-PredicTitleStroke.Thickness = 2
-PredicTitleStroke.Parent = PredicTitle
+local PredictTitleStroke = Instance.new("UIStroke")
+PredictTitleStroke.Color = Color3.fromRGB(0, 0, 0)
+PredictTitleStroke.Thickness = 2
+PredictTitleStroke.Parent = PredictTitle
 
 local MainCountdownFrame = Instance.new("Frame")
 MainCountdownFrame.Size = UDim2.new(1, -10, 0, 110)
 MainCountdownFrame.BackgroundColor3 = Color3.fromRGB(28, 16, 42)
 MainCountdownFrame.BorderSizePixel = 0
 MainCountdownFrame.LayoutOrder = 2
-MainCountdownFrame.Parent = PrediksiScroll
+MainCountdownFrame.Parent = PredictionScroll
 
 local MainCountdownCorner = Instance.new("UICorner")
 MainCountdownCorner.CornerRadius = UDim.new(0, 8)
@@ -861,12 +835,12 @@ local function CreateMainCountdownLabel(name, color, order)
     Label.TextSize = 14
     Label.TextXAlignment = Enum.TextXAlignment.Left
     Label.Parent = MainCountdownFrame
-    
+
     local Stroke = Instance.new("UIStroke")
     Stroke.Color = Color3.fromRGB(0, 0, 0)
     Stroke.Thickness = 1
     Stroke.Parent = Label
-    
+
     return Label
 end
 
@@ -889,7 +863,7 @@ local function formatTimeDetailed(seconds)
     local h = math.floor(seconds / 3600)
     local m = math.floor((seconds % 3600) / 60)
     local s = seconds % 60
-    return string.format("%d Jam %d Menit %d Detik", h, m, s)
+    return string.format("%d Hours %d Minutes %d Seconds", h, m, s)
 end
 
 task.spawn(function()
@@ -897,19 +871,18 @@ task.spawn(function()
         divineTime = math.max(0, divineTime - 1)
         eternalTime = math.max(0, eternalTime - 1)
         secretTime = math.max(0, secretTime - 1)
-        
         if divineTime == 0 then divineTime = math.random(3600, 14400) end
         if eternalTime == 0 then eternalTime = math.random(1800, 7200) end
         if secretTime == 0 then secretTime = math.random(600, 3600) end
-        
+
         if DivineCountdownLabel and DivineCountdownLabel.Parent then
-            DivineCountdownLabel.Text = "ILAHI: " .. formatTimeHMS(divineTime)
+            DivineCountdownLabel.Text = "DIVINE: " .. formatTimeHMS(divineTime)
         end
         if EternalCountdownLabel and EternalCountdownLabel.Parent then
-            EternalCountdownLabel.Text = "ABADI: " .. formatTimeHMS(eternalTime)
+            EternalCountdownLabel.Text = "ETERNAL: " .. formatTimeHMS(eternalTime)
         end
         if SecretCountdownLabel and SecretCountdownLabel.Parent then
-            SecretCountdownLabel.Text = "RAHASIA: " .. formatTimeHMS(secretTime)
+            SecretCountdownLabel.Text = "SECRET: " .. formatTimeHMS(secretTime)
         end
     end
 end)
@@ -917,18 +890,18 @@ end)
 local EggListTitle = Instance.new("TextLabel")
 EggListTitle.Size = UDim2.new(1, 0, 0, 25)
 EggListTitle.BackgroundTransparency = 1
-EggListTitle.Text = "DAFTAR PREDIKSI TELUR"
+EggListTitle.Text = "EGG PREDICTION LIST"
 EggListTitle.TextColor3 = Color3.fromRGB(200, 200, 220)
 EggListTitle.Font = Enum.Font.GothamBold
 EggListTitle.TextSize = 14
 EggListTitle.LayoutOrder = 3
-EggListTitle.Parent = PrediksiScroll
+EggListTitle.Parent = PredictionScroll
 
 local EggListFrame = Instance.new("Frame")
 EggListFrame.Size = UDim2.new(1, -10, 0, 0)
 EggListFrame.BackgroundTransparency = 1
 EggListFrame.LayoutOrder = 4
-EggListFrame.Parent = PrediksiScroll
+EggListFrame.Parent = PredictionScroll
 
 local EggListLayout = Instance.new("UIListLayout")
 EggListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -981,23 +954,9 @@ local function CreateEggPredictionBox(eggName, rarity, color, order)
     return TimeLabel
 end
 
-local divineEggs = {
-    "Telur Unicorn", "Telur Kitsune", "Telur Nightflame", "Telur ArchAngel",
-    "Telur Pembakar Dunia", "Telur Aetheron", "Telur Paus Langit Kerajaan"
-}
-local eternalEggs = {
-    "Telur Naga Es", "Telur Phoenix", "Telur Naga Lava", "Telur Mosasaurus",
-    "Telur Naga Bulan Abadi", "Telur Harimau Oni", "Telur Raja Gorila",
-    "Telur Pegasus", "Telur Kuda Kerangka", "Telur Equinox", "Telur El Maja",
-    "Telur Pemakan Dunia", "Telur Naga yang Hancur", "Telur Ular Hampa"
-}
-local secretEggs = {
-    "Telur Yeti", "Telur Cerberus", "Telur T-Rex", "Telur Tralaledon",
-    "Telur Bos Kerangka Kosmik", "Telur Naga Kosmik", "Telur Ubur-ubur Murni",
-    "Telur Gargoyle", "Telur Centaur", "Telur RazorFang", "Telur Hiu Mutan",
-    "Telur Rusa Jantan", "Telur Kraken", "Telur Ular Raja", "Telur Wendigo",
-    "Telur Pemecah Mulut", "Telur Sayap Pecah"
-}
+local divineEggs = { "Unicorn Egg", "Kitsune Egg", "Nightflame Egg", "Archangel Egg", "WorldBurner Egg", "Aetheron Egg", "Royal Sky Whale Egg" }
+local eternalEggs = { "Ice Dragon Egg", "Phoenix Egg", "Lava Dragon Egg", "Mosasaurus Egg", "Eternal Moon Dragon Egg", "Oni Tiger Egg", "Gorilla King Egg", "Pegasus Egg", "Skeleton Horse Egg", "Equinox Egg", "El Maja Egg", "World Eater Egg", "Shattered Dragon Egg", "Void Serpent Egg" }
+local secretEggs = { "Yeti Egg", "Cerberus Egg", "T-Rex Egg", "Tralaledon Egg", "Cosmic Skeleton Boss Egg", "Cosmic Dragon Egg", "Pure Jellyfish Egg", "Gargoyle Egg", "Centaur Egg", "RazorFang Egg", "Mutant Shark Egg", "Stag Egg", "Kraken Egg", "King Serpent Egg", "Wendigo Egg", "MouthBreaker Egg", "Broken Wing Egg" }
 
 local eggTimeData = {}
 local orderCounter = 1
@@ -1007,13 +966,11 @@ for _, egg in ipairs(divineEggs) do
     orderCounter = orderCounter + 1
     eggTimeData[egg] = {Label = timeLabel, Time = math.random(3600, 14400)}
 end
-
 for _, egg in ipairs(eternalEggs) do
     local timeLabel = CreateEggPredictionBox(egg, "ETERNAL", Color3.fromRGB(180, 100, 255), orderCounter)
     orderCounter = orderCounter + 1
     eggTimeData[egg] = {Label = timeLabel, Time = math.random(1800, 7200)}
 end
-
 for _, egg in ipairs(secretEggs) do
     local timeLabel = CreateEggPredictionBox(egg, "SECRET", Color3.fromRGB(255, 50, 50), orderCounter)
     orderCounter = orderCounter + 1
@@ -1033,7 +990,6 @@ task.spawn(function()
                     data.Time = math.random(600, 3600)
                 end
             end
-            
             if data.Label and data.Label.Parent then
                 data.Label.Text = formatTimeDetailed(data.Time)
             end
@@ -1067,7 +1023,7 @@ AAPadding.Parent = AdminAbuseContainer
 local AAGameTitle = Instance.new("TextLabel")
 AAGameTitle.Size = UDim2.new(1, 0, 0, 30)
 AAGameTitle.BackgroundTransparency = 1
-AAGameTitle.Text = "PENYALAHGUNAAN ADMIN MENCURI TELUR"
+AAGameTitle.Text = "STEAL AN EGG ADMIN ABUSE"
 AAGameTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
 AAGameTitle.Font = Enum.Font.FredokaOne
 AAGameTitle.TextSize = 16
@@ -1088,11 +1044,10 @@ end)
 
 local TargetTimeStamp = 1791637200
 local TargetDateString = os.date("%d %B %Y - %H:%M WIB", TargetTimeStamp)
-
 local AADateLabel = Instance.new("TextLabel")
 AADateLabel.Size = UDim2.new(1, 0, 0, 25)
 AADateLabel.BackgroundTransparency = 1
-AADateLabel.Text = "TANGGAL: " .. TargetDateString
+AADateLabel.Text = "DATE: " .. TargetDateString
 AADateLabel.TextColor3 = Color3.fromRGB(180, 180, 220)
 AADateLabel.Font = Enum.Font.Gotham
 AADateLabel.TextSize = 12
@@ -1119,7 +1074,7 @@ local AAStatusText = Instance.new("TextLabel")
 AAStatusText.Size = UDim2.new(1, -20, 1, -20)
 AAStatusText.Position = UDim2.new(0, 10, 0, 10)
 AAStatusText.BackgroundTransparency = 1
-AAStatusText.Text = "Menghitung Waktu..."
+AAStatusText.Text = "Calculating Time..."
 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
 AAStatusText.Font = Enum.Font.GothamBold
 AAStatusText.TextSize = 16
@@ -1136,9 +1091,8 @@ task.spawn(function()
         if AAStatusText and AAStatusText.Parent then
             local now = os.time()
             local diff = TargetTimeStamp - now
-            
             if diff <= 0 then
-                AAStatusText.Text = "ADMIN PENYALAHGUNAAN MULAI GO GOO!"
+                AAStatusText.Text = "ADMIN ABUSE START GO GOO!"
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 0, 0)
                 AAStatusStroke.Thickness = 2
             else
@@ -1146,8 +1100,7 @@ task.spawn(function()
                 local hours = math.floor((diff % 86400) / 3600)
                 local minutes = math.floor((diff % 3600) / 60)
                 local seconds = diff % 60
-                
-                AAStatusText.Text = string.format("DIMULAI PENYALAHGUNAAN ADMIN:\n%d Hari %d Jam %d Menit %d Detik", days, hours, minutes, seconds)
+                AAStatusText.Text = string.format("ADMIN ABUSE STARTS IN:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
                 AAStatusStroke.Thickness = 0
             end
@@ -1187,7 +1140,7 @@ DateLabel.Parent = DivineScroll
 local ListTitle = Instance.new("TextLabel")
 ListTitle.Size = UDim2.new(1, 0, 0, 35)
 ListTitle.BackgroundTransparency = 1
-ListTitle.Text = "DAFTAR KELAHIRAN ILAHI"
+ListTitle.Text = "DIVINE SPAWN LIST"
 ListTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
 ListTitle.Font = Enum.Font.GothamBold
 ListTitle.TextSize = 18
@@ -1203,7 +1156,7 @@ ListTitleStroke.Parent = ListTitle
 local ServerLabel = Instance.new("TextLabel")
 ServerLabel.Size = UDim2.new(1, 0, 0, 25)
 ServerLabel.BackgroundTransparency = 1
-ServerLabel.Text = "🇲🇨 SERVER INDONESIA 🇲🇨"
+ServerLabel.Text = "🇲🇨 INDONESIA SERVER 🇲🇨"
 ServerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 ServerLabel.Font = Enum.Font.GothamBold
 ServerLabel.TextSize = 14
@@ -1286,12 +1239,7 @@ local function AddToDivineList(eggName, area, timeStr)
         end
     end
 
-    local newItem = {
-        Egg = eggName,
-        Area = area,
-        Time = timeStr,
-        Order = #DivineSpawnData + 1
-    }
+    local newItem = {Egg = eggName, Area = area, Time = timeStr, Order = #DivineSpawnData + 1}
     table.insert(DivineSpawnData, newItem)
     SaveDivineList()
 
@@ -1315,7 +1263,7 @@ local function AddToDivineList(eggName, area, timeStr)
     InfoLabel.Size = UDim2.new(1, -20, 1, 0)
     InfoLabel.Position = UDim2.new(0, 10, 0, 0)
     InfoLabel.BackgroundTransparency = 1
-    InfoLabel.Text = string.format("%s | %s [ILAHI] %s", eggName, area, timeStr)
+    InfoLabel.Text = string.format("%s | %s [DIVINE] %s", eggName, area, timeStr)
     InfoLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     InfoLabel.Font = Enum.Font.GothamBold
     InfoLabel.TextSize = 12
@@ -1323,9 +1271,7 @@ local function AddToDivineList(eggName, area, timeStr)
     InfoLabel.Parent = Box
 
     Box.Position = UDim2.new(0, 0, 0, -10)
-    TweenService:Create(Box, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-        Position = UDim2.new(0, 0, 0, 0)
-    }):Play()
+    TweenService:Create(Box, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = UDim2.new(0, 0, 0, 0)}):Play()
 end
 
 LoadDivineList()
@@ -1334,7 +1280,7 @@ for _, descendant in ipairs(workspace:GetDescendants()) do
     local name = descendant.Name:upper()
     if name:find("DIVINE") and name:find("EGG") then
         local eggName = descendant.Name
-        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "AREA TIDAK DIKETAHUI"
+        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "UNKNOWN AREA"
         local timeStr = os.date("%I:%M %p")
         AddToDivineList(eggName, area, timeStr)
     end
@@ -1344,7 +1290,7 @@ workspace.DescendantAdded:Connect(function(descendant)
     local name = descendant.Name:upper()
     if name:find("DIVINE") and name:find("EGG") then
         local eggName = descendant.Name
-        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "AREA TIDAK DIKETAHUI"
+        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "UNKNOWN AREA"
         local timeStr = os.date("%I:%M %p")
         AddToDivineList(eggName, area, timeStr)
     end
@@ -1354,7 +1300,6 @@ task.spawn(function()
     while task.wait(30) do
         local currentHour = tonumber(os.date("%H"))
         local currentMinute = tonumber(os.date("%M"))
-        
         if currentHour == 0 and currentMinute == 0 then
             DivineSpawnData = {}
             SaveDivineList()
@@ -1383,7 +1328,7 @@ if isAdmin and AdminPage then
     MessageBox.Size = UDim2.new(1, -20, 0, 40)
     MessageBox.Position = UDim2.new(0, 10, 0, 10)
     MessageBox.BackgroundColor3 = Color3.fromRGB(25, 15, 38)
-    MessageBox.Text = "PESAN.."
+    MessageBox.Text = "MESSAGE.."
     MessageBox.TextColor3 = Color3.fromRGB(200, 200, 220)
     MessageBox.Font = Enum.Font.Gotham
     MessageBox.TextSize = 14
@@ -1398,7 +1343,7 @@ if isAdmin and AdminPage then
     SendBtn.Size = UDim2.new(1, -20, 0, 35)
     SendBtn.Position = UDim2.new(0, 10, 1, -45)
     SendBtn.BackgroundColor3 = Color3.fromRGB(120, 40, 190)
-    SendBtn.Text = "KIRIM"
+    SendBtn.Text = "SEND"
     SendBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     SendBtn.Font = Enum.Font.GothamBold
     SendBtn.TextSize = 14
@@ -1410,45 +1355,45 @@ if isAdmin and AdminPage then
 
     SendBtn.MouseButton1Click:Connect(function()
         local message = MessageBox.Text
-        if message == "" or message == "PESAN.." then return end
-        
+        if message == "" or message == "MESSAGE.." then return end
+
         local NotifGui = Instance.new("ScreenGui")
         NotifGui.Name = "LipzyNotification"
         NotifGui.Parent = game.CoreGui
         NotifGui.IgnoreGuiInset = true
-        
+
         local NotifFrame = Instance.new("Frame")
         NotifFrame.Size = UDim2.new(0, 500, 0, 100)
         NotifFrame.Position = UDim2.new(0.5, -250, 0, -150)
         NotifFrame.BackgroundColor3 = Color3.fromRGB(30, 18, 48)
         NotifFrame.BorderSizePixel = 0
         NotifFrame.Parent = NotifGui
-        
+
         local NotifCorner = Instance.new("UICorner")
         NotifCorner.CornerRadius = UDim.new(0, 10)
         NotifCorner.Parent = NotifFrame
-        
+
         local NotifStroke = Instance.new("UIStroke")
         NotifStroke.Color = Color3.fromRGB(140, 45, 220)
         NotifStroke.Thickness = 2
         NotifStroke.Parent = NotifFrame
-        
+
         local NotifProfile = Instance.new("ImageLabel")
         NotifProfile.Size = UDim2.new(0, 60, 0, 60)
         NotifProfile.Position = UDim2.new(0, 20, 0.5, -30)
         NotifProfile.BackgroundColor3 = Color3.fromRGB(45, 25, 70)
         NotifProfile.Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
         NotifProfile.Parent = NotifFrame
-        
+
         local NotifProfileCorner = Instance.new("UICorner")
         NotifProfileCorner.CornerRadius = UDim.new(1, 0)
         NotifProfileCorner.Parent = NotifProfile
-        
+
         local NotifProfileStroke = Instance.new("UIStroke")
         NotifProfileStroke.Color = Color3.fromRGB(255, 215, 0)
         NotifProfileStroke.Thickness = 2
         NotifProfileStroke.Parent = NotifProfile
-        
+
         local CrownLabel = Instance.new("TextLabel")
         CrownLabel.Size = UDim2.new(1, -100, 0, 20)
         CrownLabel.Position = UDim2.new(0, 90, 0, 0)
@@ -1459,7 +1404,7 @@ if isAdmin and AdminPage then
         CrownLabel.TextSize = 14
         CrownLabel.TextXAlignment = Enum.TextXAlignment.Left
         CrownLabel.Parent = NotifFrame
-        
+
         local NotifMsg = Instance.new("TextLabel")
         NotifMsg.Size = UDim2.new(1, -100, 1, -25)
         NotifMsg.Position = UDim2.new(0, 90, 0, 20)
@@ -1471,22 +1416,16 @@ if isAdmin and AdminPage then
         NotifMsg.TextXAlignment = Enum.TextXAlignment.Left
         NotifMsg.TextYAlignment = Enum.TextYAlignment.Top
         NotifMsg.Parent = NotifFrame
-        
-        TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-            Position = UDim2.new(0.5, -250, 0, 50)
-        }):Play()
-        
+
+        TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -250, 0, 50)}):Play()
         task.delay(3, function()
-            TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
-                Position = UDim2.new(0.5, -250, 0, -150)
-            }):Play()
+            TweenService:Create(NotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.5, -250, 0, -150)}):Play()
             task.wait(0.5)
             NotifGui:Destroy()
         end)
     end)
 
     local OwnerScriptYPos = 150
-
     local OwnerScriptFrame = Instance.new("Frame")
     OwnerScriptFrame.Size = UDim2.new(1, -20, 0, 40)
     OwnerScriptFrame.Position = UDim2.new(0, 10, 0, OwnerScriptYPos)
@@ -1502,7 +1441,7 @@ if isAdmin and AdminPage then
     OwnerTextLabel.Size = UDim2.new(0, 150, 1, 0)
     OwnerTextLabel.Position = UDim2.new(0, 10, 0, 0)
     OwnerTextLabel.BackgroundTransparency = 1
-    OwnerTextLabel.Text = "SKRIPT PEMILIK"
+    OwnerTextLabel.Text = "OWNER SCRIPT"
     OwnerTextLabel.TextColor3 = Color3.fromRGB(200, 200, 220)
     OwnerTextLabel.Font = Enum.Font.GothamBold
     OwnerTextLabel.TextSize = 14
@@ -1536,7 +1475,6 @@ if isAdmin and AdminPage then
     local function ApplyBillboard(character)
         if headBillboard then headBillboard:Destroy() end
         if rainbowConnection then rainbowConnection:Disconnect() end
-
         if not character or not character:FindFirstChild("Head") then return end
 
         headBillboard = Instance.new("BillboardGui")
@@ -1546,7 +1484,7 @@ if isAdmin and AdminPage then
         headBillboard.StudsOffset = Vector3.new(0, 2.5, 0)
         headBillboard.AlwaysOnTop = true
         headBillboard.Parent = character.Head
-        
+
         local ownerText = Instance.new("TextLabel")
         ownerText.Name = "OwnerText"
         ownerText.Size = UDim2.new(1, 0, 1, 0)
@@ -1554,14 +1492,14 @@ if isAdmin and AdminPage then
         ownerText.Font = Enum.Font.GothamBold
         ownerText.TextSize = 24
         ownerText.Parent = headBillboard
-        
+
         local textStroke = Instance.new("UIStroke")
         textStroke.Color = Color3.fromRGB(0, 0, 0)
         textStroke.Thickness = 3
         textStroke.Parent = ownerText
 
         if LocalPlayer.Name == "Yanzzz_1023" then
-            ownerText.Text = "👑PEMILIK👑"
+            ownerText.Text = "👑OWNER👑"
             ownerText.TextColor3 = Color3.fromRGB(255, 220, 0)
         elseif LocalPlayer.Name == "LifzxAfter2" then
             ownerText.Text = "👑ADMIN👑"
@@ -1583,28 +1521,15 @@ if isAdmin and AdminPage then
 
     OwnerScriptBtn.MouseButton1Click:Connect(function()
         isOwnerScriptEnabled = not isOwnerScriptEnabled
-        
         if isOwnerScriptEnabled then
-            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
-                Position = UDim2.new(1, -23, 0.5, -10),
-                BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-            }):Play()
-            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
-                BackgroundColor3 = Color3.fromRGB(40, 120, 40)
-            }):Play()
-            
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(1, -23, 0.5, -10), BackgroundColor3 = Color3.fromRGB(0, 255, 0)}):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(40, 120, 40)}):Play()
             if LocalPlayer.Character then
                 ApplyBillboard(LocalPlayer.Character)
             end
         else
-            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
-                Position = UDim2.new(0, 3, 0.5, -10),
-                BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            }):Play()
-            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {
-                BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-            }):Play()
-            
+            TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(0, 3, 0.5, -10), BackgroundColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+            TweenService:Create(ToggleBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(60, 60, 60)}):Play()
             if headBillboard then
                 headBillboard:Destroy()
                 headBillboard = nil
@@ -1624,4 +1549,4 @@ if isAdmin and AdminPage then
     end)
 end
 
-print("Lipzy Hub V5.2 Berhasil Dimuat!")
+print("Lipzy Hub V5.2 Loaded Successfully!")
