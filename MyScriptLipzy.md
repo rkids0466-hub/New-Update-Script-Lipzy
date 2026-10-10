@@ -1,9 +1,11 @@
-local LocalPlayer = game:GetService("Players").LocalPlayer
+local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local RunService = game:GetService("RunService")
 local Stats = game:GetService("Stats")
+
+local LocalPlayer = Players.LocalPlayer
 
 local AdminList = {
     ["LifzxAfter2"] = "ADMIN",
@@ -176,7 +178,11 @@ local ProfileImage = Instance.new("ImageLabel")
 ProfileImage.Size = UDim2.new(0, 70, 0, 70)
 ProfileImage.Position = UDim2.new(0.5, -35, 0, 0)
 ProfileImage.BackgroundColor3 = Color3.fromRGB(45, 25, 70)
-ProfileImage.Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
+ProfileImage.Image = Players:GetUserThumbnailAsync(
+    LocalPlayer.UserId,
+    Enum.ThumbnailType.HeadShot,
+    Enum.ThumbnailSize.Size150x150
+)
 ProfileImage.Parent = PlayerPage
 
 local ProfileCorner = Instance.new("UICorner")
@@ -359,9 +365,9 @@ local ScriptList = {
     {Name = "PULSE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PulseZax/Loader/refs/heads/main/.lua"))()]]},
     {Name = "SENA BETA", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://senahub.xyz/raw/loader"))()]]},
     {Name = "LENON HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/lennonxscripts/lennonhubv4/refs/heads/main/stealanegg",true))()]]},
-    {Name = "HUB DHII", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
+    {Name = "DHII HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
     {Name = "BlyxoHUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://flowauth.net/v1/loaders/69d3463240384f3a73fbe32c178093a2.lua"))()]]},
-    {Name = "FINDER PRIVAT SERVER", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/GlazeScripts/Private-Server-Finder/refs/heads/main/Glazehub.lua"))()]]},
+    {Name = "FINDER PRIVATE SERVER", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/GlazeScripts/Private-Server-Finder/refs/heads/main/Glazehub.lua"))()]]},
     {Name = "MIRANDA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
     {Name = "HOSHI HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://hoshihub.site/loader.lua"))()]]},
     {Name = "OXIDE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/xulfo/Oxide-Loader/main/Main.lua"))()]]},
@@ -374,12 +380,12 @@ local ScriptList = {
     {Name = "FOXNAME", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/Fn-stealanegg.lua"))()]]},
     {Name = "ZEROIN HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://zeroinhub.com/api/script"))()]]},
     {Name = "FAKE ADMIN", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/Dayvinksthik/Script/main/Games/JoshBNS-Crack.lua"))()]]},
-    {Name = "POLLUTED HUN", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PollutedHub/Sae/refs/heads/main/SaePolluted"))()]]},
+    {Name = "POLLUTED HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/PollutedHub/Sae/refs/heads/main/SaePolluted"))()]]},
     {Name = "SENA V6", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://senahub.xyz/senav6"))()]]},
     {Name = "AJJANS HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/359e97f8618e9008afe5f496184ebb7c.lua"))()]]},
-    {Name = "KOMUNITAS FYY", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://FyyCommunity.my.id"))()]]},
+    {Name = "FYY COMMUNITY", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://FyyCommunity.my.id"))()]]},
     {Name = "LIMBO HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://limbohub.my.id/loader.lua"))()]]},
-    {Name = "HUB TIDAK DIKETAHUI", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://unknownhub.win/api/projects/54474b4c5d5a4f459909c4cb70e7b4f3/loader"))()]]},
+    {Name = "UNKNOWN HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://unknownhub.win/api/projects/54474b4c5d5a4f459909c4cb70e7b4f3/loader"))()]]},
     {Name = "CLOVER HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://cloverhub.app/clover.lua"))()]]},
     {Name = "BIGFROOT", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/hanniii1/Loader/refs/heads/main/BFLoader.lua"))()]]},
     {Name = "SYS HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://syshub.fun/free"))()]]}
@@ -593,14 +599,14 @@ local function CreateToggle(name, order, onClick)
     CircleCorner.CornerRadius = UDim.new(1, 0)
     CircleCorner.Parent = ToggleCircle
 
-    local Button = Instance.new("TextButton")
-    Button.Size = UDim2.new(1, 0, 1, 0)
-    Button.BackgroundTransparency = 1
-    Button.Text = ""
-    Button.Parent = Frame
+    local Btn = Instance.new("TextButton")
+    Btn.Size = UDim2.new(1, 0, 1, 0)
+    Btn.BackgroundTransparency = 1
+    Btn.Text = ""
+    Btn.Parent = Frame
 
     local state = false
-    Button.MouseButton1Click:Connect(function()
+    Btn.MouseButton1Click:Connect(function()
         state = not state
         if state then
             TweenService:Create(ToggleCircle, TweenInfo.new(0.2), {
@@ -763,7 +769,7 @@ local DayLoop = nil
 CreateToggle("ANTI MALAM", 5, function(state)
     if state then
         DayLoop = RunService.RenderStepped:Connect(function()
-            Lighting.TimeOfDay = 12
+            Lighting.ClockTime = 12
         end)
     else
         if DayLoop then
@@ -777,7 +783,7 @@ local NightLoop = nil
 CreateToggle("ANTI-SIANG", 6, function(state)
     if state then
         NightLoop = RunService.RenderStepped:Connect(function()
-            Lighting.TimeOfDay = 0
+            Lighting.ClockTime = 0
         end)
     else
         if NightLoop then
@@ -1009,7 +1015,7 @@ for _, egg in ipairs(eternalEggs) do
 end
 
 for _, egg in ipairs(secretEggs) do
-    local timeLabel = CreateEggPredictionBox(egg, "RAHASIA", Color3.fromRGB(255, 50, 50), orderCounter)
+    local timeLabel = CreateEggPredictionBox(egg, "SECRET", Color3.fromRGB(255, 50, 50), orderCounter)
     orderCounter = orderCounter + 1
     eggTimeData[egg] = {Label = timeLabel, Time = math.random(600, 3600)}
 end
@@ -1027,6 +1033,7 @@ task.spawn(function()
                     data.Time = math.random(600, 3600)
                 end
             end
+            
             if data.Label and data.Label.Parent then
                 data.Label.Text = formatTimeDetailed(data.Time)
             end
@@ -1308,7 +1315,7 @@ local function AddToDivineList(eggName, area, timeStr)
     InfoLabel.Size = UDim2.new(1, -20, 1, 0)
     InfoLabel.Position = UDim2.new(0, 10, 0, 0)
     InfoLabel.BackgroundTransparency = 1
-    InfoLabel.Text = string.format("%s | %s [DIVINE] %s", eggName, area, timeStr)
+    InfoLabel.Text = string.format("%s | %s [ILAHI] %s", eggName, area, timeStr)
     InfoLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     InfoLabel.Font = Enum.Font.GothamBold
     InfoLabel.TextSize = 12
@@ -1327,7 +1334,7 @@ for _, descendant in ipairs(workspace:GetDescendants()) do
     local name = descendant.Name:upper()
     if name:find("DIVINE") and name:find("EGG") then
         local eggName = descendant.Name
-        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "UNKNOWN AREA"
+        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "AREA TIDAK DIKETAHUI"
         local timeStr = os.date("%I:%M %p")
         AddToDivineList(eggName, area, timeStr)
     end
@@ -1337,7 +1344,7 @@ workspace.DescendantAdded:Connect(function(descendant)
     local name = descendant.Name:upper()
     if name:find("DIVINE") and name:find("EGG") then
         local eggName = descendant.Name
-        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "UNKNOWN AREA"
+        local area = descendant.Parent.Name ~= "Workspace" and descendant.Parent.Name or "AREA TIDAK DIKETAHUI"
         local timeStr = os.date("%I:%M %p")
         AddToDivineList(eggName, area, timeStr)
     end
@@ -1351,7 +1358,6 @@ task.spawn(function()
         if currentHour == 0 and currentMinute == 0 then
             DivineSpawnData = {}
             SaveDivineList()
-            
             for _, child in ipairs(ListFrame:GetChildren()) do
                 if child:IsA("Frame") then
                     child:Destroy()
