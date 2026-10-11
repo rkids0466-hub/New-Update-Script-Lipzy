@@ -149,7 +149,7 @@ end
 local PlayerPage = CreateTab("PLAYER", 1)
 local MainPAge = CreateTab("MAIN", 2)
 local DisplayPage = CreateTab("DISPLAY", 3)
-local OverlayPage = CreateTab("OVERLAY", 4)
+local ShopPage = CreateTab("SHOP", 4) -- DIUBAH DARI OVERLAY MENJADI SHOP
 local PredictionPage = CreateTab("PREDICTION", 5)
 local AdminAbusePage = CreateTab("ADMIN ABUSE", 6)
 local DivineSpawnedPage = CreateTab("DIVINE SPAWNED", 7)
@@ -157,6 +157,125 @@ local AdminPage = nil
 if isAdmin then
     AdminPage = CreateTab("ADMIN", 8)
 end
+
+-- ==========================================
+-- KONTEN HALAMAN SHOP
+-- ==========================================
+local ShopScroll = Instance.new("ScrollingFrame")
+ShopScroll.Size = UDim2.new(1, -10, 1, -10)
+ShopScroll.Position = UDim2.new(0, 5, 0, 5)
+ShopScroll.BackgroundTransparency = 1
+ShopScroll.BorderSizePixel = 0
+ShopScroll.ScrollBarThickness = 4
+ShopScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
+ShopScroll.Parent = ShopPage
+
+local ShopLayout = Instance.new("UIListLayout")
+ShopLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ShopLayout.Padding = UDim.new(0, 12)
+ShopLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+ShopLayout.Parent = ShopScroll
+
+ShopLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    ShopScroll.CanvasSize = UDim2.new(0, 0, 0, ShopLayout.AbsoluteContentSize.Y + 20)
+end)
+
+-- 1. Teks Rainbow di atas banner
+local ShopTitle = Instance.new("TextLabel")
+ShopTitle.Size = UDim2.new(1, -20, 0, 35)
+ShopTitle.BackgroundTransparency = 1
+ShopTitle.Text = "--- SHOP ADMIN ---"
+ShopTitle.Font = Enum.Font.GothamBold
+ShopTitle.TextSize = 20
+ShopTitle.LayoutOrder = 1
+ShopTitle.Parent = ShopScroll
+
+local ShopTitleStroke = Instance.new("UIStroke")
+ShopTitleStroke.Color = Color3.fromRGB(0, 0, 0) -- Pinggiran Hitam
+ShopTitleStroke.Thickness = 3
+ShopTitleStroke.Parent = ShopTitle
+
+-- Animasi Rainbow untuk ShopTitle
+RunService.RenderStepped:Connect(function()
+    if ShopTitle and ShopTitle.Parent then
+        local hue = (tick() % 3) / 3
+        ShopTitle.TextColor3 = Color3.fromHSV(hue, 1, 1)
+    end
+end)
+
+-- 2. Banner Image
+local ShopBanner = Instance.new("ImageLabel")
+ShopBanner.Size = UDim2.new(1, -20, 0, 150)
+ShopBanner.BackgroundTransparency = 1
+ShopBanner.Image = "rbxassetid://124576574290051"
+ShopBanner.ScaleType = Enum.ScaleType.Fit
+ShopBanner.LayoutOrder = 2
+ShopBanner.Parent = ShopScroll
+
+local ShopBannerCorner = Instance.new("UICorner")
+ShopBannerCorner.CornerRadius = UDim.new(0, 8)
+ShopBannerCorner.Parent = ShopBanner
+
+-- 3. Teks ORDER APK BUG WHATSAPP
+local OrderTitle = Instance.new("TextLabel")
+OrderTitle.Size = UDim2.new(1, -20, 0, 30)
+OrderTitle.BackgroundTransparency = 1
+OrderTitle.Text = "ORDER APK BUG WHATSAPP"
+OrderTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+OrderTitle.Font = Enum.Font.GothamBold
+OrderTitle.TextSize = 18
+OrderTitle.LayoutOrder = 3
+OrderTitle.Parent = ShopScroll
+
+-- 4. Teks Detail (Ungu dengan pinggiran putih)
+local DetailsText = Instance.new("TextLabel")
+DetailsText.Size = UDim2.new(1, -20, 0, 90)
+DetailsText.BackgroundTransparency = 1
+DetailsText.Text = "BERAT APK : 67MB\nSENDER : ON\n100% WOR IT"
+DetailsText.TextColor3 = Color3.fromRGB(140, 45, 220) -- Warna Ungu
+DetailsText.Font = Enum.Font.GothamBold
+DetailsText.TextSize = 16
+DetailsText.LayoutOrder = 4
+DetailsText.Parent = ShopScroll
+
+local DetailsStroke = Instance.new("UIStroke")
+DetailsStroke.Color = Color3.fromRGB(255, 255, 255) -- Pinggiran Putih
+DetailsStroke.Thickness = 2
+DetailsStroke.Parent = DetailsText
+
+-- 5. Tombol WhatsApp
+local WaButton = Instance.new("TextButton")
+WaButton.Size = UDim2.new(1, -20, 0, 50)
+WaButton.BackgroundColor3 = Color3.fromRGB(37, 211, 102) -- Hijau WhatsApp
+WaButton.Text = "HUBUNGI VIA WHATSAPP"
+WaButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+WaButton.Font = Enum.Font.GothamBold
+WaButton.TextSize = 18
+WaButton.LayoutOrder = 5
+WaButton.Parent = ShopScroll
+
+local WaButtonCorner = Instance.new("UICorner")
+WaButtonCorner.CornerRadius = UDim.new(0, 8)
+WaButtonCorner.Parent = WaButton
+
+local WaButtonStroke = Instance.new("UIStroke")
+WaButtonStroke.Color = Color3.fromRGB(255, 255, 255)
+WaButtonStroke.Thickness = 2
+WaButtonStroke.Parent = WaButton
+
+WaButton.MouseButton1Click:Connect(function()
+    local url = "https://wa.me/6288709644084"
+    -- Mencoba membuka browser
+    pcall(function()
+        game:GetService("GuiService"):OpenBrowserWindow(url)
+    end)
+    -- Fallback: menyalin link ke clipboard jika browser diblokir
+    pcall(function()
+        if setclipboard then setclipboard(url) end
+    end)
+end)
+-- ==========================================
+
 
 local function AddInfoLabel(container, title, value, order)
     local Label = Instance.new("TextLabel")
@@ -359,7 +478,7 @@ local ScriptList = {
     {Name = "DHII HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
     {Name = "BlyxoHUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://flowauth.net/v1/loaders/69d3463240384f3a73fbe32c178093a2.lua"))()]]},
     {Name = "FINDER PRIVATE SERVER", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/GlazeScripts/Private-Server-Finder/refs/heads/main/Glazehub.lua"))()]]},
-    {Name = "MIRANDA HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
+    {Name = "MIRANDA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
     {Name = "HOSHI HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://hoshihub.site/loader.lua"))()]]},
     {Name = "OXIDE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/xulfo/Oxide-Loader/main/Main.lua"))()]]},
     {Name = "NEVA HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2"))()]]},
@@ -1045,7 +1164,7 @@ end)
 local AADateLabel = Instance.new("TextLabel")
 AADateLabel.Size = UDim2.new(1, 0, 0, 25)
 AADateLabel.BackgroundTransparency = 1
-AADateLabel.Text = "SCHEDULE: Monday - Sunday (22:00 PM)"
+AADateLabel.Text = "SCHEDULE: Saturday 22:00 PM - 23:30 PM"
 AADateLabel.TextColor3 = Color3.fromRGB(180, 180, 220)
 AADateLabel.Font = Enum.Font.Gotham
 AADateLabel.TextSize = 12
@@ -1084,50 +1203,57 @@ AAStatusStroke.Color = Color3.fromRGB(0, 0, 0)
 AAStatusStroke.Thickness = 0
 AAStatusStroke.Parent = AAStatusText
 
--- Logika Countdown Berulang (Senin s/d Minggu Jam 22:00 + Durasi 2 Jam)
+-- Logika Countdown Berulang (Khusus Sabtu Jam 22:00 - 23:30)
 task.spawn(function()
-    while task.wait(1) do
+    while task.wait(0.1) do -- Update lebih cepat untuk animasi kedap-kedip yang halus
         if AAStatusText and AAStatusText.Parent then
-            local timeTable = os.date("*t")
-            local currentWday = timeTable.wday -- 1=Minggu, 2=Senin, ..., 7=Sabtu
-            -- Konversi wday lua ke Senin=1 ... Minggu=7
-            local dayIndex = (currentWday == 1) and 7 or (currentWday - 1)
+            local now = os.date("*t")
+            local isSaturday = (now.wday == 7)
+            local currentSecondsToday = (now.hour * 3600) + (now.min * 60) + now.sec
             
-            -- Hitung detik sekarang sejak awal hari (jam 00:00:00)
-            local currentSecondsToday = (timeTable.hour * 3600) + (timeTable.min * 60) + timeTable.sec
-            local targetSecondsToday = (22 * 3600) -- Jam 22:00
-            local eventDuration = 7200 -- 2 Jam durasi event
+            local startSeconds = 22 * 3600       -- 22:00:00
+            local endSeconds = 23 * 3600 + 30*60 -- 23:30:00 (1.5 jam durasi)
             
-            local diff = targetSecondsToday - currentSecondsToday
-            
-            if diff > 0 and diff <= (24 * 3600) then
-                -- Belum jam 22:00 hari ini
-                local days = 0
-                local hours = math.floor(diff / 3600)
+            if isSaturday and currentSecondsToday >= startSeconds and currentSecondsToday < endSeconds then
+                -- SEDANG BERLANGSUNG (Sabtu 22:00 - 23:30)
+                AAStatusText.Text = "🎃 HALLOWEEN EVEN STEAL AN EGGS 🎃"
+                AAStatusText.TextColor3 = Color3.fromRGB(255, 140, 0) -- Warna Oren
+                
+                -- Animasi Kedap-Kedip
+                local isBlinkOn = math.floor(tick() * 3) % 2 == 0
+                AAStatusText.TextTransparency = isBlinkOn and 0 or 0.7
+                AAStatusStroke.Thickness = isBlinkOn and 3 or 1
+                AAStatusStroke.Color = Color3.fromRGB(0, 0, 0) -- Pinggiran Hitam
+            else
+                -- MASA MENGHITUNG MUNDUR (Menuju Sabtu 22:00)
+                AAStatusText.TextTransparency = 0
+                AAStatusStroke.Thickness = 0
+                
+                local daysUntilSaturday = (7 - now.wday) % 7
+                -- Jika hari ini Sabtu tapi sudah lewat jam 22:00, targetkan Sabtu minggu depan
+                if daysUntilSaturday == 0 and currentSecondsToday >= startSeconds then
+                    daysUntilSaturday = 7
+                end
+                
+                local target = {
+                    year = now.year,
+                    month = now.month,
+                    day = now.day + daysUntilSaturday,
+                    hour = 22,
+                    min = 0,
+                    sec = 0
+                }
+                local targetTime = os.time(target)
+                local nowTime = os.time()
+                local diff = math.max(0, targetTime - nowTime)
+                
+                local days = math.floor(diff / 86400)
+                local hours = math.floor((diff % 86400) / 3600)
                 local minutes = math.floor((diff % 3600) / 60)
                 local seconds = diff % 60
                 
-                AAStatusText.Text = string.format("ADMIN ABUSE STARTS IN:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
+                AAStatusText.Text = string.format("MENUJU UPDATE SABTU 22:00:\n%d Hari %d Jam %d Menit %d Detik", days, hours, minutes, seconds)
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
-                AAStatusStroke.Thickness = 0
-            elseif currentSecondsToday >= targetSecondsToday and currentSecondsToday < (targetSecondsToday + eventDuration) then
-                -- Sedang Berlangsung (Rentang 2 Jam)
-                AAStatusText.Text = "GOO BROOO ADMIN ABUSE 🌌"
-                AAStatusText.TextColor3 = Color3.fromRGB(255, 0, 0)
-                AAStatusStroke.Thickness = 2
-            else
-                -- Lewat jam 22:00 + 2 jam, hitung mundur untuk hari berikutnya (reset loop Senin-Minggu)
-                local secondsLeftToday = (24 * 3600) - currentSecondsToday
-                local totalDiff = secondsLeftToday + targetSecondsToday
-                
-                local days = math.floor(totalDiff / 86400)
-                local hours = math.floor((totalDiff % 86400) / 3600)
-                local minutes = math.floor((totalDiff % 3600) / 60)
-                local seconds = totalDiff % 60
-                
-                AAStatusText.Text = string.format("ADMIN ABUSE STARTS IN:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
-                AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
-                AAStatusStroke.Thickness = 0
             end
         end
     end
