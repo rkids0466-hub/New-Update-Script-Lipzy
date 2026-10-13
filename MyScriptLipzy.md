@@ -16,12 +16,12 @@ local _0x8F2A = (function()
     local _0x1B = string.char
     local _0x2C = {
         80, 82, 69, 77, 73, 85, 77, 45, 53, 53, 48, 55, 45, 57, 52, 68, 49, 45, 53, 68, 68, 69, 124, 80, 82, 69, 77, 73, 85, 77, 45, 51, 67, 54, 55, 45, 51, 67, 51, 49, 45, 49, 57, 68, 53, 124, 80, 82, 69, 77,
-        73, 85, 77, 45, 67, 50, 56, 49, 45, 50, 53, 58, 65, 45, 67, 50, 48, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 67, 53, 50, 48, 45, 51, 67, 67, 49, 45, 53, 54, 68, 55, 124, 80, 82, 69, 77, 73, 85, 77, 45,
+        73, 85, 77, 45, 67, 50, 56, 49, 45, 50, 53, 56, 65, 45, 67, 50, 48, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 67, 53, 50, 48, 45, 51, 67, 67, 49, 45, 53, 54, 68, 55, 124, 80, 82, 69, 77, 73, 85, 77, 45,
         68, 56, 51, 49, 45, 55, 53, 70, 57, 45, 69, 57, 70, 57, 124, 80, 82, 69, 77, 73, 85, 77, 45, 57, 50, 50, 65, 45, 53, 51, 69, 66, 45, 66, 52, 54, 65, 124, 80, 82, 69, 77, 73, 85, 77, 45, 51, 53, 57, 49,
         45, 54, 67, 52, 52, 45, 65, 65, 49, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 49, 68, 66, 54, 45, 54, 69, 54, 49, 45, 51, 68, 67, 56, 124, 80, 82, 69, 77, 73, 85, 77, 45, 55, 54, 65, 56, 45, 56, 56, 65,
         54, 45, 49, 66, 70, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 53, 70, 54, 57, 45, 55, 54, 57, 65, 45, 57, 50, 49, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 66, 69, 65, 48, 45, 57, 69, 69, 48, 45, 52, 51,
         52, 67, 124, 80, 82, 69, 77, 73, 85, 77, 45, 70, 48, 51, 55, 45, 48, 51, 55, 67, 45, 52, 67, 67, 66, 124, 80, 82, 69, 77, 73, 85, 77, 45, 48, 65, 69, 55, 45, 56, 56, 51, 55, 45, 49, 49, 53, 55, 124, 80,
-        82, 69, 77, 73, 85, 77, 45, 68, 67, 53, 68, 45, 70, 50, 68, 52, 45, 48, 55, 67, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 50, 65, 49, 65, 45, 52, 51, 58, 68, 45, 67, 51, 70, 54, 124, 80, 82, 69, 77, 73,
+        82, 69, 77, 73, 85, 77, 45, 68, 67, 53, 68, 45, 70, 50, 68, 52, 45, 48, 55, 67, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 50, 65, 49, 65, 45, 52, 51, 56, 68, 45, 67, 51, 70, 54, 124, 80, 82, 69, 77, 73,
         85, 77, 45, 49, 49, 50, 50, 45, 50, 67, 56, 52, 45, 65, 67, 66, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 48, 68, 51, 70, 45, 54, 68, 48, 57, 45, 70, 56, 68, 66, 124, 80, 82, 69, 77, 73, 85, 77, 45, 70,
         52, 69, 56, 45, 50, 56, 49, 51, 45, 49, 48, 50, 68, 124, 80, 82, 69, 77, 73, 85, 77, 45, 54, 69, 55, 49, 45, 50, 65, 53, 67, 45, 55, 70, 48, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 68, 55, 66, 55, 45,
         65, 49, 68, 70, 45, 69, 68, 50, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 52, 53, 70, 66, 45, 65, 57, 53, 51, 45, 55, 50, 67, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 65, 48, 48, 70, 45, 66, 50, 67, 68,
@@ -535,7 +535,7 @@ end)
 local ShopTitle = Instance.new("TextLabel")
 ShopTitle.Size = UDim2.new(1, -20, 0, 35)
 ShopTitle.BackgroundTransparency = 1
-ShopTitle.Text = "--ADMIN SHOP--"
+ShopTitle.Text = "-- ADMIN SHOP --"
 ShopTitle.Font = Enum.Font.GothamBold
 ShopTitle.TextSize = 20
 ShopTitle.LayoutOrder = 1
@@ -629,7 +629,7 @@ ResultLabel.Parent = RedeemFrame
 
 SendBtn.MouseButton1Click:Connect(function()
     if isPremium then
-        ResultLabel.Text = "YOU ARE ALREADY PREMIUM"
+        ResultLabel.Text = "ALREADY PREMIUM"
         ResultLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
         return
     end
@@ -637,7 +637,7 @@ SendBtn.MouseButton1Click:Connect(function()
     local code = string.upper(CodeInput.Text)
     
     if usedCodes[code] == true then
-        ResultLabel.Text = "CODE MAXIMUM"
+        ResultLabel.Text = "CODE ALREADY USED"
         ResultLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
         return
     end
@@ -749,12 +749,12 @@ PlayerInfoPadding.Parent = PlayerInfoContainer
 AddInfoLabel(PlayerInfoContainer, "Account Age", LocalPlayer.AccountAge .. " Days", 1)
 local AccountCreatedDate = os.date("%d %B %Y", os.time() - (LocalPlayer.AccountAge * 86400))
 AddInfoLabel(PlayerInfoContainer, "Account Created", AccountCreatedDate, 2)
-local TimeLabel = AddInfoLabel(PlayerInfoContainer, "Time", os.date("%H:%M:%S WIB"), 3)
+local TimeLabel = AddInfoLabel(PlayerInfoContainer, "Time", os.date("%H:%M:%S"), 3)
 
 task.spawn(function()
     while task.wait(1) do
         if TimeLabel and TimeLabel.Parent then
-            TimeLabel.Text = "Time: " .. os.date("%H:%M:%S WIB")
+            TimeLabel.Text = "Time: " .. os.date("%H:%M:%S")
         end
     end
 end)
@@ -899,7 +899,7 @@ local OpenScriptBtn = Instance.new("TextButton")
 OpenScriptBtn.Size = UDim2.new(1, -20, 0, 36)
 OpenScriptBtn.Position = UDim2.new(0, 10, 0, 5)
 OpenScriptBtn.BackgroundColor3 = Color3.fromRGB(140, 45, 220)
-OpenScriptBtn.Text = "OPEN SCRIPT"
+OpenScriptBtn.Text = "EXECUTE SCRIPT"
 OpenScriptBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 OpenScriptBtn.Font = Enum.Font.GothamBold
 OpenScriptBtn.TextSize = 14
@@ -1030,7 +1030,7 @@ OpenScriptBtn.MouseButton1Click:Connect(function()
             loadstring(selectedScript)()
         end)
         if not success then
-            warn("Failed to run script: " .. tostring(err))
+            warn("Failed to execute script: " .. tostring(err))
         end
     end
 end)
@@ -1251,7 +1251,7 @@ end)
 
 local Lighting = game:GetService("Lighting")
 local DayLoop = nil
-CreateToggle("ANTI NIGHT", 5, function(state)
+CreateToggle("NO NIGHT", 5, function(state)
     if state then
         DayLoop = RunService.RenderStepped:Connect(function()
             Lighting.ClockTime = 12
@@ -1265,7 +1265,7 @@ CreateToggle("ANTI NIGHT", 5, function(state)
 end)
 
 local NightLoop = nil
-CreateToggle("ANTI DAY", 6, function(state)
+CreateToggle("NO DAY", 6, function(state)
     if state then
         NightLoop = RunService.RenderStepped:Connect(function()
             Lighting.ClockTime = 0
@@ -1279,7 +1279,7 @@ CreateToggle("ANTI DAY", 6, function(state)
 end)
 
 local origShadows = Lighting.GlobalShadows
-CreateToggle("GRAPHICS SHADOWS", 7, function(state)
+CreateToggle("GRAPHICAL SHADOWS", 7, function(state)
     Lighting.GlobalShadows = state
     if state then
         Lighting.Technology = Enum.Technology.Future
@@ -1466,8 +1466,8 @@ local function CreateEggPredictionBox(eggName, rarity, color, order)
 end
 
 local divineEggs = { "Unicorn Egg", "Kitsune Egg", "Nightflame Egg", "Archangel Egg", "WorldBurner Egg", "Aetheron Egg", "Royal Sky Whale Egg" }
-local eternalEggs = { "Ice Dragon Egg", "Phoenix Egg", "Lava Dragon Egg", "Mosasaurus Egg", "Eternal Moon Dragon Egg", "Oni Tiger Egg", "Gorilla King Egg", "Pegasus Egg", "Skeleton Horse Egg", "Equinox Egg", "El Maja Egg", "World Eater Egg", "Shattered Dragon Egg", "Void Serpent Egg" }
-local secretEggs = { "Yeti Egg", "Cerberus Egg", "T-Rex Egg", "Tralaledon Egg", "Cosmic Skeleton Boss Egg", "Cosmic Dragon Egg", "Pure Jellyfish Egg", "Gargoyle Egg", "Centaur Egg", "RazorFang Egg", "Mutant Shark Egg", "Stag Egg", "Kraken Egg", "King Snake Egg", "Wendigo Egg", "Mouth Breaker Egg", "Broken Wing Egg" }
+local eternalEggs = { "Ice Dragon Egg", "Phoenix Egg", "Lava Dragon Egg", "Mosasaurus Egg", "Eternal Moon Dragon Egg", "Oni Tiger Egg", "Gorilla King Egg", "Pegasus Egg", "Skeleton Horse Egg", "Equinox Egg", "El Maja Egg", "World Eater Egg", "Destroyer Dragon Egg", "Void Snake Egg" }
+local secretEggs = { "Yeti Egg", "Cerberus Egg", "T-Rex Egg", "Tralaledon Egg", "Cosmic Skeleton Boss Egg", "Cosmic Dragon Egg", "Pure Jellyfish Egg", "Gargoyle Egg", "Centaur Egg", "RazorFang Egg", "Mutant Shark Egg", "Male Deer Egg", "Kraken Egg", "King Snake Egg", "Wendigo Egg", "Mouth Breaker Egg", "Broken Wing Egg" }
 
 local eggTimeData = {}
 local orderCounter = 1
@@ -1536,7 +1536,7 @@ AAPadding.Parent = AdminAbuseContainer
 local AAGameTitle = Instance.new("TextLabel")
 AAGameTitle.Size = UDim2.new(1, 0, 0, 30)
 AAGameTitle.BackgroundTransparency = 1
-AAGameTitle.Text = "STEAL AN EGG ADMIN ABUSE"
+AAGameTitle.Text = "ADMIN ABUSE EGG STEALING"
 AAGameTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
 AAGameTitle.Font = Enum.Font.FredokaOne
 AAGameTitle.TextSize = 16
@@ -1585,7 +1585,7 @@ local AAStatusText = Instance.new("TextLabel")
 AAStatusText.Size = UDim2.new(1, -20, 1, -20)
 AAStatusText.Position = UDim2.new(0, 10, 0, 10)
 AAStatusText.BackgroundTransparency = 1
-AAStatusText.Text = "Calculating Time..."
+AAStatusText.Text = "Counting down..."
 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
 AAStatusText.Font = Enum.Font.GothamBold
 AAStatusText.TextSize = 15
@@ -1608,7 +1608,7 @@ task.spawn(function()
             local endSeconds = 23 * 3600 + 30 * 60
             
             if isSaturday and currentSecondsToday >= startSeconds and currentSecondsToday < endSeconds then
-                AAStatusText.Text = "🎃 HALLOWEEN EGG STEAL EVENT 🎃"
+                AAStatusText.Text = "🎃 HALLOWEEN EGG STEALING EVENT 🎃"
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 140, 0)
                 
                 local isBlinkOn = math.floor(tick() * 3) % 2 == 0
@@ -1641,7 +1641,7 @@ task.spawn(function()
                 local minutes = math.floor((diff % 3600) / 60)
                 local seconds = diff % 60
                 
-                AAStatusText.Text = string.format("UNTIL SATURDAY UPDATE 22:00:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
+                AAStatusText.Text = string.format("COUNTDOWN TO SATURDAY 22:00 UPDATE:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
             end
         end
@@ -1680,7 +1680,7 @@ DateLabel.Parent = DivineScroll
 local ListTitle = Instance.new("TextLabel")
 ListTitle.Size = UDim2.new(1, 0, 0, 35)
 ListTitle.BackgroundTransparency = 1
-ListTitle.Text = "DIVINE SPAWNED LIST"
+ListTitle.Text = "DIVINE SPAWN LIST"
 ListTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
 ListTitle.Font = Enum.Font.GothamBold
 ListTitle.TextSize = 18
@@ -1696,7 +1696,7 @@ ListTitleStroke.Parent = ListTitle
 local ServerLabel = Instance.new("TextLabel")
 ServerLabel.Size = UDim2.new(1, 0, 0, 25)
 ServerLabel.BackgroundTransparency = 1
-ServerLabel.Text = "🇲🇨 INDONESIA SERVER 🇲🇨"
+ServerLabel.Text = "🇲🇨 INDONESIAN SERVER 🇲🇨"
 ServerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 ServerLabel.Font = Enum.Font.GothamBold
 ServerLabel.TextSize = 14
@@ -1872,14 +1872,14 @@ task.spawn(function()
                 if hour == 21 and min == 30 then
                     messageText = "Admin Abuse😍 My Owner And Moderator Haii."
                 elseif hour == 22 and min == 0 then
-                    messageText = "Gooo 22:00 Admin Started?"
+                    messageText = "Gooo 22:00 Admin Starts?"
                 elseif hour == 22 and min == 30 then
                     messageText = "L or W?"
                 else
-                    messageText = "Admin Abuse Event in Progress!"
+                    messageText = "Admin Abuse Event Ongoing!"
                 end
             elseif wday == 3 then
-                messageText = "P."
+                messageText = "Hi."
             end
             
             if messageText ~= "" then
