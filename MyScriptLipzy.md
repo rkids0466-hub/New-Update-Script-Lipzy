@@ -7,26 +7,21 @@ local Stats = game:GetService("Stats")
 
 local LocalPlayer = Players.LocalPlayer
 
--- DAFTAR ADMIN AWAL
 local AdminList = {
     ["LifzxAfter2"] = "ADMIN",
     ["Yanzzz_1023"] = "OWNER"
 }
 
--- ==========================================
--- KODE REDEEM PREMIUM (TER-OBFUSCATE 100%)
--- Tidak dapat dibaca manusia, namun berfungsi normal
--- ==========================================
 local _0x8F2A = (function()
     local _0x1B = string.char
     local _0x2C = {
         80, 82, 69, 77, 73, 85, 77, 45, 53, 53, 48, 55, 45, 57, 52, 68, 49, 45, 53, 68, 68, 69, 124, 80, 82, 69, 77, 73, 85, 77, 45, 51, 67, 54, 55, 45, 51, 67, 51, 49, 45, 49, 57, 68, 53, 124, 80, 82, 69, 77,
-        73, 85, 77, 45, 67, 50, 56, 49, 45, 50, 53, 56, 65, 45, 67, 50, 48, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 67, 53, 50, 48, 45, 51, 67, 67, 49, 45, 53, 54, 68, 55, 124, 80, 82, 69, 77, 73, 85, 77, 45,
+        73, 85, 77, 45, 67, 50, 56, 49, 45, 50, 53, 58, 65, 45, 67, 50, 48, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 67, 53, 50, 48, 45, 51, 67, 67, 49, 45, 53, 54, 68, 55, 124, 80, 82, 69, 77, 73, 85, 77, 45,
         68, 56, 51, 49, 45, 55, 53, 70, 57, 45, 69, 57, 70, 57, 124, 80, 82, 69, 77, 73, 85, 77, 45, 57, 50, 50, 65, 45, 53, 51, 69, 66, 45, 66, 52, 54, 65, 124, 80, 82, 69, 77, 73, 85, 77, 45, 51, 53, 57, 49,
         45, 54, 67, 52, 52, 45, 65, 65, 49, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 49, 68, 66, 54, 45, 54, 69, 54, 49, 45, 51, 68, 67, 56, 124, 80, 82, 69, 77, 73, 85, 77, 45, 55, 54, 65, 56, 45, 56, 56, 65,
         54, 45, 49, 66, 70, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 53, 70, 54, 57, 45, 55, 54, 57, 65, 45, 57, 50, 49, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 66, 69, 65, 48, 45, 57, 69, 69, 48, 45, 52, 51,
-        56, 67, 124, 80, 82, 69, 77, 73, 85, 77, 45, 70, 48, 51, 55, 45, 48, 51, 55, 67, 45, 52, 67, 67, 66, 124, 80, 82, 69, 77, 73, 85, 77, 45, 48, 65, 69, 55, 45, 56, 56, 51, 55, 45, 49, 49, 53, 55, 124, 80,
-        82, 69, 77, 73, 85, 77, 45, 68, 67, 53, 68, 45, 70, 50, 68, 52, 45, 48, 55, 67, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 50, 65, 49, 65, 45, 52, 51, 56, 68, 45, 67, 51, 70, 54, 124, 80, 82, 69, 77, 73,
+        52, 67, 124, 80, 82, 69, 77, 73, 85, 77, 45, 70, 48, 51, 55, 45, 48, 51, 55, 67, 45, 52, 67, 67, 66, 124, 80, 82, 69, 77, 73, 85, 77, 45, 48, 65, 69, 55, 45, 56, 56, 51, 55, 45, 49, 49, 53, 55, 124, 80,
+        82, 69, 77, 73, 85, 77, 45, 68, 67, 53, 68, 45, 70, 50, 68, 52, 45, 48, 55, 67, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 50, 65, 49, 65, 45, 52, 51, 58, 68, 45, 67, 51, 70, 54, 124, 80, 82, 69, 77, 73,
         85, 77, 45, 49, 49, 50, 50, 45, 50, 67, 56, 52, 45, 65, 67, 66, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 48, 68, 51, 70, 45, 54, 68, 48, 57, 45, 70, 56, 68, 66, 124, 80, 82, 69, 77, 73, 85, 77, 45, 70,
         52, 69, 56, 45, 50, 56, 49, 51, 45, 49, 48, 50, 68, 124, 80, 82, 69, 77, 73, 85, 77, 45, 54, 69, 55, 49, 45, 50, 65, 53, 67, 45, 55, 70, 48, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 68, 55, 66, 55, 45,
         65, 49, 68, 70, 45, 69, 68, 50, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 52, 53, 70, 66, 45, 65, 57, 53, 51, 45, 55, 50, 67, 51, 124, 80, 82, 69, 77, 73, 85, 77, 45, 65, 48, 48, 70, 45, 66, 50, 67, 68,
@@ -40,7 +35,7 @@ local _0x8F2A = (function()
         124, 80, 82, 69, 77, 73, 85, 77, 45, 53, 55, 55, 49, 45, 57, 68, 48, 66, 45, 48, 57, 55, 57, 124, 80, 82, 69, 77, 73, 85, 77, 45, 56, 57, 53, 69, 45, 50, 57, 54, 67, 45, 48, 67, 49, 67, 124, 80, 82, 69,
         77, 73, 85, 77, 45, 65, 54, 56, 48, 45, 53, 50, 52, 50, 45, 67, 70, 48, 54, 124, 80, 82, 69, 77, 73, 85, 77, 45, 52, 52, 54, 66, 45, 55, 68, 55, 70, 45, 56, 48, 69, 70, 124, 80, 82, 69, 77, 73, 85, 77,
         45, 52, 56, 53, 69, 45, 65, 68, 67, 52, 45, 56, 50, 57, 67, 124, 80, 82, 69, 77, 73, 85, 77, 45, 52, 65, 69, 70, 45, 70, 68, 68, 48, 45, 49, 51, 69, 53, 124, 80, 82, 69, 77, 73, 85, 77, 45, 49, 51, 56,
-        56, 45, 65, 49, 57, 56, 45, 54, 65, 52, 57, 124, 80, 82, 69, 77, 73, 85, 77, 45, 70, 55, 56, 55, 45, 69, 55, 68, 70, 45, 54, 55, 54, 66, 124, 80, 82, 69, 77, 73, 85, 77, 45, 57, 69, 53, 69, 45, 57, 70,
+        58, 45, 65, 49, 57, 56, 45, 54, 65, 52, 57, 124, 80, 82, 69, 77, 73, 85, 77, 45, 70, 55, 56, 55, 45, 69, 55, 68, 70, 45, 54, 53, 54, 66, 124, 80, 82, 69, 77, 73, 85, 77, 45, 57, 69, 53, 69, 45, 57, 70,
         66, 57, 45, 55, 52, 69, 50, 124, 80, 82, 69, 77, 73, 85, 77, 45, 53, 68, 66, 55, 45, 67, 49, 56, 56, 45, 54, 69, 55, 67, 124, 80, 82, 69, 77, 73, 85, 77, 45, 52, 70, 67, 51, 45, 68, 55, 49, 51, 45, 66,
         56, 70, 53, 124, 80, 82, 69, 77, 73, 85, 77, 45, 67, 54, 52, 69, 45, 51, 57, 50, 68, 45, 68, 51, 51, 50, 124, 80, 82, 69, 77, 73, 85, 77, 45, 55, 53, 52, 48, 45, 52, 67, 69, 56, 45, 49, 57, 69, 70, 124,
         80, 82, 69, 77, 73, 85, 77, 45, 50, 50, 66, 55, 45, 53, 55, 56, 53, 45, 51, 55, 48, 52, 124, 80, 82, 69, 77, 73, 85, 77, 45, 67, 55, 65, 54, 45, 53, 68, 68, 49, 45, 57, 50, 56, 48, 124, 80, 82, 69, 77,
@@ -79,14 +74,29 @@ local _0x8F2A = (function()
 end)()
 local validCodes = _0x8F2A
 
--- ==========================================
--- SISTEM SAVE PERMANEN (1 ORANG 1 CODE)
--- ==========================================
+local UsedCodesFile = "LipzyHub_UsedCodes.txt"
+local usedCodes = {}
+
+if pcall(function() return readfile(UsedCodesFile) end) then
+    local success, data = pcall(function()
+        return game:GetService("HttpService"):JSONDecode(readfile(UsedCodesFile))
+    end)
+    if success and type(data) == "table" then
+        usedCodes = data
+    end
+end
+
+local function SaveUsedCodes()
+    pcall(function()
+        local json = game:GetService("HttpService"):JSONEncode(usedCodes)
+        writefile(UsedCodesFile, json)
+    end)
+end
+
 local SaveFile = "LipzyHub_Premium_" .. LocalPlayer.UserId .. ".txt"
 local isPremium = false
 local isAdmin = false
 
--- Cek apakah pemain sudah pernah redeem dan tersimpan
 if pcall(function() return readfile(SaveFile) end) then
     if readfile(SaveFile) == "PREMIUM" then
         isPremium = true
@@ -94,7 +104,6 @@ if pcall(function() return readfile(SaveFile) end) then
     end
 end
 
--- Cek apakah pemain adalah admin/owner dari daftar awal
 local userRole = AdminList[LocalPlayer.Name]
 if userRole ~= nil then
     isAdmin = true
@@ -235,17 +244,16 @@ local function CreateTab(name, layoutOrder)
 end
 
 local PlayerPage = CreateTab("PLAYER", 1)
-local MainPAge = CreateTab("MAIN", 2)
+local MainPage = CreateTab("MAIN", 2)
 local DisplayPage = CreateTab("DISPLAY", 3)
 local ShopPage = CreateTab("SHOP", 4)
 local PredictionPage = CreateTab("PREDICTION", 5)
 local AdminAbusePage = CreateTab("ADMIN ABUSE", 6)
 local DivineSpawnedPage = CreateTab("DIVINE SPAWNED", 7)
 
-local StatusLabelRef = nil 
+local StatusLabelRef = nil
 local AdminPageInstance = nil
 
--- Fungsi untuk mengisi konten Admin (Dipanggil saat load atau setelah redeem)
 local function PopulateAdminPage(page)
     for _, child in ipairs(page:GetChildren()) do
         child:Destroy()
@@ -488,7 +496,6 @@ local function PopulateAdminPage(page)
     end)
 end
 
--- Buat Tab Admin jika sudah premium/admin sejak awal
 if isAdmin then
     AdminPageInstance = CreateTab("ADMIN", 8)
     PopulateAdminPage(AdminPageInstance)
@@ -506,9 +513,6 @@ local function updatePlayerStatusToPremium()
     end
 end
 
--- ==========================================
--- KONTEN HALAMAN SHOP
--- ==========================================
 local ShopScroll = Instance.new("ScrollingFrame")
 ShopScroll.Size = UDim2.new(1, -10, 1, -10)
 ShopScroll.Position = UDim2.new(0, 5, 0, 5)
@@ -587,7 +591,7 @@ CodeInput.Size = UDim2.new(0.7, -10, 0, 30)
 CodeInput.Position = UDim2.new(0, 10, 0, 35)
 CodeInput.BackgroundColor3 = Color3.fromRGB(18, 12, 28)
 CodeInput.Text = ""
-CodeInput.PlaceholderText = "Masukkan Kode Disini..."
+CodeInput.PlaceholderText = "Enter Code Here..."
 CodeInput.TextColor3 = Color3.fromRGB(255, 255, 255)
 CodeInput.Font = Enum.Font.Gotham
 CodeInput.TextSize = 12
@@ -623,17 +627,22 @@ ResultLabel.TextSize = 11
 ResultLabel.TextXAlignment = Enum.TextXAlignment.Left
 ResultLabel.Parent = RedeemFrame
 
--- Logika Redeem (1 Orang 1 Code, Save Permanen)
 SendBtn.MouseButton1Click:Connect(function()
     if isPremium then
-        ResultLabel.Text = "Anda sudah PREMIUM!"
+        ResultLabel.Text = "YOU ARE ALREADY PREMIUM"
         ResultLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
         return
     end
     
     local code = string.upper(CodeInput.Text)
-    local isValid = false
     
+    if usedCodes[code] == true then
+        ResultLabel.Text = "CODE MAXIMUM"
+        ResultLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+        return
+    end
+    
+    local isValid = false
     for _, c in ipairs(validCodes) do
         if c == code then
             isValid = true
@@ -646,29 +655,32 @@ SendBtn.MouseButton1Click:Connect(function()
         isAdmin = true
         pcall(function() writefile(SaveFile, "PREMIUM") end)
         
-        ResultLabel.Text = "BERHASIL! Akun kini PREMIUM."
+        usedCodes[code] = true
+        SaveUsedCodes()
+        
+        ResultLabel.Text = "SUCCESS! Account is now PREMIUM."
         ResultLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
         CodeInput.Text = ""
         
         updatePlayerStatusToPremium()
     else
-        ResultLabel.Text = "Kode Tidak Valid!"
+        ResultLabel.Text = "Invalid Code!"
         ResultLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
     end
 end)
 
-local function AddInfoLabel(container, title, value, order)
-    local Label = Instance.new("TextLabel")
-    Label.Size = UDim2.new(1, 0, 0, 25)
-    Label.BackgroundTransparency = 1
-    Label.Text = title .. ": " .. value
-    Label.TextColor3 = Color3.fromRGB(200, 200, 220)
-    Label.Font = Enum.Font.Gotham
-    Label.TextSize = 11
-    Label.TextXAlignment = Enum.TextXAlignment.Left
-    Label.LayoutOrder = order
-    Label.Parent = container
-    return Label
+local function AddInfoLabel(container, title, val, order)
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, 0, 0, 25)
+    label.BackgroundTransparency = 1
+    label.Text = title .. ": " .. val
+    label.TextColor3 = Color3.fromRGB(200, 200, 220)
+    label.Font = Enum.Font.Gotham
+    label.TextSize = 11
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.LayoutOrder = order
+    label.Parent = container
+    return label
 end
 
 local ProfileImage = Instance.new("ImageLabel")
@@ -747,7 +759,7 @@ task.spawn(function()
     end
 end)
 
-local GameName = "Steal an Egg"
+local GameName = "Steal An Egg"
 pcall(function()
     local placeInfo = MarketplaceService:GetProductInfo(game.PlaceId)
     if placeInfo and placeInfo.Name then
@@ -860,7 +872,7 @@ local ScriptList = {
     {Name = "DHII HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dhiisepertiorang/dhii_kick.lua/refs/heads/main/dhiitoaa.lua"))()]]},
     {Name = "BlyxoHUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://flowauth.net/v1/loaders/69d3463240384f3a73fbe32c178093a2.lua"))()]]},
     {Name = "FINDER PRIVATE SERVER", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/GlazeScripts/Private-Server-Finder/refs/heads/main/Glazehub.lua"))()]]},
-    {Name = "MIRANDA HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
+    {Name = "MIRANDA HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()]]},
     {Name = "HOSHI HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://hoshihub.site/loader.lua"))()]]},
     {Name = "OXIDE HUB", KeyStatus = "NO KEY", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/xulfo/Oxide-Loader/main/Main.lua"))()]]},
     {Name = "NEVA HUB", KeyStatus = "KEYLESS", Script = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2"))()]]},
@@ -891,7 +903,7 @@ OpenScriptBtn.Text = "OPEN SCRIPT"
 OpenScriptBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 OpenScriptBtn.Font = Enum.Font.GothamBold
 OpenScriptBtn.TextSize = 14
-OpenScriptBtn.Parent = MainPAge
+OpenScriptBtn.Parent = MainPage
 
 local OpenScriptCorner = Instance.new("UICorner")
 OpenScriptCorner.CornerRadius = UDim.new(0, 8)
@@ -904,14 +916,14 @@ ScriptScroll.BackgroundTransparency = 1
 ScriptScroll.BorderSizePixel = 0
 ScriptScroll.ScrollBarThickness = 4
 ScriptScroll.ScrollBarImageColor3 = Color3.fromRGB(140, 45, 220)
-ScriptScroll.Parent = MainPAge
+ScriptScroll.Parent = MainPage
 
 local ScriptListLayout = Instance.new("UIListLayout")
 ScriptListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 ScriptListLayout.Padding = UDim.new(0, 6)
 ScriptListLayout.Parent = ScriptScroll
 
-local SelectedScript = nil
+local selectedScript = nil
 local RegisteredItems = {}
 
 for index, data in ipairs(ScriptList) do
@@ -986,7 +998,7 @@ for index, data in ipairs(ScriptList) do
     RegisteredItems[index] = {ItemFrame = ItemFrame, NameLabel = NameLabel, CheckMark = CheckMark, Stroke = ItemStroke, Data = data}
 
     ClickBtn.MouseButton1Click:Connect(function()
-        SelectedScript = data.Script
+        selectedScript = data.Script
         for _, item in pairs(RegisteredItems) do
             item.CheckMark.Text = ""
             item.Stroke.Color = Color3.fromRGB(70, 40, 110)
@@ -1013,12 +1025,12 @@ ScriptListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(functio
 end)
 
 OpenScriptBtn.MouseButton1Click:Connect(function()
-    if SelectedScript then
+    if selectedScript then
         local success, err = pcall(function()
-            loadstring(SelectedScript)()
+            loadstring(selectedScript)()
         end)
         if not success then
-            warn("Failed to execute script: " .. tostring(err))
+            warn("Failed to run script: " .. tostring(err))
         end
     end
 end)
@@ -1206,13 +1218,13 @@ end)
 
 local SavedMaterials = {}
 CreateToggle("FPS BOOST", 4, function(state)
-    local Terrain = workspace:FindFirstChildOfClass("Terrain")
+    local terrain = workspace:FindFirstChildOfClass("Terrain")
     if state then
-        if Terrain then
-            Terrain.WaterWaveSize = 0
-            Terrain.WaterWaveSpeed = 0
-            Terrain.WaterReflectance = 0
-            Terrain.WaterTransparency = 0
+        if terrain then
+            terrain.WaterWaveSize = 0
+            terrain.WaterWaveSpeed = 0
+            terrain.WaterReflectance = 0
+            terrain.WaterTransparency = 0
         end
         for _, v in ipairs(game:GetDescendants()) do
             if v:IsA("BasePart") then
@@ -1324,22 +1336,22 @@ MainCountdownStroke.Thickness = 1
 MainCountdownStroke.Parent = MainCountdownFrame
 
 local function CreateMainCountdownLabel(name, color, order)
-    local Label = Instance.new("TextLabel")
-    Label.Size = UDim2.new(1, -20, 0, 30)
-    Label.Position = UDim2.new(0, 10, 0, 10 + (order - 1) * 35)
-    Label.BackgroundTransparency = 1
-    Label.Text = name .. ": 00:00:00"
-    Label.TextColor3 = color
-    Label.Font = Enum.Font.GothamBold
-    Label.TextSize = 14
-    Label.TextXAlignment = Enum.TextXAlignment.Left
-    Label.Parent = MainCountdownFrame
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, -20, 0, 30)
+    label.Position = UDim2.new(0, 10, 0, 10 + (order - 1) * 35)
+    label.BackgroundTransparency = 1
+    label.Text = name .. ": 00:00:00"
+    label.TextColor3 = color
+    label.Font = Enum.Font.GothamBold
+    label.TextSize = 14
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.Parent = MainCountdownFrame
 
-    local Stroke = Instance.new("UIStroke")
-    Stroke.Color = Color3.fromRGB(0, 0, 0)
-    Stroke.Thickness = 1
-    Stroke.Parent = Label
-    return Label
+    local stroke = Instance.new("UIStroke")
+    stroke.Color = Color3.fromRGB(0, 0, 0)
+    stroke.Thickness = 1
+    stroke.Parent = label
+    return label
 end
 
 local DivineCountdownLabel = CreateMainCountdownLabel("DIVINE", Color3.fromRGB(255, 215, 0), 1)
@@ -1455,7 +1467,7 @@ end
 
 local divineEggs = { "Unicorn Egg", "Kitsune Egg", "Nightflame Egg", "Archangel Egg", "WorldBurner Egg", "Aetheron Egg", "Royal Sky Whale Egg" }
 local eternalEggs = { "Ice Dragon Egg", "Phoenix Egg", "Lava Dragon Egg", "Mosasaurus Egg", "Eternal Moon Dragon Egg", "Oni Tiger Egg", "Gorilla King Egg", "Pegasus Egg", "Skeleton Horse Egg", "Equinox Egg", "El Maja Egg", "World Eater Egg", "Shattered Dragon Egg", "Void Serpent Egg" }
-local secretEggs = { "Yeti Egg", "Cerberus Egg", "T-Rex Egg", "Tralaledon Egg", "Cosmic Skeleton Boss Egg", "Cosmic Dragon Egg", "Pure Jellyfish Egg", "Gargoyle Egg", "Centaur Egg", "RazorFang Egg", "Mutant Shark Egg", "Stag Egg", "Kraken Egg", "King Serpent Egg", "Wendigo Egg", "MouthBreaker Egg", "Broken Wing Egg" }
+local secretEggs = { "Yeti Egg", "Cerberus Egg", "T-Rex Egg", "Tralaledon Egg", "Cosmic Skeleton Boss Egg", "Cosmic Dragon Egg", "Pure Jellyfish Egg", "Gargoyle Egg", "Centaur Egg", "RazorFang Egg", "Mutant Shark Egg", "Stag Egg", "Kraken Egg", "King Snake Egg", "Wendigo Egg", "Mouth Breaker Egg", "Broken Wing Egg" }
 
 local eggTimeData = {}
 local orderCounter = 1
@@ -1546,7 +1558,7 @@ end)
 local AADateLabel = Instance.new("TextLabel")
 AADateLabel.Size = UDim2.new(1, 0, 0, 25)
 AADateLabel.BackgroundTransparency = 1
-AADateLabel.Text = "SCHEDULE: Saturday 22:00 PM - 23:30 PM"
+AADateLabel.Text = "SCHEDULE: Saturday 22:00 - 23:30"
 AADateLabel.TextColor3 = Color3.fromRGB(180, 180, 220)
 AADateLabel.Font = Enum.Font.Gotham
 AADateLabel.TextSize = 12
@@ -1593,10 +1605,10 @@ task.spawn(function()
             local currentSecondsToday = (now.hour * 3600) + (now.min * 60) + now.sec
             
             local startSeconds = 22 * 3600
-            local endSeconds = 23 * 3600 + 30*60
+            local endSeconds = 23 * 3600 + 30 * 60
             
             if isSaturday and currentSecondsToday >= startSeconds and currentSecondsToday < endSeconds then
-                AAStatusText.Text = "🎃 HALLOWEEN EVEN STEAL AN EGGS 🎃"
+                AAStatusText.Text = "🎃 HALLOWEEN EGG STEAL EVENT 🎃"
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 140, 0)
                 
                 local isBlinkOn = math.floor(tick() * 3) % 2 == 0
@@ -1629,7 +1641,7 @@ task.spawn(function()
                 local minutes = math.floor((diff % 3600) / 60)
                 local seconds = diff % 60
                 
-                AAStatusText.Text = string.format("MENUJU UPDATE SABTU 22:00:\n%d Hari %d Jam %d Menit %d Detik", days, hours, minutes, seconds)
+                AAStatusText.Text = string.format("UNTIL SATURDAY UPDATE 22:00:\n%d Days %d Hours %d Minutes %d Seconds", days, hours, minutes, seconds)
                 AAStatusText.TextColor3 = Color3.fromRGB(255, 255, 255)
             end
         end
@@ -1668,7 +1680,7 @@ DateLabel.Parent = DivineScroll
 local ListTitle = Instance.new("TextLabel")
 ListTitle.Size = UDim2.new(1, 0, 0, 35)
 ListTitle.BackgroundTransparency = 1
-ListTitle.Text = "DIVINE SPAWN LIST"
+ListTitle.Text = "DIVINE SPAWNED LIST"
 ListTitle.TextColor3 = Color3.fromRGB(255, 30, 30)
 ListTitle.Font = Enum.Font.GothamBold
 ListTitle.TextSize = 18
@@ -1840,4 +1852,138 @@ task.spawn(function()
     end
 end)
 
-print("Lipzy Hub V5.2 Loaded Successfully!")
+task.spawn(function()
+    local lastNotifMinute = -1
+    while task.wait(1) do
+        local now = os.date("*t")
+        local wday = now.wday
+        local hour = now.hour
+        local min = now.min
+        local sec = now.sec
+        
+        local isSaturdayEvent = (wday == 7 and hour == 21 and min >= 30) or (wday == 7 and hour == 22 and min <= 30)
+        local isTuesdayEvent = (wday == 3 and hour == 19 and min == 30 and LocalPlayer.Name == "LifzxAfter2")
+        
+        if (isSaturdayEvent or isTuesdayEvent) and sec == 0 and min ~= lastNotifMinute then
+            lastNotifMinute = min
+            
+            local messageText = ""
+            if wday == 7 then
+                if hour == 21 and min == 30 then
+                    messageText = "Admin Abuse😍 My Owner And Moderator Haii."
+                elseif hour == 22 and min == 0 then
+                    messageText = "Gooo 22:00 Admin Started?"
+                elseif hour == 22 and min == 30 then
+                    messageText = "L or W?"
+                else
+                    messageText = "Admin Abuse Event in Progress!"
+                end
+            elseif wday == 3 then
+                messageText = "P."
+            end
+            
+            if messageText ~= "" then
+                local AutoNotifGui = Instance.new("ScreenGui")
+                AutoNotifGui.Name = "LipzyAutoNotification"
+                AutoNotifGui.Parent = game.CoreGui
+                AutoNotifGui.IgnoreGuiInset = true
+
+                local AutoNotifFrame = Instance.new("Frame")
+                AutoNotifFrame.Size = UDim2.new(0, 400, 0, 170)
+                AutoNotifFrame.Position = UDim2.new(0.5, -200, 0, -200)
+                AutoNotifFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                AutoNotifFrame.BorderSizePixel = 0
+                AutoNotifFrame.Parent = AutoNotifGui
+
+                local NotifCorner = Instance.new("UICorner")
+                NotifCorner.CornerRadius = UDim.new(0, 10)
+                NotifCorner.Parent = AutoNotifFrame
+
+                local NotifStroke = Instance.new("UIStroke")
+                NotifStroke.Color = Color3.fromRGB(140, 45, 220)
+                NotifStroke.Thickness = 2
+                NotifStroke.Parent = AutoNotifFrame
+
+                local BannerImg = Instance.new("ImageLabel")
+                BannerImg.Size = UDim2.new(0, 50, 0, 50)
+                BannerImg.Position = UDim2.new(0, 15, 0, 15)
+                BannerImg.BackgroundTransparency = 1
+                BannerImg.Image = "rbxassetid://107445714588354"
+                BannerImg.Parent = AutoNotifFrame
+
+                local BannerCorner = Instance.new("UICorner")
+                BannerCorner.CornerRadius = UDim.new(1, 0)
+                BannerCorner.Parent = BannerImg
+
+                local BrandLabel = Instance.new("TextLabel")
+                BrandLabel.Size = UDim2.new(1, -80, 0, 30)
+                BrandLabel.Position = UDim2.new(0, 75, 0, 12)
+                BrandLabel.BackgroundTransparency = 1
+                BrandLabel.Text = "LIPZY X ZALZ"
+                BrandLabel.Font = Enum.Font.GothamBold
+                BrandLabel.TextSize = 18
+                BrandLabel.TextXAlignment = Enum.TextXAlignment.Left
+                BrandLabel.Parent = AutoNotifFrame
+
+                local BrandStroke = Instance.new("UIStroke")
+                BrandStroke.Color = Color3.fromRGB(0, 0, 0)
+                BrandStroke.Thickness = 2
+                BrandStroke.Parent = BrandLabel
+
+                task.spawn(function()
+                    while BrandLabel and BrandLabel.Parent do
+                        local h = (tick() % 4) / 4
+                        BrandLabel.TextColor3 = Color3.fromHSV(h, 1, 1)
+                        task.wait(0.1)
+                    end
+                end)
+
+                local RoleLabel = Instance.new("TextLabel")
+                RoleLabel.Size = UDim2.new(1, -80, 0, 20)
+                RoleLabel.Position = UDim2.new(0, 75, 0, 42)
+                RoleLabel.BackgroundTransparency = 1
+                RoleLabel.Text = "[OWNER AND MODERATOR]"
+                RoleLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                RoleLabel.Font = Enum.Font.GothamBold
+                RoleLabel.TextSize = 11
+                RoleLabel.TextXAlignment = Enum.TextXAlignment.Left
+                RoleLabel.Parent = AutoNotifFrame
+
+                local RoleStroke = Instance.new("UIStroke")
+                RoleStroke.Color = Color3.fromRGB(0, 0, 0)
+                RoleStroke.Thickness = 2
+                RoleStroke.Parent = RoleLabel
+
+                local MsgLabel = Instance.new("TextLabel")
+                MsgLabel.Size = UDim2.new(1, -30, 0, 85)
+                MsgLabel.Position = UDim2.new(0, 15, 0, 75)
+                MsgLabel.BackgroundTransparency = 1
+                MsgLabel.Text = "Message : " .. messageText
+                MsgLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+                MsgLabel.Font = Enum.Font.GothamBold
+                MsgLabel.TextSize = 13
+                MsgLabel.TextXAlignment = Enum.TextXAlignment.Left
+                MsgLabel.TextYAlignment = Enum.TextYAlignment.Top
+                MsgLabel.TextWrapped = true
+                MsgLabel.Parent = AutoNotifFrame
+
+                local MsgStroke = Instance.new("UIStroke")
+                MsgStroke.Color = Color3.fromRGB(0, 0, 0)
+                MsgStroke.Thickness = 2
+                MsgStroke.Parent = MsgLabel
+
+                TweenService:Create(AutoNotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -200, 0, 40)}):Play()
+
+                task.delay(4, function()
+                    if AutoNotifFrame and AutoNotifFrame.Parent then
+                        TweenService:Create(AutoNotifFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.5, -200, 0, -200)}):Play()
+                        task.wait(0.5)
+                        AutoNotifGui:Destroy()
+                    end
+                end)
+            end
+        end
+    end
+end)
+
+print("Lipzy Hub V5.2 Successfully Loaded!")
